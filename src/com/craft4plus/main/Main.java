@@ -4,6 +4,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 	
-	//START CODING :D
+	@Override
+	public void onEnable() {
+		System.out.println("Craft4Plus has been enabled!");
+	}
+	
+	@Override
+	public void onDisable() {
+		System.out.println("Craft4Plus has been disabled!");
+	}
 
 }
