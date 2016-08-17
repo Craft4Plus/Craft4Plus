@@ -1,15 +1,21 @@
 package com.craft4plus.main;
 
 import org.bukkit.Bukkit;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.craft4plus.parties.Parties;
 import com.craft4plus.tips.Tips;
 
-public class Main extends JavaPlugin {
+public class Main extends JavaPlugin implements Listener {
+	
+	public static JavaPlugin instance;
 	
 	@Override
 	public void onEnable() {
+		instance = this;
+		
 		registerEvents();
 		
 		repeatingTasksPerMinute();
@@ -29,10 +35,10 @@ public class Main extends JavaPlugin {
 	}
 
 	public void registerEvents(){
-		@SuppressWarnings("unused")
 		PluginManager pm = getServer().getPluginManager();
-		
-//		pm.registerEvents(new WhateverClassName(), this);
+
+		pm.registerEvents(this, this);
+		pm.registerEvents(new Parties(), this);
 	}
 	
 	@Override
