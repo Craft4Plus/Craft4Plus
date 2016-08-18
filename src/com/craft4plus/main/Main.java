@@ -5,6 +5,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.craft4plus.detection.Detection;
 import com.craft4plus.parties.Parties;
 import com.craft4plus.tips.Tips;
 
@@ -39,6 +40,7 @@ public class Main extends JavaPlugin implements Listener {
 
 		pm.registerEvents(this, this);
 		pm.registerEvents(new Parties(), this);
+		pm.registerEvents(new Detection(), this);
 	}
 	
 	@Override
