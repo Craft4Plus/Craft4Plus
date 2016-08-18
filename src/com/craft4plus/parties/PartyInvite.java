@@ -9,7 +9,7 @@ import net.md_5.bungee.api.ChatColor;
 
 public class PartyInvite implements CommandExecutor {
 
-	String PartyPrefix = ChatColor.GRAY + "[" + ChatColor.BLUE + "Party" + ChatColor.GRAY + "]" + ChatColor.RESET;
+	String PartyPrefix = ChatColor.GRAY + "[" + ChatColor.BLUE + "Party" + ChatColor.GRAY + "]" + ChatColor.RESET + " ";
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (commandLabel.equalsIgnoreCase("party")) {
@@ -17,9 +17,14 @@ public class PartyInvite implements CommandExecutor {
 				if (args.length == 1) {
 					for (Player serverplayer : Bukkit.getServer().getOnlinePlayers()) {
 						if (args[0].equalsIgnoreCase(serverplayer.getName())) {
+							if (!args[0].equalsIgnoreCase(sender.getName())) {
 							sender.sendMessage(
 									PartyPrefix + serverplayer.getName() + " has been invited to your party.");
 							return true;
+							} else {
+								sender.sendMessage(PartyPrefix + "You can't invite yourself!");
+								return false;
+							}
 						}
 					}
 					sender.sendMessage(PartyPrefix + "Cannot find a player by that username.");
