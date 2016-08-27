@@ -1,7 +1,7 @@
 name: Craft4Plus
 version: 0.1
 main: com.craft4plus.main.Main
-author: chrismin13 & UnitedGamersMC
+authors: [chrismin13, UnitedGamersMC, Vadyn]
 commands:
     ranks:
         description: Use this command with any rank name after it and a player name to get that player on that rank. Checks if player is in any other ranks before proceeding.
