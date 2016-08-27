@@ -8,13 +8,19 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import com.connorlinfoot.bountifulapi.BountifulAPI;
+import com.craft4plus.listeners.PlayerJoin;
 
 import net.md_5.bungee.api.ChatColor;
 
 public class Tips {
 
+	private PlayerJoin PlayerJustJoinedList;
+
 	public void showTips() {
-		
+
+		PlayerJustJoinedList = new PlayerJoin();
+		List<String> PlayerJustJoined = PlayerJustJoinedList.getList();
+
 		List<String> listCrafter = new ArrayList<String>();
 		
 		listCrafter.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Sell items in the Survival Shop to get coins!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
@@ -29,7 +35,7 @@ public class Tips {
 		listCrafter.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Want a map of the server? Visit map.craft4plus.ml" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
 		
 		String TipsCrafter = listCrafter.get(new Random().nextInt(listCrafter.size()));
-		
+
 		List<String> listMiner = new ArrayList<String>();
 		
 		listMiner.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Sell items in the Survival Shop to get coins!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
@@ -44,19 +50,26 @@ public class Tips {
 		listMiner.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Want a map of the server? Visit map.craft4plus.ml" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
 		
 		String TipsMiner = listMiner.get(new Random().nextInt(listMiner.size()));
-		
-		for(Player player : Bukkit.getServer().getOnlinePlayers()){
-			if ((player.hasPermission("c4p.rank.crafter"))&&(!player.isOp())){
-				
-		BountifulAPI.sendActionBar(player, TipsCrafter, 100);
-		
-			} else {
-				if ((player.hasPermission("c4p.rank.miner"))&&(!player.isOp())) {
-					BountifulAPI.sendActionBar(player, TipsMiner, 100);
+
+		for (Player player : Bukkit.getServer().getOnlinePlayers()) {
+
+			if (PlayerJustJoined != null) {
+
+				if ((!PlayerJustJoined.contains(player.getName())) && (!player.isOp())) {
+
+					if (player.hasPermission("c4p.rank.crafter")) {
+
+						BountifulAPI.sendActionBar(player, TipsCrafter, 100);
+
+					} else {
+						if (player.hasPermission("c4p.rank.miner")) {
+							BountifulAPI.sendActionBar(player, TipsMiner, 100);
+						}
+
+					}
+
 				}
-				
 			}
-		
 		}
 	}
 }

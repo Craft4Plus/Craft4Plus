@@ -3,5 +3,7 @@ version: 0.1
 main: com.craft4plus.main.Main
 author: chrismin13 & UnitedGamersMC
 commands:
-    party:
-        description: Invites a player to your party.
+    ranks:
+        description: Use this command with any rank name after it and a player name to get that player on that rank. Checks if player is in any other ranks before proceeding.
+        usage: /ranks <rankname> <playername>
+depend: [Vault]
