@@ -51,18 +51,18 @@ public class Tips {
 		List<String> listWarrior = new ArrayList<String>(); // List of Warrior Tips
 		
 		// Add Warrior Tips to the list
-		listMiner.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Sell items in the Survival Shop to get coins!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
-	//	listMiner.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "You can get the Warrior Rank using 10,000 in-game coins!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
-		listMiner.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "There are huge Creative Plots available!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
-		listMiner.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "There are plenty of Minigames available!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
-		listMiner.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Join Discord to chat with other players! discord.craft4plus.ml" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
-		listMiner.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Need help with the server? Tell us on Discord!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
-		listMiner.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Want to chat with your mates only? Use one of the Chat Chanels!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
-		listMiner.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Hard to get resources in SkyBlock? Use the shop!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
-		listMiner.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "mcMMO is available! Use it to gain amazing advantages." + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
-		listMiner.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Want a map of the server? Visit map.craft4plus.ml" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
+		listWarrior.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Sell items in the Survival Shop to get coins!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
+	//	listWarrior.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "You can get the Warrior Rank using 10,000 in-game coins!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
+		listWarrior.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "There are huge Creative Plots available!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
+		listWarrior.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "There are plenty of Minigames available!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
+		listWarrior.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Join Discord to chat with other players! discord.craft4plus.ml" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
+		listWarrior.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Need help with the server? Tell us on Discord!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
+		listWarrior.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Want to chat with your mates only? Use one of the Chat Chanels!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
+		listWarrior.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Hard to get resources in SkyBlock? Use the shop!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
+		listWarrior.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "mcMMO is available! Use it to gain amazing advantages." + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
+		listWarrior.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Want a map of the server? Visit map.craft4plus.ml" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
 		
-		String TipsWarrior = listWarrior.get(new Random().nextInt(listMiner.size())); // Pick a random Warrior Tip.
+		String TipsWarrior = listWarrior.get(new Random().nextInt(listWarrior.size())); // Pick a random Warrior Tip.
 
 		for (Player player : Bukkit.getServer().getOnlinePlayers()) { // For every player on the server
 
