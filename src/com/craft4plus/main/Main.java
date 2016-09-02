@@ -9,9 +9,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.craft4plus.listeners.PlayerJoin;
 import com.craft4plus.listeners.PlayerLeave;
+import com.craft4plus.motd.MailPlaceholder;
 import com.craft4plus.ranks.RanksCommand;
 import com.craft4plus.tips.Tips;
-
+import com.earth2me.essentials.Essentials;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
@@ -106,7 +107,15 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
     }
     
     // END OF VAULT API STUFF!
-
+    
+    public static Essentials ess; // Implement the Essentials API
+    
+    @Override
+    public void onLoad() { // Works just like onEnable but is called way earlier
+    	ess = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials"); // Implement the Essentials API
+    	MailPlaceholder.registerMotdPlaceholders(); // MOTD Placeholders for ServerListPlus
+    }
+    
 	@Override
 	public void onDisable() {
 		System.out.println("Craft4Plus has been disabled!");

@@ -2,7 +2,8 @@ package com.craft4plus.listeners;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,20 +19,18 @@ public class PlayerJoin implements Listener {
 
 		PlayerJustJoined.add(player.getName()); // Add name to list of players
 												// that just joined.
+		
+		for (Player EveryoneElse : Bukkit.getServer().getOnlinePlayers()) { // For every player on the server
+			if (EveryoneElse.getName() != player.getName()) { // Check if they are not the player that just logged in
+				EveryoneElse.playSound(EveryoneElse.getLocation(), Sound.ENTITY_FIREWORK_LAUNCH, 1F, 1F); // Play the firework launch sound
+			}
+		}
 
 		new java.util.Timer().schedule(new java.util.TimerTask() {
 			@Override
 			public void run() {
-				if (PlayerJustJoined.contains(player.getName())) { // Check
-																	// if
-																	// player
-																	// is
-																	// still
-																	// list
-					PlayerJustJoined.remove(player.getName()); // Remove
-																// after
-																// ten
-																// seconds
+				if (PlayerJustJoined.contains(player.getName())) { // Check if player is still in list
+					PlayerJustJoined.remove(player.getName()); // Remove after ten seconds
 				}
 			}
 		}, 10000 // This is 10 seconds BTW :P
