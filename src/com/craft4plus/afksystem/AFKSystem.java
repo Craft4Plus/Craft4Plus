@@ -9,7 +9,7 @@ public class AFKSystem extends main implements Listener {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("afk")) {
 			    if (args.length == 2) {
-				if (sender.hasPermission("c4p.ranks.manage")) {}
+				if (sender.hasPermission("c4p.command.afk")) {}
 				
     
 
