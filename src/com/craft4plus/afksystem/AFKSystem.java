@@ -16,7 +16,7 @@ public class AFKSystem implements CommandExecutor {
 	}
 	     Player player = (Player) sender;
 	     
-	     return false;
+	     return true;
 }}
 				
     
