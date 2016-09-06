@@ -9,6 +9,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcsg.survivalgames.SurvivalGames;
 
+import com.craft4plus.afksystem.AFKSystem;
 import com.craft4plus.listeners.PlayerJoin;
 import com.craft4plus.listeners.PlayerLeave;
 import com.craft4plus.minigames.LegacyPvP;
@@ -62,6 +63,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		//Register Commands Here
 		
 		this.getCommand("ranks").setExecutor(new RanksCommand());
+		this.getCommand("afk").setExecutor(new AFKSystem());
 	}
 
 	public void repeatingTasksPerMinute() {
