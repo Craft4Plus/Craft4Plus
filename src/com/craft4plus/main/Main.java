@@ -63,7 +63,6 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		//Register Commands Here
 		
 		this.getCommand("ranks").setExecutor(new RanksCommand());
-		this.getCommand("afk").setExecutor(new AFKSystem());
 	}
 
 	public void repeatingTasksPerMinute() {
@@ -89,6 +88,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		pm.registerEvents(new PlayerLeave(), this);
 		pm.registerEvents(new LegacyPvP(), this);
 		pm.registerEvents(new SGPlayerDetection(), this);
+		pm.registerEvents(new AFKSystem(), this);
 	}
 	
 	// VAULT API STUFF!

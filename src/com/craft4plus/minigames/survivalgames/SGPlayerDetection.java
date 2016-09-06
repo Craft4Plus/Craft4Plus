@@ -30,6 +30,7 @@ public class SGPlayerDetection implements Listener {
         }
 	}
 	
+	// Used PlayerChangedWorldEvent instead of PlayerLeaveArenaEvent as it wasn't working
 	@EventHandler
 	public void onPlayerWorldChange (PlayerChangedWorldEvent event) { // When a player changes worlds
 		if (PlayerInSG != null) {
