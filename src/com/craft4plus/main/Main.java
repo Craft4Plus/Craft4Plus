@@ -3,16 +3,22 @@ package com.craft4plus.main;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcsg.survivalgames.SurvivalGames;
 
 import com.craft4plus.listeners.PlayerJoin;
 import com.craft4plus.listeners.PlayerLeave;
+import com.craft4plus.minigames.LegacyPvP;
+import com.craft4plus.minigames.survivalgames.SGPlayerDetection;
 import com.craft4plus.motd.MailPlaceholder;
 import com.craft4plus.ranks.RanksCommand;
 import com.craft4plus.tips.Tips;
 import com.earth2me.essentials.Essentials;
+
+import net.daboross.bukkitdev.skywars.api.SkyWars;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
@@ -21,8 +27,18 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 	
 	public static JavaPlugin instance;
 	
+	public static Essentials ess; // Implement the Essentials API
+	
+	public static SkyWars sw; // Implement the SkyWars API
+	
+	public static SurvivalGames sg; // Implement the SkyWars API
+	
 	public void onEnable() {
 		instance = this;
+		
+		sw = (SkyWars) Bukkit.getPluginManager().getPlugin("SkyWars"); // Implement the Skywars API
+		
+		sg = (SurvivalGames) Bukkit.getPluginManager().getPlugin("SurvivalGames"); // Implement the SurvivalGames API
 		
 		if (!setupEconomy() ) {
 			System.out.println("Disabled due to no Vault dependency found!");
@@ -69,6 +85,8 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		pm.registerEvents(this, this);
 		pm.registerEvents(new PlayerJoin(), this);
 		pm.registerEvents(new PlayerLeave(), this);
+		pm.registerEvents(new LegacyPvP(), this);
+		pm.registerEvents(new SGPlayerDetection(), this);
 	}
 	
 	// VAULT API STUFF!
@@ -108,8 +126,6 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
     
     // END OF VAULT API STUFF!
     
-    public static Essentials ess; // Implement the Essentials API
-    
     @Override
     public void onLoad() { // Works just like onEnable but is called way earlier
     	ess = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials"); // Implement the Essentials API
@@ -119,5 +135,9 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 	@Override
 	public void onDisable() {
 		System.out.println("Craft4Plus has been disabled!");
+	}
+
+	public static Plugin getInstance() {
+		return instance;
 	}
 }

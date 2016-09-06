@@ -8,5 +8,7 @@
 	<classpathentry kind="lib" path="Vault.jar"/>
 	<classpathentry kind="lib" path="ServerListPlus-3.4.6-Universal.jar"/>
 	<classpathentry kind="lib" path="EssentialsX-2.0.1.jar"/>
+	<classpathentry kind="lib" path="SkyWars.jar"/>
+	<classpathentry kind="lib" path="Survival-Games.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
