@@ -8,6 +8,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
@@ -35,7 +36,7 @@ public class LegacyPvP implements Listener {
 				} else if (player.getInventory().getItemInMainHand().getType() == Material.STONE_SPADE) {
 					event.setDamage(event.getDamage() - 0.75D + 1.25D);
 				}
-				instance.setBaseValue(18.0D); // 1.8-like attack speed
+				instance.setBaseValue(24.0D); // 1.8-like attack speed
 			} else {
 				instance.setBaseValue(4.0D); // 1.9+ attack speed
 			}
@@ -44,12 +45,12 @@ public class LegacyPvP implements Listener {
 
 	}
 
-	@EventHandler
+	@EventHandler (priority = EventPriority.LOWEST) 
 	public void onWorldChange(PlayerChangedWorldEvent event) { // When a player changes world 
 		Player player = (Player) event.getPlayer();
 		AttributeInstance instance = player.getAttribute(Attribute.GENERIC_ATTACK_SPEED);
-		if ((Main.sw.getCurrentGameTracker().isInGame(player.getUniqueId()))) { // Only check for SW - won't work for SG
-			instance.setBaseValue(18.0D); // 1.8 like attack speed
+		if ((Main.sw.getCurrentGameTracker().isInGame(player.getUniqueId())) || (SGPlayerDetection.InSGGame(player))) { // Only check for SW - won't work for SG
+			instance.setBaseValue(24.0D); // 1.8 like attack speed
 		} else {
 			instance.setBaseValue(4.0D); // 1.9+ attack speed
 		}
