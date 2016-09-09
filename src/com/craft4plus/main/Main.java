@@ -13,6 +13,8 @@ import com.craft4plus.afksystem.AFKSystem;
 import com.craft4plus.listeners.PlayerJoin;
 import com.craft4plus.listeners.PlayerLeave;
 import com.craft4plus.minigames.LegacyPvP;
+import com.craft4plus.minigames.kitpvp.KitPvPDeath;
+import com.craft4plus.minigames.kitpvp.KitPvPItemDrops;
 import com.craft4plus.minigames.survivalgames.SGPlayerDetection;
 import com.craft4plus.motd.MailPlaceholder;
 import com.craft4plus.ranks.RanksCommand;
@@ -89,6 +91,8 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		pm.registerEvents(new LegacyPvP(), this);
 		pm.registerEvents(new SGPlayerDetection(), this);
 		pm.registerEvents(new AFKSystem(), this);
+		pm.registerEvents(new KitPvPItemDrops(), this);
+		pm.registerEvents(new KitPvPDeath(), this);
 	}
 	
 	// VAULT API STUFF!

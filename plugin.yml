@@ -1,5 +1,5 @@
 name: Craft4Plus
-version: 0.2
+version: 0.4
 main: com.craft4plus.main.Main
 authors: [chrismin13, UnitedGamersMC, Vadyn]
 commands:

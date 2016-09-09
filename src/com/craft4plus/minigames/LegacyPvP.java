@@ -1,6 +1,7 @@
 package com.craft4plus.minigames;
 
 import com.craft4plus.main.Main;
+import com.craft4plus.minigames.kitpvp.KitPvPPlayerDetection;
 import com.craft4plus.minigames.survivalgames.SGPlayerDetection;
 
 import org.bukkit.Material;
@@ -20,7 +21,7 @@ public class LegacyPvP implements Listener {
 		if ((event.getDamager() instanceof Player)) { // If the damager is a player
 			Player player = (Player) event.getDamager(); // Make him a player variable
 			AttributeInstance instance = player.getAttribute(Attribute.GENERIC_ATTACK_SPEED); // Get attack speed as variable
-			if ((Main.sw.getCurrentGameTracker().isInGame(player.getUniqueId())) || (SGPlayerDetection.InSGGame(player))) { // Check if he's in SurvivalGames(SGPlayerDetection) or SkyWars
+			if ((Main.sw.getCurrentGameTracker().isInGame(player.getUniqueId())) || (SGPlayerDetection.InSGGame(player)) || (KitPvPPlayerDetection.InSGGame(player))) { // Check if he's in SurvivalGames(SGPlayerDetection) or SkyWars
 				// Restores axes attack damage to 1.8 attack damage
 				if (player.getInventory().getItemInMainHand().getType() == Material.DIAMOND_AXE) {
 					event.setDamage(event.getDamage() - 6.0D + 3.0D);
@@ -49,7 +50,7 @@ public class LegacyPvP implements Listener {
 	public void onWorldChange(PlayerChangedWorldEvent event) { // When a player changes world 
 		Player player = (Player) event.getPlayer();
 		AttributeInstance instance = player.getAttribute(Attribute.GENERIC_ATTACK_SPEED);
-		if ((Main.sw.getCurrentGameTracker().isInGame(player.getUniqueId())) || (SGPlayerDetection.InSGGame(player))) { // Only check for SW - won't work for SG
+		if ((Main.sw.getCurrentGameTracker().isInGame(player.getUniqueId())) || (SGPlayerDetection.InSGGame(player)) || (KitPvPPlayerDetection.InSGGame(player))) { 
 			instance.setBaseValue(24.0D); // 1.8 like attack speed
 		} else {
 			instance.setBaseValue(4.0D); // 1.9+ attack speed
