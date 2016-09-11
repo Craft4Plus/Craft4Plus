@@ -67,7 +67,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		//Register Commands Here
 		
 		this.getCommand("ranks").setExecutor(new RanksCommand());
-		this.getCommand("warpsystem").setExecutor(new WarpSystem());
+		this.getCommand("wp").setExecutor(new WarpSystem());
 		this.getCommand("setwp").setExecutor(new SetWarpCmd());
 	}
 
