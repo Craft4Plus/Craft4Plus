@@ -11,14 +11,15 @@ public class SetWarpCmd implements Listener, CommandExecutor {
 	
 	public boolean onCommand(CommandSender sender, Command command, 
 			String label, String[] args) {
-	            if (label.equalsIgnoreCase("setwp" + )) {
+	            if (label.equalsIgnoreCase("setwp")) {
 	            if (!(sender instanceof Player)) {
 	            	sender.sendMessage(ChatColor.RED + "You must be in-game to set a warp!");
 	            	return false;
 	            }
 	            
 	            Player player = (Player) sender;
-	            	
-	            }
-
-}
+	            return true; }
+	            
+	            return false;
+	            } 
+	}
