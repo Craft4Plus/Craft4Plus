@@ -1,4 +1,4 @@
-package com.earth2me.essentials.warpsystem;
+package com.craft4plus.warpsystem;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
