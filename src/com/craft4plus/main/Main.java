@@ -19,9 +19,9 @@ import com.craft4plus.minigames.survivalgames.SGPlayerDetection;
 import com.craft4plus.motd.MailPlaceholder;
 import com.craft4plus.ranks.RanksCommand;
 import com.craft4plus.tips.Tips;
-import com.earth2me.essentials;
 import com.craft4plus.warpsystem.SetWarpCmd;
-import com.craft4plus.WarpSystem;
+import com.craft4plus.warpsystem.WarpSystem;
+import com.earth2me.essentials.Essentials;
 
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import net.milkbowl.vault.chat.Chat;

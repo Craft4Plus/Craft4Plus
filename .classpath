@@ -10,7 +10,7 @@
 	<classpathentry kind="lib" path="EssentialsX-2.0.1.jar"/>
 	<classpathentry kind="lib" path="SkyWars.jar"/>
 	<classpathentry kind="lib" path="Survival-Games.jar"/>
-	<classpathentry kind="lib" path="worldguard-6.1.2.jar"/>
 	<classpathentry kind="lib" path="worldedit-bukkit-6.1.3.jar"/>
+	<classpathentry kind="lib" path="worldguard-6.1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -22,6 +22,6 @@ public class WarpSystem implements Listener, CommandExecutor {
 		            player.sendMessage("You have been teleported to..."); // Small message that is sent to the player when teleported.
         }    
       }
+		         return false;
 	}
   }
-}
