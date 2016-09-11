@@ -19,15 +19,20 @@ public class AFKSystem implements Listener {
 	
 	@EventHandler (priority = EventPriority.HIGHEST)
 	public boolean onAfk(AfkStatusChangeEvent event) {
+		
 		IUser iuser = event.getAffected(); // User from essentials
 		Player player = Bukkit.getServer().getPlayer(iuser.getName()); // Player
 		if (player.hasPermission("c4p.afk.elite")) { //Just a permission to prevent everyone from having this
-			if (!iuser.isAfk()) { // Wierd how this works, this is what happens if the player was not afk and just became afk
+			
+			if (!iuser.isAfk()) { // Weird how this works, this is what happens if the player was not afk and just became afk
 				LocationBeforeAFK.put(player.getName(), player.getLocation()); // Get the location of the player to store it for later
 				GameModeBeforeAFK.put(player.getName(), player.getGameMode()); // Get the GameMode of the player to store it for later
+				
 				player.teleport(new Location(Bukkit.getWorld("BuildWorld"), 2000, 91, 2000)); // Teleport him to the AFK area
 				return true;
+				
 			} else if (iuser.isAfk()) { // Player stopped being AFK
+				
 				if ((LocationBeforeAFK.containsKey(player.getName())) && (GameModeBeforeAFK.containsKey(player.getName()))) { // If we've got somewhere to lead this guy back to
 					player.teleport(LocationBeforeAFK.get(player.getName())); // Get that location and telport him
 					LocationBeforeAFK.remove(player.getName()); // Remove the location data

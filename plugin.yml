@@ -6,4 +6,10 @@ commands:
     ranks:
         description: Use this command with any rank name after it and a player name to get that player on that rank. Checks if player is in any other ranks before proceeding.
         usage: /ranks <rankname> <playername>
+    wp:
+        description: Warp to a different location.
+        usage: /wp
+    setwp:
+        description: Set a warp in a specific location.
+        usage: /setwp
 depend: [Vault]

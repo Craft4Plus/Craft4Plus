@@ -20,6 +20,8 @@ import com.craft4plus.motd.MailPlaceholder;
 import com.craft4plus.ranks.RanksCommand;
 import com.craft4plus.tips.Tips;
 import com.earth2me.essentials.Essentials;
+import com.earth2me.essentials.warpsystem.SetWarpCmd;
+import com.earth2me.essentials.warpsystem.WarpSystem;
 
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import net.milkbowl.vault.chat.Chat;
@@ -65,6 +67,8 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		//Register Commands Here
 		
 		this.getCommand("ranks").setExecutor(new RanksCommand());
+		this.getCommand("warpsystem").setExecutor(new WarpSystem());
+		this.getCommand("setwp").setExecutor(new SetWarpCmd());
 	}
 
 	public void repeatingTasksPerMinute() {
