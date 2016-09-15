@@ -41,6 +41,24 @@ public class AFKSystem implements Listener {
 				}
 				return true;
 			}
+		} else {
+			if (!iuser.isAfk()) { // Weird how this works, this is what happens if the player was not afk and just became afk
+				LocationBeforeAFK.put(player.getName(), player.getLocation()); // Get the location of the player to store it for later
+				GameModeBeforeAFK.put(player.getName(), player.getGameMode()); // Get the GameMode of the player to store it for later
+				
+				player.teleport(new Location(Bukkit.getWorld("BuildWorld"), 100000, 70, 10000)); // Teleport him to the AFK area
+				return true;
+				
+			} else if (iuser.isAfk()) { // Player stopped being AFK
+				
+				if ((LocationBeforeAFK.containsKey(player.getName())) && (GameModeBeforeAFK.containsKey(player.getName()))) { // If we've got somewhere to lead this guy back to
+					player.teleport(LocationBeforeAFK.get(player.getName())); // Get that location and telport him
+					LocationBeforeAFK.remove(player.getName()); // Remove the location data
+					player.setGameMode(GameModeBeforeAFK.get(player.getName())); // Get his previous gamemode
+					GameModeBeforeAFK.remove(player.getName()); // Remove the location data
+				}
+				return true;
+			}
 		}
 		return false;
 	}

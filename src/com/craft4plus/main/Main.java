@@ -16,6 +16,7 @@ import com.craft4plus.minigames.LegacyPvP;
 import com.craft4plus.minigames.kitpvp.KitPvPDeath;
 import com.craft4plus.minigames.kitpvp.KitPvPItemDrops;
 import com.craft4plus.minigames.survivalgames.SGPlayerDetection;
+import com.craft4plus.miscellaneous.MelonFaller;
 import com.craft4plus.motd.MailPlaceholder;
 import com.craft4plus.ranks.RanksCommand;
 import com.craft4plus.tips.Tips;
@@ -97,6 +98,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		pm.registerEvents(new AFKSystem(), this);
 		pm.registerEvents(new KitPvPItemDrops(), this);
 		pm.registerEvents(new KitPvPDeath(), this);
+		pm.registerEvents(new MelonFaller(), this);
 	}
 	
 	// VAULT API STUFF!
