@@ -9,6 +9,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import com.craft4plus.minigames.parkour.Parkour;
+
 public class PlayerJoin implements Listener {
 
 	static List<String> PlayerJustJoined = new ArrayList<String>(); // List that will hold all the players that just joined
@@ -26,6 +28,8 @@ public class PlayerJoin implements Listener {
 			}
 		}
 
+		Parkour.removeFromLists(player.getName());
+		
 		new java.util.Timer().schedule(new java.util.TimerTask() {
 			@Override
 			public void run() {

@@ -12,9 +12,11 @@ import org.mcsg.survivalgames.SurvivalGames;
 import com.craft4plus.afksystem.AFKSystem;
 import com.craft4plus.listeners.PlayerJoin;
 import com.craft4plus.listeners.PlayerLeave;
+import com.craft4plus.listeners.PlayerWorldChange;
 import com.craft4plus.minigames.LegacyPvP;
 import com.craft4plus.minigames.kitpvp.KitPvPDeath;
 import com.craft4plus.minigames.kitpvp.KitPvPItemDrops;
+import com.craft4plus.minigames.parkour.Parkour;
 import com.craft4plus.minigames.survivalgames.SGPlayerDetection;
 import com.craft4plus.miscellaneous.MelonFaller;
 import com.craft4plus.motd.MailPlaceholder;
@@ -42,10 +44,6 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 	public void onEnable() {
 		instance = this;
 		
-		sw = (SkyWars) Bukkit.getPluginManager().getPlugin("SkyWars"); // Implement the Skywars API
-		
-		sg = (SurvivalGames) Bukkit.getPluginManager().getPlugin("SurvivalGames"); // Implement the SurvivalGames API
-		
 		if (!setupEconomy() ) {
 			System.out.println("Disabled due to no Vault dependency found!");
             getServer().getPluginManager().disablePlugin(this);
@@ -53,7 +51,10 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
         }
         setupPermissions();
         setupChat();
-
+		
+		sw = (SkyWars) Bukkit.getPluginManager().getPlugin("SkyWars"); // Implement the Skywars API
+		
+		sg = (SurvivalGames) Bukkit.getPluginManager().getPlugin("SurvivalGames"); // Implement the SurvivalGames API
 		
 		registerCommands();
 		
@@ -99,6 +100,9 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		pm.registerEvents(new KitPvPItemDrops(), this);
 		pm.registerEvents(new KitPvPDeath(), this);
 		pm.registerEvents(new MelonFaller(), this);
+		pm.registerEvents(new Parkour(), this);
+		pm.registerEvents(new PlayerWorldChange(), this);
+		
 	}
 	
 	// VAULT API STUFF!

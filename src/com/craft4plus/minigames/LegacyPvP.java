@@ -19,32 +19,60 @@ public class LegacyPvP implements Listener {
 	@EventHandler
 	public void onEntityDamage(EntityDamageByEntityEvent event) { // When an entity is hit
 		if ((event.getDamager() instanceof Player)) { // If the damager is a player
+			
 			Player player = (Player) event.getDamager(); // Make him a player variable
 			AttributeInstance instance = player.getAttribute(Attribute.GENERIC_ATTACK_SPEED); // Get attack speed as variable
-			if ((Main.sw.getCurrentGameTracker().isInGame(player.getUniqueId())) || (SGPlayerDetection.InSGGame(player)) || (KitPvPPlayerDetection.InSGGame(player)) || (BedwarsPlayerDetection.InBWGame(player))) { // Check if he's in SurvivalGames(SGPlayerDetection) or SkyWars
+			
+			if (inLegacyPvPArea(player)) { // Check if he's in a Legacy PvP Area
+				
 				if (!(instance.getBaseValue() == 24)) {
-				instance.setBaseValue(24.0D); // 1.8-like attack speed
+					instance.setBaseValue(24.0D); // 1.8-like attack speed
 				}
+				
 			} else {
+				
 				if (!(instance.getBaseValue() == 4)) {
-				instance.setBaseValue(4.0D); // 1.9+ attack speed
+					instance.setBaseValue(4.0D); // 1.9+ attack speed
 				}
+				
 			}
 
 		}
 
 	}
 
-	@EventHandler (priority = EventPriority.LOWEST) 
-	public void onWorldChange(PlayerChangedWorldEvent event) { // When a player changes world 
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void onWorldChange(PlayerChangedWorldEvent event) { // When a player changes world
+		
 		Player player = (Player) event.getPlayer();
 		AttributeInstance instance = player.getAttribute(Attribute.GENERIC_ATTACK_SPEED);
-		if ((Main.sw.getCurrentGameTracker().isInGame(player.getUniqueId())) || (SGPlayerDetection.InSGGame(player)) || (KitPvPPlayerDetection.InSGGame(player)) || (BedwarsPlayerDetection.InBWGame(player))) { 
-			instance.setBaseValue(24.0D); // 1.8 like attack speed
+		
+		if (inLegacyPvPArea(player)) { // Check if he's in a Legacy PvP Area
+			
+			if (!(instance.getBaseValue() == 24)) {
+				instance.setBaseValue(24.0D); // 1.8-like attack speed
+			}
+			
 		} else {
-			instance.setBaseValue(4.0D); // 1.9+ attack speed
+			
+			if (!(instance.getBaseValue() == 4)) {
+				instance.setBaseValue(4.0D); // 1.9+ attack speed
+			}
+			
 		}
 
+	}
+
+	public boolean inLegacyPvPArea(Player player) {
+		
+		if ((Main.sw.getCurrentGameTracker().isInGame(player.getUniqueId())) || (SGPlayerDetection.InSGGame(player))
+				|| (KitPvPPlayerDetection.InSGGame(player)) || (BedwarsPlayerDetection.InBWGame(player))) {
+			
+			return true;
+			
+		}
+		
+		return false;
 	}
 
 }

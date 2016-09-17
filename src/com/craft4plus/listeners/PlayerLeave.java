@@ -6,6 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import com.craft4plus.listeners.PlayerJoin;
+import com.craft4plus.minigames.parkour.Parkour;
 
 public class PlayerLeave implements Listener {
 	@EventHandler
@@ -15,6 +16,8 @@ public class PlayerLeave implements Listener {
 		if (PlayerJoin.JustJoined(player)) { // Check if player is in the just joined list
 			PlayerJoin.RemoveFromJustJoined(player); // Remove him
 		}
+		
+		Parkour.removeFromLists(player.getName());
 
 	}
 

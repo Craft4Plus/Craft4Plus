@@ -17,7 +17,8 @@ public class SetWarpCmd implements Listener, CommandExecutor {
 	            	return false;
 	            }
 	            
-	            Player player = (Player) sender;
+	            @SuppressWarnings("unused")
+				Player player = (Player) sender;
 	            return true; }
 	            
 	            return false;
