@@ -13,5 +13,6 @@
 	<classpathentry kind="lib" path="worldedit-bukkit-6.1.3.jar"/>
 	<classpathentry kind="lib" path="worldguard-6.1.2.jar"/>
 	<classpathentry kind="lib" path="BedwarsRel-1.3.3.jar"/>
+	<classpathentry kind="lib" path="ChestCommands1.10.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

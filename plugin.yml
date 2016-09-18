@@ -12,4 +12,7 @@ commands:
     setwp:
         description: Set a warp in a specific location.
         usage: /setwp
+    parkourreset:
+        description: Get back to the beggining of the parkour.
+        usage: /parkourreset
 depend: [Vault]

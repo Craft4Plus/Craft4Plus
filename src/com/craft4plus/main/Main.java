@@ -17,6 +17,7 @@ import com.craft4plus.minigames.LegacyPvP;
 import com.craft4plus.minigames.kitpvp.KitPvPDeath;
 import com.craft4plus.minigames.kitpvp.KitPvPItemDrops;
 import com.craft4plus.minigames.parkour.Parkour;
+import com.craft4plus.minigames.parkour.ParkourCommand;
 import com.craft4plus.minigames.survivalgames.SGPlayerDetection;
 import com.craft4plus.miscellaneous.MelonFaller;
 import com.craft4plus.motd.MailPlaceholder;
@@ -25,6 +26,7 @@ import com.craft4plus.tips.Tips;
 import com.craft4plus.warpsystem.SetWarpCmd;
 import com.craft4plus.warpsystem.WarpSystem;
 import com.earth2me.essentials.Essentials;
+import com.gmail.filoghost.chestcommands.ChestCommands;
 
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import net.milkbowl.vault.chat.Chat;
@@ -41,6 +43,8 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 	
 	public static SurvivalGames sg; // Implement the SkyWars API
 	
+	public static ChestCommands cc; // Implement the ChestCommands API
+	
 	public void onEnable() {
 		instance = this;
 		
@@ -55,6 +59,8 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		sw = (SkyWars) Bukkit.getPluginManager().getPlugin("SkyWars"); // Implement the Skywars API
 		
 		sg = (SurvivalGames) Bukkit.getPluginManager().getPlugin("SurvivalGames"); // Implement the SurvivalGames API
+		
+		cc = (ChestCommands) Bukkit.getPluginManager().getPlugin("ChestCommands"); // Implement the SurvivalGames API
 		
 		registerCommands();
 		
@@ -71,6 +77,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		this.getCommand("ranks").setExecutor(new RanksCommand());
 		this.getCommand("wp").setExecutor(new WarpSystem());
 		this.getCommand("setwp").setExecutor(new SetWarpCmd());
+		this.getCommand("parkourreset").setExecutor(new ParkourCommand());
 	}
 
 	public void repeatingTasksPerMinute() {
