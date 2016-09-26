@@ -10,6 +10,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.mcsg.survivalgames.SurvivalGames;
 
 import com.craft4plus.afksystem.AFKSystem;
+import com.craft4plus.bulders.builds.BuildsCommand;
+import com.craft4plus.custom.CraftingRecipes;
 import com.craft4plus.listeners.PlayerJoin;
 import com.craft4plus.listeners.PlayerLeave;
 import com.craft4plus.listeners.PlayerWorldChange;
@@ -68,9 +70,13 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		
 		repeatingTasksPerMinute();
 		
+		loadConfigs();
+		
+		CraftingRecipes.addCustomCraftingRecipes();
+		
 		System.out.println("Craft4Plus has been enabled!");
 	}
-	
+
 	private void registerCommands() {
 		//Register Commands Here
 		
@@ -78,6 +84,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		this.getCommand("wp").setExecutor(new WarpSystem());
 		this.getCommand("setwp").setExecutor(new SetWarpCmd());
 		this.getCommand("parkourreset").setExecutor(new ParkourCommand());
+		this.getCommand("builds").setExecutor(new BuildsCommand());
 	}
 
 	public void repeatingTasksPerMinute() {
@@ -110,6 +117,10 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		pm.registerEvents(new Parkour(), this);
 		pm.registerEvents(new PlayerWorldChange(), this);
 		
+	}
+	
+	private void loadConfigs() {
+		//TODO
 	}
 	
 	// VAULT API STUFF!

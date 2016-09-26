@@ -53,4 +53,3 @@ public class MelonFaller implements Listener {
 	}
 
 }
-

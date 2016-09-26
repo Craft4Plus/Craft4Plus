@@ -15,4 +15,7 @@ commands:
     parkourreset:
         description: Get back to the beggining of the parkour.
         usage: /parkourreset
+    builds:
+        description: Custom command for the Builders!
+        usage: /builds <args>
 depend: [Vault]
