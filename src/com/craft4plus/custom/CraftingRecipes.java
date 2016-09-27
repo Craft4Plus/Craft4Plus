@@ -15,7 +15,7 @@ public class CraftingRecipes {
 	
 	public static void addEmeraldSword() {
 		
-		ItemStack item = CustomItems.createItem(Material.DIAMOND_SWORD, 1, 1632, "Emerald Sword", true, false, false, null, null);
+		ItemStack item = CustomItems.createItem(Material.DIAMOND_SWORD, 1, 1633, "Emerald Sword", true, false, false, null, null);
 		
 	    ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 		 
