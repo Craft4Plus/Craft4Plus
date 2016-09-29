@@ -15,7 +15,7 @@ public class CraftingRecipes {
 	
 	public static void addEmeraldSword() {
 		
-		ItemStack item = CustomItems.createItem(Material.DIAMOND_SWORD, 1, 1633, "Emerald Sword", true, false, false, null, null);
+		ItemStack item = CustomItems.EmeraldSword();
 		
 	    ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 		 
@@ -46,7 +46,6 @@ public class CraftingRecipes {
 		ItemRecipe3.setIngredient('9', Material.STICK);
 		 
 		Bukkit.getServer().addRecipe(ItemRecipe3);
-		
 	}
 	
 }

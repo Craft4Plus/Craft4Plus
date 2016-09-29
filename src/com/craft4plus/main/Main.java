@@ -12,6 +12,8 @@ import org.mcsg.survivalgames.SurvivalGames;
 import com.craft4plus.afksystem.AFKSystem;
 import com.craft4plus.bulders.builds.BuildsCommand;
 import com.craft4plus.custom.CraftingRecipes;
+import com.craft4plus.custom.CustomItemsListener;
+import com.craft4plus.custom.ResourcePackListener;
 import com.craft4plus.listeners.PlayerJoin;
 import com.craft4plus.listeners.PlayerLeave;
 import com.craft4plus.listeners.PlayerWorldChange;
@@ -116,7 +118,8 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		pm.registerEvents(new MelonFaller(), this);
 		pm.registerEvents(new Parkour(), this);
 		pm.registerEvents(new PlayerWorldChange(), this);
-		
+		pm.registerEvents(new CustomItemsListener(), this);
+		pm.registerEvents(new ResourcePackListener(), this);
 	}
 	
 	private void loadConfigs() {

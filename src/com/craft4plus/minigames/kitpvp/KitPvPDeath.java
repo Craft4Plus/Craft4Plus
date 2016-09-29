@@ -45,6 +45,7 @@ public class KitPvPDeath implements Listener{
 	    @EventHandler
 	    public void onEntityDamageByEntity(EntityDamageByEntityEvent e) {
 	               
+	    	if (e.getDamager() instanceof Player && e.getEntity() instanceof Player) {
 	            Player damaged = (Player) e.getEntity();
 
 	            Player damager = (Player) e.getDamager();
@@ -56,6 +57,7 @@ public class KitPvPDeath implements Listener{
 	            }
 	               
 	            lastdamager.put(damaged.getUniqueId(), damager.getName());
+	    	}
 	}
 
 	

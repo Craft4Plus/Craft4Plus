@@ -29,7 +29,7 @@ public class CustomItems {
 			NBTTagCompound ItemDamage = new NBTTagCompound();
 			ItemDamage.set("AttributeName", new NBTTagString("generic.attackDamage"));
 			ItemDamage.set("Name", new NBTTagString("generic.attackDamage"));
-			ItemDamage.set("Amount", new NBTTagDouble(7.0 - 1.0));
+			ItemDamage.set("Amount", new NBTTagDouble(attackdamage - 1.0));
 			ItemDamage.set("Operation", new NBTTagInt(0));
 			ItemDamage.set("UUIDLeast", new NBTTagInt(894654));
 			ItemDamage.set("UUIDMost", new NBTTagInt(2872));
@@ -39,7 +39,7 @@ public class CustomItems {
 			NBTTagCompound ItemSpeed = new NBTTagCompound();
 			ItemSpeed.set("AttributeName", new NBTTagString("generic.attackSpeed"));
 			ItemSpeed.set("Name", new NBTTagString("generic.attackSpeed"));
-			ItemSpeed.set("Amount", new NBTTagDouble(1.6 - 4.0));
+			ItemSpeed.set("Amount", new NBTTagDouble(attackspeed - 4.0));
 			ItemSpeed.set("Operation", new NBTTagInt(0));
 			ItemSpeed.set("UUIDLeast", new NBTTagInt(894654));
 			ItemSpeed.set("UUIDMost", new NBTTagInt(2872));
@@ -72,4 +72,16 @@ public class CustomItems {
 
 		return Item;
 	}
+	
+	public static ItemStack EmeraldSword() {
+		return CustomItems.createItem(Material.DIAMOND_SWORD, 1, 1633, "Emerald Sword", true, false, false, null, null);
+	}
+	
+	public static int getCustomItemDurability(ItemStack item) {
+		if (item.getType().equals(Material.DIAMOND_SWORD)) {
+			return 0;
+		}
+		return 123456789;
+	}
+	
 }
