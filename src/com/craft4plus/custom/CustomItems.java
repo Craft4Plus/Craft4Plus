@@ -15,7 +15,9 @@ import net.minecraft.server.v1_10_R1.NBTTagString;
 
 public class CustomItems {
 
-	public static ItemStack createItem(Material material, int quantity, int durability, String itemname, boolean unbreakable, boolean hideunbreaking, boolean hideattributes, Double attackdamage, Double attackspeed) {
+	public static ItemStack createItem(Material material, int quantity, int durability, String itemname,
+			boolean unbreakable, boolean hideunbreaking, boolean hideattributes, Double attackdamage,
+			Double attackspeed) {
 
 		ItemStack Item = new ItemStack(material, quantity, (short) durability);
 
@@ -57,11 +59,11 @@ public class CustomItems {
 		ItemMeta ItemMeta = Item.getItemMeta();
 
 		ItemMeta.spigot().setUnbreakable(unbreakable);
-		
+
 		if (hideunbreaking) {
 			ItemMeta.removeItemFlags(ItemFlag.HIDE_UNBREAKABLE);
 		}
-		
+
 		if (hideattributes) {
 			ItemMeta.removeItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 		}
@@ -72,16 +74,36 @@ public class CustomItems {
 
 		return Item;
 	}
-	
+
 	public static ItemStack EmeraldSword() {
 		return CustomItems.createItem(Material.DIAMOND_SWORD, 1, 1633, "Emerald Sword", true, false, false, null, null);
 	}
-	
+
+	public static ItemStack EmeraldAxe() {
+		return CustomItems.createItem(Material.DIAMOND_AXE, 1, 1633, "Emerald Axe", true, false, false, null, null);
+	}
+
+	public static ItemStack EmeraldPickaxe() {
+		return CustomItems.createItem(Material.DIAMOND_PICKAXE, 1, 1633, "Emerald Pickaxe", true, false, false, null,
+				null);
+	}
+
+	public static ItemStack EmeraldShovel() {
+		return CustomItems.createItem(Material.DIAMOND_SPADE, 1, 1633, "Emerald Shovel", true, false, false, null,
+				null);
+	}
+
+	public static ItemStack EmeraldHoe() {
+		return CustomItems.createItem(Material.DIAMOND_HOE, 1, 1633, "Emerald Hoe", true, false, false, null, null);
+	}
+
 	public static int getCustomItemDurability(ItemStack item) {
-		if (item.getType().equals(Material.DIAMOND_SWORD)) {
+		if ((item.getType().equals(Material.DIAMOND_SWORD)) || (item.getType().equals(Material.DIAMOND_AXE))
+				|| (item.getType().equals(Material.DIAMOND_PICKAXE)) || (item.getType().equals(Material.DIAMOND_SPADE))
+				|| (item.getType().equals(Material.DIAMOND_HOE))) {
 			return 0;
 		}
 		return 123456789;
 	}
-	
+
 }
