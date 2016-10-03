@@ -5,15 +5,42 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 
+import com.craft4plus.main.Main;
+
 public class CraftingRecipes {
 	
 	public static void addCustomCraftingRecipes() {
 	
-		addEmeraldSword();
-		addEmeraldAxe();
-		addEmeraldPickaxe();
-		addEmeraldShovel();
-		addEmeraldHoe();
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() { //Schedule a repeating task
+			@Override
+			public void run() {
+				addEmeraldSword();
+			}
+		}, 1L);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() { //Schedule a repeating task
+		@Override
+		public void run() {
+			addEmeraldAxe();
+		}
+		}, 1L);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() { //Schedule a repeating task
+			@Override
+			public void run() {
+				addEmeraldPickaxe();
+			}
+		}, 1L);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() { //Schedule a repeating task
+			@Override
+			public void run() {
+				addEmeraldShovel();
+			}
+		}, 1L);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() { //Schedule a repeating task
+			@Override
+			public void run() {
+				addEmeraldHoe();
+			}
+		}, 1L);
 		
 	}
 	

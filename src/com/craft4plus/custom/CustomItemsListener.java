@@ -21,7 +21,7 @@ public class CustomItemsListener implements Listener {
 					&& (CustomItems.getCustomItemDurability(player.getItemInHand()) != 123456789)
 					&& !(player.getItemInHand().getDurability() <= CustomItems
 							.getCustomItemDurability(player.getItemInHand()))) {
-				player.getItemInHand().setAmount(0);
+				player.getInventory().removeItem(player.getItemInHand());
 				player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
 			}
 		}
