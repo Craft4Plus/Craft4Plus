@@ -1,10 +1,12 @@
 package com.craft4plus.custom;
 
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_10_R1.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import net.md_5.bungee.api.ChatColor;
 import net.minecraft.server.v1_10_R1.NBTTagCompound;
@@ -101,6 +103,55 @@ public class CustomItems {
 
 	}
 	
+	public static ItemStack setArmorLevel(ItemStack Item, int ArmorLevel, int ArmorToughnessLevel, String ApplicationArea) {
+		
+		net.minecraft.server.v1_10_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(Item);
+		NBTTagCompound ItemCompound = (nmsStack.hasTag()) ? nmsStack.getTag() : new NBTTagCompound();
+
+		NBTTagList ItemModifiers = new NBTTagList();
+
+		NBTTagCompound ItemArmor = new NBTTagCompound();
+		ItemArmor.set("AttributeName", new NBTTagString("generic.armor"));
+		ItemArmor.set("Name", new NBTTagString("generic.armor"));
+		ItemArmor.set("Amount", new NBTTagDouble(ArmorLevel));
+		ItemArmor.set("Operation", new NBTTagInt(0));
+		ItemArmor.set("UUIDLeast", new NBTTagInt(1));
+		ItemArmor.set("UUIDMost", new NBTTagInt(1));
+		ItemArmor.set("Slot", new NBTTagString(ApplicationArea)); // Can be "mainhand", "offhand", "feet", "legs", "chest", "head"
+
+		NBTTagCompound ItemArmorToughness = new NBTTagCompound();
+		ItemArmorToughness.set("AttributeName", new NBTTagString("generic.armorToughness"));
+		ItemArmorToughness.set("Name", new NBTTagString("generic.armorToughness"));
+		ItemArmorToughness.set("Amount", new NBTTagDouble(ArmorToughnessLevel));
+		ItemArmorToughness.set("Operation", new NBTTagInt(0));
+		ItemArmorToughness.set("UUIDLeast", new NBTTagInt(1));
+		ItemArmorToughness.set("UUIDMost", new NBTTagInt(1));
+		ItemArmorToughness.set("Slot", new NBTTagString(ApplicationArea)); // Can be "mainhand", "offhand", "feet", "legs", "chest", "head"
+		
+		ItemModifiers.add(ItemArmor);
+		ItemModifiers.add(ItemArmorToughness);
+		ItemCompound.set("AttributeModifiers", ItemModifiers);
+		
+		nmsStack.setTag(ItemCompound);
+		return CraftItemStack.asBukkitCopy(nmsStack);
+		
+	}
+	
+	public static void setLeatherArmorColor(ItemStack Item, int Red, int Green, int Blue) {
+		
+		LeatherArmorMeta meta = (LeatherArmorMeta) Item.getItemMeta();
+		
+		meta.setColor(Color.fromRGB(Red, Green, Blue));
+		
+		ItemMeta ItemMeta = Item.getItemMeta();
+		Item.setItemMeta(ItemMeta);
+		
+		Item.setItemMeta(meta);
+		
+	}
+	
+	// ------------ EMERALD ITEMS ---------------
+	
 	public static ItemStack EmeraldSword() {
 
 		ItemStack Item = createItem(Material.DIAMOND_SWORD, 1, 1561);
@@ -155,6 +206,60 @@ public class CustomItems {
 		return Item;
 		
 	}
+	
+	public static ItemStack EmeraldHelmet() {
+		
+		ItemStack Item = createItem(Material.LEATHER_HELMET, 1, 0);
+		
+		setUnbreakable(Item, true, false);
+		setName(Item, "Emerald Helmet");
+		Item = setArmorLevel(Item, 3, 2, "head");
+		setLeatherArmorColor(Item, 0, 255, 76);
+		
+		return Item;
+		
+	}
+	
+	public static ItemStack EmeraldChestplate() {
+		
+		ItemStack Item = createItem(Material.LEATHER_CHESTPLATE, 1, 0);
+		
+		setUnbreakable(Item, true, false);
+		setName(Item, "Emerald Chestplate");
+		Item = setArmorLevel(Item, 8, 2, "chest");
+		setLeatherArmorColor(Item, 0, 255, 76);
+		
+		return Item;
+		
+	}
+	
+	public static ItemStack EmeraldLeggings() {
+		
+		ItemStack Item = createItem(Material.LEATHER_LEGGINGS, 1, 0);
+		
+		setUnbreakable(Item, true, false);
+		setName(Item, "Emerald Leggings");
+		Item = setArmorLevel(Item, 6, 2, "legs");
+		setLeatherArmorColor(Item, 0, 255, 76);
+		
+		return Item;
+		
+	}
+	
+	public static ItemStack EmeraldBoots() {
+		
+		ItemStack Item = createItem(Material.LEATHER_BOOTS, 1, 0);
+		
+		setUnbreakable(Item, true, false);
+		setName(Item, "Emerald Boots");
+		Item = setArmorLevel(Item, 3, 2, "feet");
+		setLeatherArmorColor(Item, 0, 255, 76);
+		
+		return Item;
+		
+	}
+	
+	// ------------ END OF EMERALD ITEMS ---------------
 
 	public static int getCustomItemDurability(ItemStack item) {
 		if ((item.getType().equals(Material.DIAMOND_SWORD)) || (item.getType().equals(Material.DIAMOND_AXE))
@@ -164,7 +269,7 @@ public class CustomItems {
 			if (ItemMeta.spigot().isUnbreakable()) {
 				return 123456789;
 			}
-			return 1561;
+			return 1560;
 		}
 		return 123456789;
 	}
