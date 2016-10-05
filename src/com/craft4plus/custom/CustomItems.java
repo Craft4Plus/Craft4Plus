@@ -16,6 +16,8 @@ import net.minecraft.server.v1_10_R1.NBTTagList;
 import net.minecraft.server.v1_10_R1.NBTTagString;
 
 public class CustomItems {
+	
+	public static int ArmorUUID = 1;
 
 	public static ItemStack createItemOld(Material material, int quantity, int durability, String itemname,
 			boolean unbreakable, boolean hideunbreaking, boolean hideattributes, Double attackdamage,
@@ -115,8 +117,8 @@ public class CustomItems {
 		ItemArmor.set("Name", new NBTTagString("generic.armor"));
 		ItemArmor.set("Amount", new NBTTagDouble(ArmorLevel));
 		ItemArmor.set("Operation", new NBTTagInt(0));
-		ItemArmor.set("UUIDLeast", new NBTTagInt(1));
-		ItemArmor.set("UUIDMost", new NBTTagInt(1));
+		ItemArmor.set("UUIDLeast", new NBTTagInt(ArmorUUID));
+		ItemArmor.set("UUIDMost", new NBTTagInt(ArmorUUID));
 		ItemArmor.set("Slot", new NBTTagString(ApplicationArea)); // Can be "mainhand", "offhand", "feet", "legs", "chest", "head"
 
 		NBTTagCompound ItemArmorToughness = new NBTTagCompound();
@@ -124,13 +126,15 @@ public class CustomItems {
 		ItemArmorToughness.set("Name", new NBTTagString("generic.armorToughness"));
 		ItemArmorToughness.set("Amount", new NBTTagDouble(ArmorToughnessLevel));
 		ItemArmorToughness.set("Operation", new NBTTagInt(0));
-		ItemArmorToughness.set("UUIDLeast", new NBTTagInt(1));
-		ItemArmorToughness.set("UUIDMost", new NBTTagInt(1));
+		ItemArmorToughness.set("UUIDLeast", new NBTTagInt(ArmorUUID));
+		ItemArmorToughness.set("UUIDMost", new NBTTagInt(ArmorUUID));
 		ItemArmorToughness.set("Slot", new NBTTagString(ApplicationArea)); // Can be "mainhand", "offhand", "feet", "legs", "chest", "head"
 		
 		ItemModifiers.add(ItemArmor);
 		ItemModifiers.add(ItemArmorToughness);
 		ItemCompound.set("AttributeModifiers", ItemModifiers);
+		
+		ArmorUUID = ArmorUUID + 1;
 		
 		nmsStack.setTag(ItemCompound);
 		return CraftItemStack.asBukkitCopy(nmsStack);
