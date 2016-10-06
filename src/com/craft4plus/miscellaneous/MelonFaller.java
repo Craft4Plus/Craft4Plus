@@ -3,6 +3,7 @@ package com.craft4plus.miscellaneous;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,7 +31,7 @@ public class MelonFaller implements Listener {
 
 	@EventHandler
 	public void onMelonTouchdown(EntityChangeBlockEvent event) {
-		if (((FallingBlock) event.getEntity()).getMaterial() == Material.MELON_BLOCK) {
+		if ((event.getEntityType().equals(EntityType.FALLING_BLOCK) && ((FallingBlock) event.getEntity()).getMaterial() == Material.MELON_BLOCK)) {
 			event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(),
 					new ItemStack(Material.MELON));
 			event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(),

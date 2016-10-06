@@ -1,5 +1,6 @@
 package com.craft4plus.main;
 
+import java.io.File;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
@@ -10,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.mcsg.survivalgames.SurvivalGames;
 
 import com.craft4plus.afksystem.AFKSystem;
+import com.craft4plus.bulders.builds.Builds;
 import com.craft4plus.bulders.builds.BuildsCommand;
 import com.craft4plus.custom.CraftingRecipes;
 import com.craft4plus.custom.CustomItemsListener;
@@ -72,7 +74,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		
 		repeatingTasksPerMinute();
 		
-		loadConfigs();
+		load();
 		
 		CraftingRecipes.addCustomCraftingRecipes();
 		
@@ -97,7 +99,11 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 			Tips tips = new Tips();
 			@Override
 			public void run() {
-			tips.showTips();
+			
+				tips.showTips();
+			
+				save();
+			
 			}
 		}, 0L, 1200L);
 	}
@@ -122,8 +128,27 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		pm.registerEvents(new ResourcePackListener(), this);
 	}
 	
-	private void loadConfigs() {
-		//TODO
+	private void load() {
+		
+		File dir = getDataFolder();
+		
+		if (!dir.exists()) {
+			if (!dir.mkdir()) {
+				System.out.println("COULD NOT CREATE DIRECTORY! THE WORLD IS ENDING!");
+				return;
+			}
+		}
+		
+		Builds.load(dir);
+		
+	}
+	
+	public void save() {
+		
+		File dir = getDataFolder();
+		
+		Builds.save(dir);
+		
 	}
 	
 	// VAULT API STUFF!
@@ -171,6 +196,8 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
     
 	@Override
 	public void onDisable() {
+		save();
+		
 		System.out.println("Craft4Plus has been disabled!");
 	}
 
