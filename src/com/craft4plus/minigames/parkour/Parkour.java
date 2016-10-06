@@ -16,10 +16,22 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class Parkour implements Listener {
+	
+	ArrayList<String> Checkpoint1 = new ArrayList<String>();
 
 	public static HashMap<String, Integer> parkourprogress = new HashMap<String, Integer>();
 	public static HashMap<String, Long> parkourtime = new HashMap<String, Long>();
 	public static HashMap<String, String> parkourname = new HashMap<String, String>();
+
+	public boolean onCommand(CommandSender arg0, Command arg1, String[] arg2, String arg3) {
+		
+		Player p = (PLayer) arg0;
+		
+		if (p.hasPermission("Parkour.start"));
+		if (arg0.getName().equalsIgnoreCase("Parkour") && arg0 instanceof Player);
+		
+		return false;
+	}
 	
 	@EventHandler
 	public void onPressurePlate(PlayerInteractEvent event) { // When a player interacts with a block
