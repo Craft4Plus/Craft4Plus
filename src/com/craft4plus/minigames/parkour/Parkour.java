@@ -17,34 +17,11 @@ import org.bukkit.event.player.PlayerInteractEvent;
 
 public class Parkour implements Listener {
 	
-	ArrayList<String> CheckpointS1 = new ArrayList<String>();
-	ArrayList<String> CheckpointS2 = new ArrayList<String>();
-	ArrayList<String> CheckpointS3 = new ArrayList<String>();
-	ArrayList<String> CheckpointSU1 = new ArrayList<String>();
-	ArrayList<String> CheckpointSU2 = new ArrayList<String>();
-	AraryList<String> Parkour = new ArrayList<String>();
 	
 	public static HashMap<String, Integer> parkourprogress = new HashMap<String, Integer>();
 	public static HashMap<String, Long> parkourtime = new HashMap<String, Long>();
 	public static HashMap<String, String> parkourname = new HashMap<String, String>();
 
-	public boolean onCommand(CommandSender arg0, Command arg1, String[] arg2, String arg3) {
-		
-		Player p = (Player) arg0;
-		
-		if (p.hasPermission("Parkour.start")){
-			if (arg0.getName().equalsIgnoreCase("Parkour start") && arg0 instanceof Player);
-			if (parkour.contains(p.getName()));
-			parkour.add(p.getName());
-		}
-		
-		if (p.hasPermission("Parkour.stop")){
-			if (arg1.getName().equalsIgnoreCase("Parkour stop"));
-			if (parkour.contains(p.getName()));
-			parkour.remove(p.getName());
-		}
-		return false;
-	}
 	
 	@EventHandler
 	public void onPressurePlate(PlayerInteractEvent event) { // When a player interacts with a block
@@ -152,29 +129,19 @@ public class Parkour implements Listener {
 	
 	public int isCheckpointPlate (Location loc) { // Check if the plate is a checkpoint pressure plate
 		if ((loc.getBlockX() == 55) && (loc.getBlockY() == 80) && (loc.getBlockZ() == -46) && (loc.getWorld().getName().equals("Spawn"))) { //Spawn1 checkpoint plates
-			if (CheckpointS1.contains(p.getName()));
-			CheckpointS1.add(p.getName);
 			return 1;
 		}
 		if ((loc.getBlockX() == 51) && (loc.getBlockY() == 84) && (loc.getBlockZ() == -47) && (loc.getWorld().getName().equals("Spawn"))) { //Spawn1 checkpoint plates
-			if (CheckpointS2.contains(p.getName()));
-			CheckpointS2.add(p.getName);
 			return 2;
 		}
 		if ((loc.getBlockX() == 51) && (loc.getBlockY() == 93) && (loc.getBlockZ() == -47) && (loc.getWorld().getName().equals("Spawn"))) { //Spawn1 checkpoint plates
-			if (CheckpointS3.contains(p.getName()));
-			CheckpointS3.add(p.getName);
 			return 3;
 		}		
 		
 		if ((loc.getBlockX() == -362) && (loc.getBlockY() == 86) && (loc.getBlockZ() == 352) && (loc.getWorld().getName().equals("Survival"))) { //Survival1 checkpoint plates
-			if (CheckpointSU1.contains(p.getName()));
-			CheckpointSU1.add(p.getName);
 			return 1;
 		}
 		if ((loc.getBlockX() == -365) && (loc.getBlockY() == 87) && (loc.getBlockZ() == 329) && (loc.getWorld().getName().equals("Survival"))) { //Survival1 checkpoint plates
-			if (CheckpointSU2.contains(p.getName()));
-			CheckpointSU2.add(p.getName);
 			return 2;
 		}
 		
