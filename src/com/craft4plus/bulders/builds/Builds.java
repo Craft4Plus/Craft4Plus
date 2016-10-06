@@ -24,7 +24,7 @@ public class Builds {
 	
 	static HashMap<Integer, Location> BuildsListLocation = new HashMap<Integer, Location>();
 	
-	static HashMap<Integer, String> BuildsListLocationSerialized;
+	static HashMap<Integer, String> BuildsListLocationSerialized = new HashMap<Integer, String>();
 	
 	static HashMap<Integer, UUID> BuildsListSubmitter;
 	
@@ -133,7 +133,7 @@ public class Builds {
 		if (BuildsListLocation == null) {
 			Files.save(null, new File((dir), "BuildsListLocationSerialized.dat"));
 		} else {
-			BuildsListLocationSerialized = new HashMap<Integer, String>();
+			BuildsListLocationSerialized.clear();
 			for (Integer i : BuildsListLocation.keySet()) {
 				BuildsListLocationSerialized.put(i, Files.getSerializedLocation(BuildsListLocation.get(i)));
 			}
@@ -158,10 +158,8 @@ public class Builds {
 		if (BuildsListString == null) {
 			BuildsListString  = new HashMap<Integer, String>();
 		}
-		if (BuildsListLocationSerialized == null) {
-			BuildsListLocationSerialized = new HashMap<Integer, String>();
-		} else {
-			for(Integer i : BuildsListLocationSerialized.keySet()) {
+		if (BuildsListLocationSerialized != null) {
+			for (Integer i : BuildsListLocationSerialized.keySet()) {
 				BuildsListLocation.put(i, Files.getDeserializedLocation(BuildsListLocationSerialized.get(i)));
 			}
 		}

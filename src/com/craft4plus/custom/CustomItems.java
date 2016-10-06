@@ -1,13 +1,19 @@
 package com.craft4plus.custom;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_10_R1.inventory.CraftItemStack;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
+import com.connorlinfoot.bountifulapi.BountifulAPI;
 import net.md_5.bungee.api.ChatColor;
 import net.minecraft.server.v1_10_R1.NBTTagCompound;
 import net.minecraft.server.v1_10_R1.NBTTagDouble;
@@ -18,67 +24,7 @@ import net.minecraft.server.v1_10_R1.NBTTagString;
 public class CustomItems {
 	
 	public static int ArmorUUID = 1;
-
-	public static ItemStack createItemOld(Material material, int quantity, int durability, String itemname,
-			boolean unbreakable, boolean hideunbreaking, boolean hideattributes, Double attackdamage,
-			Double attackspeed) {
-
-		ItemStack Item = new ItemStack(material, quantity, (short) durability);
-
-		if (attackdamage != null && attackspeed != null) {
-			net.minecraft.server.v1_10_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(Item);
-			NBTTagCompound ItemCompound = (nmsStack.hasTag()) ? nmsStack.getTag() : new NBTTagCompound();
-
-			NBTTagList ItemModifiers = new NBTTagList();
-
-			// -- attack damage
-			NBTTagCompound ItemDamage = new NBTTagCompound();
-			ItemDamage.set("AttributeName", new NBTTagString("generic.attackDamage"));
-			ItemDamage.set("Name", new NBTTagString("generic.attackDamage"));
-			ItemDamage.set("Amount", new NBTTagDouble(attackdamage - 1.0));
-			ItemDamage.set("Operation", new NBTTagInt(0));
-			ItemDamage.set("UUIDLeast", new NBTTagInt(894654));
-			ItemDamage.set("UUIDMost", new NBTTagInt(2872));
-			ItemDamage.set("Slot", new NBTTagString("mainhand"));
-
-			// -- attack speed
-			NBTTagCompound ItemSpeed = new NBTTagCompound();
-			ItemSpeed.set("AttributeName", new NBTTagString("generic.attackSpeed"));
-			ItemSpeed.set("Name", new NBTTagString("generic.attackSpeed"));
-			ItemSpeed.set("Amount", new NBTTagDouble(attackspeed - 4.0));
-			ItemSpeed.set("Operation", new NBTTagInt(0));
-			ItemSpeed.set("UUIDLeast", new NBTTagInt(894654));
-			ItemSpeed.set("UUIDMost", new NBTTagInt(2872));
-			ItemSpeed.set("Slot", new NBTTagString("mainhand"));
-
-			// -- apply modifiers
-			ItemModifiers.add(ItemSpeed);
-			ItemModifiers.add(ItemDamage);
-			ItemCompound.set("AttributeModifiers", ItemModifiers);
-
-			nmsStack.setTag(ItemCompound);
-			Item = CraftItemStack.asBukkitCopy(nmsStack);
-		}		
-
-		ItemMeta ItemMeta = Item.getItemMeta();
-
-		ItemMeta.spigot().setUnbreakable(unbreakable);
-
-		if (hideunbreaking) {
-			ItemMeta.removeItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-		}
-
-		if (hideattributes) {
-			ItemMeta.removeItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-		}
-
-		ItemMeta.setDisplayName(ChatColor.RESET + itemname);
-
-		Item.setItemMeta(ItemMeta);
-
-		return Item;
-	}
-
+	
 	public static ItemStack createItem(Material material, int quantity, int durability) {
 		
 		ItemStack Item = new ItemStack(material, quantity, (short) durability);
@@ -141,6 +87,43 @@ public class CustomItems {
 		
 	}
 	
+	public static ItemStack setAttack(ItemStack Item, double AttackSpeed, double AttackDamage) {
+		
+		net.minecraft.server.v1_10_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(Item);
+		NBTTagCompound ItemCompound = (nmsStack.hasTag()) ? nmsStack.getTag() : new NBTTagCompound();
+
+		NBTTagList ItemModifiers = new NBTTagList();
+
+		// -- attack damage
+		NBTTagCompound ItemDamage = new NBTTagCompound();
+		ItemDamage.set("AttributeName", new NBTTagString("generic.attackDamage"));
+		ItemDamage.set("Name", new NBTTagString("generic.attackDamage"));
+		ItemDamage.set("Amount", new NBTTagDouble(AttackDamage - 1.0));
+		ItemDamage.set("Operation", new NBTTagInt(0));
+		ItemDamage.set("UUIDLeast", new NBTTagInt(894654));
+		ItemDamage.set("UUIDMost", new NBTTagInt(2872));
+		ItemDamage.set("Slot", new NBTTagString("mainhand"));
+
+		// -- attack speed
+		NBTTagCompound ItemSpeed = new NBTTagCompound();
+		ItemSpeed.set("AttributeName", new NBTTagString("generic.attackSpeed"));
+		ItemSpeed.set("Name", new NBTTagString("generic.attackSpeed"));
+		ItemSpeed.set("Amount", new NBTTagDouble(AttackSpeed - 4.0));
+		ItemSpeed.set("Operation", new NBTTagInt(0));
+		ItemSpeed.set("UUIDLeast", new NBTTagInt(894654));
+		ItemSpeed.set("UUIDMost", new NBTTagInt(2872));
+		ItemSpeed.set("Slot", new NBTTagString("mainhand"));
+
+		// -- apply modifiers
+		ItemModifiers.add(ItemSpeed);
+		ItemModifiers.add(ItemDamage);
+		ItemCompound.set("AttributeModifiers", ItemModifiers);
+
+		nmsStack.setTag(ItemCompound);
+		return CraftItemStack.asBukkitCopy(nmsStack);
+		
+	}
+	
 	public static void setLeatherArmorColor(ItemStack Item, int Red, int Green, int Blue) {
 		
 		LeatherArmorMeta meta = (LeatherArmorMeta) Item.getItemMeta();
@@ -152,6 +135,23 @@ public class CustomItems {
 		
 		Item.setItemMeta(meta);
 		
+	}
+	
+	public static ItemStack addDurabilityLore(ItemStack item, int CurrentDurability, int MaximumDurability) {
+		ItemMeta im = item.getItemMeta();
+		im.setDisplayName(im.getDisplayName());
+		if (item.getItemMeta().getLore() == null) {
+			List<String> loreList = new ArrayList<String>();
+			loreList.add("Durability: " + Integer.toString(CurrentDurability) + " / " + Integer.toString(MaximumDurability));//This is the first line of lore
+			im.setLore(loreList);
+			item.setItemMeta(im);
+		} else {
+			List<String> loreList = item.getItemMeta().getLore();
+			loreList.add("Durability: " + Integer.toString(CurrentDurability) + " / " + Integer.toString(MaximumDurability));//This is the first line of lore
+			im.setLore(loreList);
+			item.setItemMeta(im);
+		}
+		return item;
 	}
 	
 	// ------------ EMERALD ITEMS ---------------
@@ -264,18 +264,151 @@ public class CustomItems {
 	}
 	
 	// ------------ END OF EMERALD ITEMS ---------------
+	
+	// ----------------- DOUBLE AXES ------------------- 
+	
+	public static ItemStack WoodenDoubleAxe() {
+
+		ItemStack Item = createItem(Material.WOOD_AXE, 1, 59);
+		
+		setUnbreakable(Item, true, true);
+		setName(Item, "Wooden Double Axe");
+		Item = setAttack(Item, 0.5, 7.0);
+		Item = addDurabilityLore(Item, 59, 59);
+		
+		return Item;
+
+	}
+
+	public static ItemStack StoneDoubleAxe() {
+
+		ItemStack Item = createItem(Material.STONE_AXE, 1, 131);
+
+		setUnbreakable(Item, true, true);
+		setName(Item, "Stone Double Axe");
+		Item = setAttack(Item, 0.5, 9.0);
+		Item = addDurabilityLore(Item, 131, 131);
+		
+		return Item;
+
+	}
+
+	public static ItemStack IronDoubleAxe() {
+
+		ItemStack Item = createItem(Material.IRON_AXE, 1, 250);
+
+		setUnbreakable(Item, true, true);
+		setName(Item, "Iron Double Axe");
+		Item = setAttack(Item, 0.6, 9.0);
+		Item = addDurabilityLore(Item, 250, 250);
+		
+		return Item;
+
+	}
+
+	public static ItemStack GoldDoubleAxe() {
+
+		ItemStack Item = createItem(Material.GOLD_AXE, 1, 31);
+
+		setUnbreakable(Item, true, true);
+		setName(Item, "Golden Double Axe");
+		Item = setAttack(Item, 0.7, 7.0);
+		Item = addDurabilityLore(Item, 32, 32);
+
+		return Item;
+
+	}
+
+	public static ItemStack DiamondDoubleAxe() {
+
+		ItemStack Item = createItem(Material.GOLD_AXE, 1, 30);
+
+		setUnbreakable(Item, true, true);
+		setName(Item, "Diamond Double Axe");
+		Item = setAttack(Item, 0.7, 9.0);
+		Item = addDurabilityLore(Item, 1561, 1561);
+
+		return Item;
+
+	}
+	
+	public static ItemStack EmeraldDoubleAxe() {
+
+		ItemStack Item = createItem(Material.GOLD_AXE, 1, 29);
+
+		setUnbreakable(Item, true, false);
+		setName(Item, "Emerald Double Axe");
+		Item = setAttack(Item, 0.7, 9.0);
+
+		return Item;
+
+	}
 
 	public static int getCustomItemDurability(ItemStack item) {
-		if ((item.getType().equals(Material.DIAMOND_SWORD)) || (item.getType().equals(Material.DIAMOND_AXE))
-				|| (item.getType().equals(Material.DIAMOND_PICKAXE)) || (item.getType().equals(Material.DIAMOND_SPADE))
-				|| (item.getType().equals(Material.DIAMOND_HOE))) {
-			ItemMeta ItemMeta = item.getItemMeta();
-			if (ItemMeta.spigot().isUnbreakable()) {
-				return 123456789;
+		if ((item.getItemMeta() != null) && (!item.getItemMeta().spigot().isUnbreakable())) {
+			Material m = item.getType();
+			if ((m.equals(Material.DIAMOND_SWORD)) || (m.equals(Material.DIAMOND_AXE))
+					|| (m.equals(Material.DIAMOND_PICKAXE)) || (m.equals(Material.DIAMOND_SPADE))
+					|| (m.equals(Material.DIAMOND_HOE))) {
+				return 1560;
 			}
-			return 1560;
+			if (m.equals(Material.WOOD_AXE)) {
+				return 58;
+			}
+			if (m.equals(Material.STONE_AXE)) {
+				return 130;
+			}
+			if (m.equals(Material.IRON_AXE)) {
+				return 250;
+			}
+			if (m.equals(Material.GOLD_AXE)) {
+				return 28;
+			}
+			return 123456789;
 		}
 		return 123456789;
 	}
 
+	public static boolean isDoubleAxe(ItemStack item) {
+		if (item.getItemMeta().spigot().isUnbreakable()) {
+			Material m = item.getType();
+			if ((m.equals(Material.WOOD_AXE) && item.getDurability() == 59)
+					|| (m.equals(Material.STONE_AXE) && item.getDurability() == 131)
+					|| (m.equals(Material.IRON_AXE) && item.getDurability() == 250)
+					|| (m.equals(Material.GOLD_AXE) && item.getDurability() <= 28)) {
+				return true;
+			}
+			return false;
+		}
+		return false;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public static void reduceDurability(ItemStack item, Player player, int durabilitytoremove) {
+		List<String> lore = item.getItemMeta().getLore();
+		for (String string : lore) {
+			if (string.startsWith("Durability: ")) {
+				String durability = string.replaceFirst("Durability: ", "");
+				String segments[] = durability.split(" / ");
+				int finaldurability = Integer.parseInt(segments[0]) - durabilitytoremove;
+				if (finaldurability == 0) {
+					player.getInventory().removeItem(player.getItemInHand()); // Check if there is an item in hand and if it should be broken due to low durability.
+					player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
+					return;
+				} else {
+					String newstring = string.replaceFirst(segments[0], Integer.toString(finaldurability));
+					lore.remove(string);
+					lore.add(newstring);
+					if (finaldurability <= 10) {
+						BountifulAPI.sendActionBar(player, ChatColor.RED + "" + ChatColor.BOLD + "Item Durability Low!");
+					}
+				}
+			}
+		}
+		ItemMeta im = item.getItemMeta();
+		im.setDisplayName(im.getDisplayName());
+		im.setLore(lore);
+		item.setItemMeta(im);		
+	}
+	
 }

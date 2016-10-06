@@ -197,6 +197,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 	@Override
 	public void onDisable() {
 		save();
+		Bukkit.getServer().resetRecipes();
 		
 		System.out.println("Craft4Plus has been disabled!");
 	}

@@ -70,6 +70,43 @@ public class CraftingRecipes {
 			}
 		}, 1L);
 		// ------------ END OF EMERALD ITEMS ---------------
+		// ----------------- DOUBLE AXES ------------------- 
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+			@Override
+			public void run() {
+				addWoodenDoubleAxe();
+			}
+		}, 1L);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+			@Override
+			public void run() {
+				addStoneDoubleAxe();
+			}
+		}, 1L);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+			@Override
+			public void run() {
+				addIronDoubleAxe();
+			}
+		}, 1L);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+			@Override
+			public void run() {
+				addGoldDoubleAxe();
+			}
+		}, 1L);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+			@Override
+			public void run() {
+				addDiamondDoubleAxe();
+			}
+		}, 1L);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+			@Override
+			public void run() {
+				addEmeraldDoubleAxe();
+			}
+		}, 1L);
 	}
 
 	// ------------ EMERALD ITEMS ---------------
@@ -294,5 +331,108 @@ public class CraftingRecipes {
 	}
 
 	// ------------ END OF EMERALD ITEMS ---------------
+	// ----------------- DOUBLE AXES ------------------- 
+	
+	public static void addWoodenDoubleAxe() {
+
+		ItemStack item = CustomItems.WoodenDoubleAxe();
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("789", "456", "123");
+
+		ItemRecipe1.setIngredient('7', Material.WOOD_AXE);
+		ItemRecipe1.setIngredient('9', Material.WOOD_AXE);
+		ItemRecipe1.setIngredient('8', Material.STICK);
+		ItemRecipe1.setIngredient('5', Material.STICK);
+		ItemRecipe1.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+	}
+	
+	public static void addStoneDoubleAxe() {
+
+		ItemStack item = CustomItems.StoneDoubleAxe();
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("789", "456", "123");
+
+		ItemRecipe1.setIngredient('7', Material.STONE_AXE);
+		ItemRecipe1.setIngredient('9', Material.STONE_AXE);
+		ItemRecipe1.setIngredient('8', Material.STICK);
+		ItemRecipe1.setIngredient('5', Material.STICK);
+		ItemRecipe1.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+	}
+	
+	public static void addIronDoubleAxe() {
+
+		ItemStack item = CustomItems.IronDoubleAxe();
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("789", "456", "123");
+
+		ItemRecipe1.setIngredient('7', Material.IRON_AXE);
+		ItemRecipe1.setIngredient('9', Material.IRON_AXE);
+		ItemRecipe1.setIngredient('8', Material.STICK);
+		ItemRecipe1.setIngredient('5', Material.STICK);
+		ItemRecipe1.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+	}
+	
+	public static void addGoldDoubleAxe() {
+
+		ItemStack item = CustomItems.GoldDoubleAxe();
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("789", "456", "123");
+
+		ItemRecipe1.setIngredient('7', Material.GOLD_AXE);
+		ItemRecipe1.setIngredient('9', Material.GOLD_AXE);
+		ItemRecipe1.setIngredient('8', Material.STICK);
+		ItemRecipe1.setIngredient('5', Material.STICK);
+		ItemRecipe1.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+	}
+	
+	public static void addDiamondDoubleAxe() {
+
+		ItemStack item = CustomItems.DiamondDoubleAxe();
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("789", "456", "123");
+
+		ItemRecipe1.setIngredient('7', Material.DIAMOND_AXE);
+		ItemRecipe1.setIngredient('9', Material.DIAMOND_AXE);
+		ItemRecipe1.setIngredient('8', Material.STICK);
+		ItemRecipe1.setIngredient('5', Material.STICK);
+		ItemRecipe1.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+	}
+	
+	public static void addEmeraldDoubleAxe() {
+
+		ItemStack item = CustomItems.EmeraldDoubleAxe();
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("789", "456", "123");
+
+		ItemRecipe1.setIngredient('7', CustomItems.EmeraldDoubleAxe().getData());
+		ItemRecipe1.setIngredient('9', CustomItems.EmeraldDoubleAxe().getData());
+		ItemRecipe1.setIngredient('8', Material.STICK);
+		ItemRecipe1.setIngredient('5', Material.STICK);
+		ItemRecipe1.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+	}
 	
 }
