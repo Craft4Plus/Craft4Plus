@@ -9,7 +9,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import com.craft4plus.main.Main;
 import com.craft4plus.minigames.parkour.Parkour;
+import com.craft4plus.motd.Titles;
 
 public class PlayerJoin implements Listener {
 
@@ -30,16 +32,17 @@ public class PlayerJoin implements Listener {
 
 		Parkour.removeFromLists(player.getName());
 		
-		new java.util.Timer().schedule(new java.util.TimerTask() {
+		Titles.titleOnPlayerJoin(player);
+
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() { //Schedule a repeating task
 			@Override
 			public void run() {
 				if (PlayerJustJoined.contains(player.getName())) { // Check if player is still in list
 					PlayerJustJoined.remove(player.getName()); // Remove after ten seconds
 				}
 			}
-		}, 10000 // This is 10 seconds BTW :P
-		);
-
+		}, 200L);
+		
 	}
 
 	public static boolean JustJoined(Player player){ // Boolean that we can access from any class as long as you specify player.

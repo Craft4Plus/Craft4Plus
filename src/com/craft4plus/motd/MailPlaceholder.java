@@ -2,6 +2,7 @@ package com.craft4plus.motd;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
 import com.craft4plus.bulders.builds.Builds;
 import com.craft4plus.main.Main;
@@ -19,7 +20,7 @@ public class MailPlaceholder {
 	
 	public static void registerMotdPlaceholders() {
         ReplacementManager.getDynamic().add(new LiteralPlaceholder("%mail%") { // Register placeholder %mail%
-            @SuppressWarnings("deprecation") // For the offlinePlayer, which was made dpricated due to UUIDs
+            @SuppressWarnings("deprecation") // For the offlinePlayer, which was made depricated due to UUIDs
 			@Override
             public String replace(StatusResponse response, String s) {
                 PlayerIdentity identity = response.getRequest().getIdentity(); // Player from SLP
@@ -28,10 +29,10 @@ public class MailPlaceholder {
                     User EssentialsUser = Main.ess.getUser(player); // Get the Essentials User
                     if (PermissionsEx.getUser((player.getName())).has("c4p.builders.motd") || player.isOp()) {
                      	if (Builds.buildsAvailable() == 1) {
-                    			return this.replace(s, ChatColor.RED + "" + ChatColor.BOLD + "You have 1 new build");
+                    			return this.replace(s, ChatColor.RED + "" + ChatColor.BOLD + "There is 1 new build");
                     		} else {
                     			if (Builds.buildsAvailable() > 1) {
-                    			return this.replace(s, ChatColor.RED + "" + ChatColor.BOLD + "You have " + Builds.buildsAvailable() +" new mails");
+                    			return this.replace(s, ChatColor.RED + "" + ChatColor.BOLD + "There " + Builds.buildsAvailable() +" new builds");
                     			}
                     		}
                     }
@@ -59,5 +60,35 @@ public class MailPlaceholder {
             }
         });		
 	}
-
+	
+	public static String mailString(Player player) {
+		User EssentialsUser = Main.ess.getUser(player);
+		if (EssentialsUser != null) {
+        	if (EssentialsUser.getMails().isEmpty()) { // Mail is empty
+        		return null;
+        	} else {
+        		if (EssentialsUser.getMails().size() == 1) { // Mail is 1
+        			return "You have 1 new mail";
+        		} else { // Mail is above 1
+        			return "You have " + EssentialsUser.getMails().size() +" new mails";
+        		}
+        	}
+        
+        }
+		return null;
+	}
+	
+	public static String buildsString(Player player) {
+            if (player.hasPermission("c4p.builders.motd") || player.isOp()) {
+             	if (Builds.buildsAvailable() == 1) {
+            			return "There is 1 new build!";
+            		} else {
+            			if (Builds.buildsAvailable() > 1) {
+            			return "There are " + Builds.buildsAvailable() +" new builds!";
+            			}
+            			return null;
+            		}
+            }
+			return null;
+	}
 }

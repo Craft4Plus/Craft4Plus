@@ -7,6 +7,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import com.craft4plus.miscellaneous.TreeBreaker;
 
@@ -48,7 +51,18 @@ public class CustomItemsListener implements Listener {
 	
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) { // When a player interacts with something
-			customItemCheck(event.getPlayer());
+		customItemCheck(event.getPlayer());
 	}
-
+	
+	@EventHandler
+	public void onPlayerMove(PlayerMoveEvent event) {
+		Player player = event.getPlayer();
+			if (CustomItems.isStoneArmor(player.getInventory().getItem(39))
+					|| CustomItems.isStoneArmor(player.getInventory().getItem(38))
+					|| CustomItems.isStoneArmor(player.getInventory().getItem(37))
+					|| CustomItems.isStoneArmor(player.getInventory().getItem(36))) {
+				player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 40, 1));
+		}
+	}
+	
 }

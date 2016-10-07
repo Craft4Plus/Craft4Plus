@@ -107,6 +107,36 @@ public class CraftingRecipes {
 				addEmeraldDoubleAxe();
 			}
 		}, 1L);
+		
+		// ------------- END OF DOUBLE AXES ----------------
+		
+		// ----------------- STONE ARMOR -------------------
+		
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+			@Override
+			public void run() {
+				addStoneHelmet();
+			}
+		}, 1L);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+			@Override
+			public void run() {
+				addStoneChestplate();
+			}
+		}, 1L);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+			@Override
+			public void run() {
+				addStoneLeggings();
+			}
+		}, 1L);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+			@Override
+			public void run() {
+				addStoneBoots();
+			}
+		}, 1L);
+		
 	}
 
 	// ------------ EMERALD ITEMS ---------------
@@ -331,6 +361,7 @@ public class CraftingRecipes {
 	}
 
 	// ------------ END OF EMERALD ITEMS ---------------
+	
 	// ----------------- DOUBLE AXES ------------------- 
 	
 	public static void addWoodenDoubleAxe() {
@@ -341,9 +372,11 @@ public class CraftingRecipes {
 
 		ItemRecipe1.shape("789", "456", "123");
 
-		ItemRecipe1.setIngredient('7', Material.WOOD_AXE);
-		ItemRecipe1.setIngredient('9', Material.WOOD_AXE);
-		ItemRecipe1.setIngredient('8', Material.STICK);
+		ItemRecipe1.setIngredient('7', Material.WOOD);
+		ItemRecipe1.setIngredient('8', Material.WOOD);
+		ItemRecipe1.setIngredient('9', Material.WOOD);
+		ItemRecipe1.setIngredient('4', Material.WOOD);
+		ItemRecipe1.setIngredient('6', Material.WOOD);
 		ItemRecipe1.setIngredient('5', Material.STICK);
 		ItemRecipe1.setIngredient('2', Material.STICK);
 
@@ -358,9 +391,11 @@ public class CraftingRecipes {
 
 		ItemRecipe1.shape("789", "456", "123");
 
-		ItemRecipe1.setIngredient('7', Material.STONE_AXE);
-		ItemRecipe1.setIngredient('9', Material.STONE_AXE);
-		ItemRecipe1.setIngredient('8', Material.STICK);
+		ItemRecipe1.setIngredient('7', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('8', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('9', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('4', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('6', Material.COBBLESTONE);
 		ItemRecipe1.setIngredient('5', Material.STICK);
 		ItemRecipe1.setIngredient('2', Material.STICK);
 
@@ -375,9 +410,11 @@ public class CraftingRecipes {
 
 		ItemRecipe1.shape("789", "456", "123");
 
-		ItemRecipe1.setIngredient('7', Material.IRON_AXE);
-		ItemRecipe1.setIngredient('9', Material.IRON_AXE);
-		ItemRecipe1.setIngredient('8', Material.STICK);
+		ItemRecipe1.setIngredient('7', Material.IRON_INGOT);
+		ItemRecipe1.setIngredient('8', Material.IRON_INGOT);
+		ItemRecipe1.setIngredient('9', Material.IRON_INGOT);
+		ItemRecipe1.setIngredient('4', Material.IRON_INGOT);
+		ItemRecipe1.setIngredient('6', Material.IRON_INGOT);
 		ItemRecipe1.setIngredient('5', Material.STICK);
 		ItemRecipe1.setIngredient('2', Material.STICK);
 
@@ -392,9 +429,11 @@ public class CraftingRecipes {
 
 		ItemRecipe1.shape("789", "456", "123");
 
-		ItemRecipe1.setIngredient('7', Material.GOLD_AXE);
-		ItemRecipe1.setIngredient('9', Material.GOLD_AXE);
-		ItemRecipe1.setIngredient('8', Material.STICK);
+		ItemRecipe1.setIngredient('7', Material.GOLD_INGOT);
+		ItemRecipe1.setIngredient('8', Material.GOLD_INGOT);
+		ItemRecipe1.setIngredient('9', Material.GOLD_INGOT);
+		ItemRecipe1.setIngredient('4', Material.GOLD_INGOT);
+		ItemRecipe1.setIngredient('6', Material.GOLD_INGOT);
 		ItemRecipe1.setIngredient('5', Material.STICK);
 		ItemRecipe1.setIngredient('2', Material.STICK);
 
@@ -409,9 +448,11 @@ public class CraftingRecipes {
 
 		ItemRecipe1.shape("789", "456", "123");
 
-		ItemRecipe1.setIngredient('7', Material.DIAMOND_AXE);
-		ItemRecipe1.setIngredient('9', Material.DIAMOND_AXE);
-		ItemRecipe1.setIngredient('8', Material.STICK);
+		ItemRecipe1.setIngredient('7', Material.DIAMOND);
+		ItemRecipe1.setIngredient('8', Material.DIAMOND);
+		ItemRecipe1.setIngredient('9', Material.DIAMOND);
+		ItemRecipe1.setIngredient('4', Material.DIAMOND);
+		ItemRecipe1.setIngredient('6', Material.DIAMOND);
 		ItemRecipe1.setIngredient('5', Material.STICK);
 		ItemRecipe1.setIngredient('2', Material.STICK);
 
@@ -426,13 +467,116 @@ public class CraftingRecipes {
 
 		ItemRecipe1.shape("789", "456", "123");
 
-		ItemRecipe1.setIngredient('7', CustomItems.EmeraldDoubleAxe().getData());
-		ItemRecipe1.setIngredient('9', CustomItems.EmeraldDoubleAxe().getData());
-		ItemRecipe1.setIngredient('8', Material.STICK);
+		ItemRecipe1.setIngredient('7', Material.EMERALD);
+		ItemRecipe1.setIngredient('8', Material.EMERALD);
+		ItemRecipe1.setIngredient('9', Material.EMERALD);
+		ItemRecipe1.setIngredient('4', Material.EMERALD);
+		ItemRecipe1.setIngredient('6', Material.EMERALD);
 		ItemRecipe1.setIngredient('5', Material.STICK);
 		ItemRecipe1.setIngredient('2', Material.STICK);
 
 		Bukkit.getServer().addRecipe(ItemRecipe1);
+	}
+	
+	// ------------- END OF DOUBLE AXES ----------------
+	
+	// ----------------- STONE ARMOR -------------------
+	
+	public static void addStoneHelmet() {
+
+		ItemStack item = CustomItems.StoneHelmet();
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("789", "456", "123");
+
+		ItemRecipe1.setIngredient('7', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('8', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('9', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('4', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('6', Material.COBBLESTONE);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+
+		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
+
+		ItemRecipe2.shape("789", "456", "123");
+
+		ItemRecipe2.setIngredient('4', Material.COBBLESTONE);
+		ItemRecipe2.setIngredient('5', Material.COBBLESTONE);
+		ItemRecipe2.setIngredient('6', Material.COBBLESTONE);
+		ItemRecipe2.setIngredient('1', Material.COBBLESTONE);
+		ItemRecipe2.setIngredient('3', Material.COBBLESTONE);
+
+		Bukkit.getServer().addRecipe(ItemRecipe2);
+	}
+
+	public static void addStoneChestplate() {
+
+		ItemStack item = CustomItems.StoneChestplate();
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("789", "456", "123");
+
+		ItemRecipe1.setIngredient('7', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('9', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('4', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('5', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('6', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('1', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('2', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('3', Material.COBBLESTONE);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+
+	}
+
+	public static void addStoneLeggings() {
+
+		ItemStack item = CustomItems.StoneLeggings();
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("789", "456", "123");
+
+		ItemRecipe1.setIngredient('7', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('8', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('9', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('4', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('6', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('1', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('3', Material.COBBLESTONE);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+
+	}
+
+	public static void addStoneBoots() {
+
+		ItemStack item = CustomItems.StoneBoots();
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("789", "456", "123");
+
+		ItemRecipe1.setIngredient('7', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('9', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('4', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('6', Material.COBBLESTONE);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+
+		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
+
+		ItemRecipe2.shape("789", "456", "123");
+
+		ItemRecipe2.setIngredient('4', Material.COBBLESTONE);
+		ItemRecipe2.setIngredient('6', Material.COBBLESTONE);
+		ItemRecipe2.setIngredient('1', Material.COBBLESTONE);
+		ItemRecipe2.setIngredient('3', Material.COBBLESTONE);
+
+		Bukkit.getServer().addRecipe(ItemRecipe2);
 	}
 	
 }
