@@ -431,6 +431,153 @@ public class CustomItems {
 
 	}
 	
+	public static boolean isStoneArmor(ItemStack item) {
+		if (item != null) {
+			Material m = item.getType();
+			if ((m.equals(Material.LEATHER_HELMET)) || (m.equals(Material.LEATHER_CHESTPLATE))
+					|| (m.equals(Material.LEATHER_LEGGINGS)) || (m.equals(Material.LEATHER_BOOTS))) {
+				LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
+				if ((meta.getColor().getRed() == 103) && (meta.getColor().getBlue() == 103) && (meta.getColor().getGreen() == 103)) {
+					return true;
+				}
+				if ((meta.getColor().getRed() == 168) && (meta.getColor().getBlue() == 100) && (meta.getColor().getGreen() == 168)) {
+					return true;
+				}
+				return false;
+			}
+			return false;
+		}
+		return false;
+	}
+	
+	
+	// ------------- END OF STONE ARMOR ----------------
+	
+	// --------------- END STONE ITEMS -----------------
+	
+	
+	public static ItemStack EndStoneHelmet() {
+
+		ItemStack Item = createItem(Material.LEATHER_HELMET, 1, 0);
+
+		setName(Item, "End Stone Helmet");
+		Item = setArmorLevel(Item, 2, 0, "head");
+		setLeatherArmorColor(Item, 168, 168, 100);
+
+		return Item;
+
+	}
+
+	public static ItemStack EndStoneChestplate() {
+
+		ItemStack Item = createItem(Material.LEATHER_CHESTPLATE, 1, 0);
+
+		setName(Item, "End Stone Chestplate");
+		Item = setArmorLevel(Item, 5, 0, "chest");
+		setLeatherArmorColor(Item, 168, 168, 100);
+
+		return Item;
+
+	}
+
+	public static ItemStack EndStoneLeggings() {
+
+		ItemStack Item = createItem(Material.LEATHER_LEGGINGS, 1, 0);
+
+		setName(Item, "End Stone Leggings");
+		Item = setArmorLevel(Item, 4, 0, "legs");
+		setLeatherArmorColor(Item, 168, 168, 100);
+
+		return Item;
+
+	}
+
+	public static ItemStack EndStoneBoots() {
+
+		ItemStack Item = createItem(Material.LEATHER_BOOTS, 1, 0);
+
+		setName(Item, "End Stone Boots");
+		Item = setArmorLevel(Item, 1, 0, "feet");
+		setLeatherArmorColor(Item, 168, 168, 100);
+
+		return Item;
+
+	}
+	
+	public static ItemStack EndStoneSword() {
+		
+		ItemStack Item = createItem(Material.STONE_SWORD, 1 , 131);
+		
+		setName(Item, "End Stone Sword");
+		setUnbreakable(Item, true, true);
+		Item = addDurabilityLore(Item, 131, 131);
+		
+		return Item;
+		
+	}
+	
+	public static ItemStack EndStoneAxe() {
+		
+		ItemStack Item = createItem(Material.STONE_AXE, 1 , 130);
+		
+		setName(Item, "End Stone Axe");
+		setUnbreakable(Item, true, true);
+		Item = addDurabilityLore(Item, 131, 131);
+		
+		return Item;
+		
+	}
+	
+	public static ItemStack EndStoneDoubleAxe() {
+		
+		ItemStack Item = createItem(Material.STONE_AXE, 1 , 129);
+		
+		setName(Item, "End Stone Double Axe");
+		setUnbreakable(Item, true, true);
+		Item = addDurabilityLore(Item, 131, 131);
+		
+		return Item;
+		
+	}
+	
+	public static ItemStack EndStonePickaxe() {
+		
+		ItemStack Item = createItem(Material.STONE_PICKAXE, 1 , 131);
+		
+		setName(Item, "End Stone Pickaxe");
+		setUnbreakable(Item, true, true);
+		Item = addDurabilityLore(Item, 131, 131);
+		
+		return Item;
+		
+	}
+	
+	public static ItemStack EndStoneShovel() {
+		
+		ItemStack Item = createItem(Material.STONE_SPADE, 1 , 131);
+		
+		setName(Item, "End Stone Shovel");
+		setUnbreakable(Item, true, true);
+		Item = addDurabilityLore(Item, 131, 131);
+		
+		return Item;
+		
+	}
+	
+	public static ItemStack EndStoneHoe() {
+		
+		ItemStack Item = createItem(Material.STONE_HOE, 1 , 131);
+		
+		setName(Item, "End Stone Hoe");
+		setUnbreakable(Item, true, true);
+		Item = addDurabilityLore(Item, 131, 131);
+		
+		return Item;
+		
+	}
+	
+	// ------------ END OF END STONE ITEMS -------------
+	
 	public static int getCustomItemDurability(ItemStack item) {
 		if ((item.getItemMeta() != null) && (!item.getItemMeta().spigot().isUnbreakable())) {
 			Material m = item.getType();
@@ -439,11 +586,15 @@ public class CustomItems {
 					|| (m.equals(Material.DIAMOND_HOE))) {
 				return 1560;
 			}
+			if ((m.equals(Material.STONE_SWORD)) || (m.equals(Material.STONE_PICKAXE)) || (m.equals(Material.STONE_SPADE))
+					|| (m.equals(Material.STONE_HOE))) {
+				return 130;
+			}
 			if (m.equals(Material.WOOD_AXE)) {
 				return 58;
 			}
 			if (m.equals(Material.STONE_AXE)) {
-				return 130;
+				return 128;
 			}
 			if (m.equals(Material.IRON_AXE)) {
 				return 250;
@@ -454,22 +605,6 @@ public class CustomItems {
 			return 123456789;
 		}
 		return 123456789;
-	}
-
-	public static boolean isStoneArmor(ItemStack item) {
-		if (item != null) {
-			Material m = item.getType();
-			if ((m.equals(Material.LEATHER_HELMET)) || (m.equals(Material.LEATHER_CHESTPLATE))
-					|| (m.equals(Material.LEATHER_LEGGINGS)) || (m.equals(Material.LEATHER_BOOTS))) {
-				LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
-				if ((meta.getColor().getRed() == 103) && (meta.getColor().getBlue() == 103) && (meta.getColor().getGreen() == 103)) {
-					return true;
-				}
-				return false;
-			}
-			return false;
-		}
-		return false;
 	}
 	
 	@SuppressWarnings("deprecation")
