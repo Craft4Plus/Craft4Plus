@@ -364,7 +364,7 @@ public class CustomItems {
 	}
 
 	public static boolean isDoubleAxe(ItemStack item) {
-		if (item.getItemMeta().spigot().isUnbreakable()) {
+		if (!item.getType().equals(Material.AIR) && (item.getItemMeta() != null) && item.getItemMeta().spigot().isUnbreakable()) {
 			Material m = item.getType();
 			if ((m.equals(Material.WOOD_AXE) && item.getDurability() == 59)
 					|| (m.equals(Material.STONE_AXE) && item.getDurability() == 131)
@@ -576,10 +576,36 @@ public class CustomItems {
 		
 	}
 	
+	public static boolean isEndStoneSword(ItemStack item) {
+		if (item.getItemMeta().spigot().isUnbreakable()) {
+			Material m = item.getType();
+			if (m.equals(Material.STONE_SWORD) && item.getDurability() == 131) {
+				return true;
+			}
+			return false;
+		}
+		return false;
+	}
+	
+	public static boolean isEndStoneItem(ItemStack item) {
+		if (item.getItemMeta().spigot().isUnbreakable()) {
+			Material m = item.getType();
+			if ((m.equals(Material.STONE_AXE) && item.getDurability() == 130)
+					|| (m.equals(Material.STONE_AXE) && item.getDurability() == 129)
+					|| (m.equals(Material.STONE_SPADE) && item.getDurability() == 131)
+					|| (m.equals(Material.STONE_PICKAXE) && item.getDurability() == 131)
+					|| (m.equals(Material.STONE_HOE) && item.getDurability() == 131)) {
+				return true;
+			}
+			return false;
+		}
+		return false;
+	}
+	
 	// ------------ END OF END STONE ITEMS -------------
 	
 	public static int getCustomItemDurability(ItemStack item) {
-		if ((item.getItemMeta() != null) && (!item.getItemMeta().spigot().isUnbreakable())) {
+		if ((!item.getType().equals(Material.AIR)) && (item.getItemMeta() != null) && (!item.getItemMeta().spigot().isUnbreakable())) {
 			Material m = item.getType();
 			if ((m.equals(Material.DIAMOND_SWORD)) || (m.equals(Material.DIAMOND_AXE))
 					|| (m.equals(Material.DIAMOND_PICKAXE)) || (m.equals(Material.DIAMOND_SPADE))
@@ -606,51 +632,52 @@ public class CustomItems {
 		}
 		return 123456789;
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	public static void reduceDurability(ItemStack item, Player player, int durabilitytoremove) {
 		if (player.getGameMode() != GameMode.CREATIVE) {
-			List<String> lore = item.getItemMeta().getLore();
-			for (String string : lore) {
-				if (string.startsWith(ChatColor.GRAY + "Durability: ")) {
-					String durability = string.replaceFirst(ChatColor.GRAY + "Durability: ", "");
-					String segments[] = durability.split(" / ");
-					int finaldurability = Integer.parseInt(segments[0]) - durabilitytoremove;
-					String newstring = string.replaceFirst("Durability: " + segments[0],
-							"Durability: " + Integer.toString(finaldurability));
-					lore.remove(string);
-					lore.add(newstring);
-					if (finaldurability <= 10) {
-						BountifulAPI.sendActionBar(player,
-								ChatColor.RED + "" + ChatColor.BOLD + "Item Durability Low!");
-						String redstring = newstring.replaceAll(ChatColor.GRAY + "", ChatColor.RED + "");
-						lore.remove(newstring);
-						lore.add(redstring);
-					}
-				} else if (string.startsWith(ChatColor.RED + "Durability: ")) {
-					String durability = string.replaceFirst(ChatColor.RED + "Durability: ", "");
-					String segments[] = durability.split(" / ");
-					int finaldurability = Integer.parseInt(segments[0]) - durabilitytoremove;
-					if (finaldurability == 0) {
-						player.getInventory().removeItem(player.getItemInHand());
-						player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
-						return;
-					} else {
+			if (item.getItemMeta().getLore() != null) {
+				List<String> lore = item.getItemMeta().getLore();
+				for (String string : lore) {
+					if (string.startsWith(ChatColor.GRAY + "Durability: ")) {
+						String durability = string.replaceFirst(ChatColor.GRAY + "Durability: ", "");
+						String segments[] = durability.split(" / ");
+						int finaldurability = Integer.parseInt(segments[0]) - durabilitytoremove;
 						String newstring = string.replaceFirst("Durability: " + segments[0],
 								"Durability: " + Integer.toString(finaldurability));
-						BountifulAPI.sendActionBar(player,
-								ChatColor.RED + "" + ChatColor.BOLD + "Item Durability Low!");
-						String redstring = newstring.replaceAll(ChatColor.RED + "", ChatColor.RED + "");
 						lore.remove(string);
-						lore.remove(newstring);
-						lore.add(redstring);
+						lore.add(newstring);
+						if (finaldurability <= 10) {
+							BountifulAPI.sendActionBar(player,
+									ChatColor.RED + "" + ChatColor.BOLD + "Item Durability Low!");
+							String redstring = newstring.replaceAll(ChatColor.GRAY + "", ChatColor.RED + "");
+							lore.remove(newstring);
+							lore.add(redstring);
+						}
+					} else if (string.startsWith(ChatColor.RED + "Durability: ")) {
+						String durability = string.replaceFirst(ChatColor.RED + "Durability: ", "");
+						String segments[] = durability.split(" / ");
+						int finaldurability = Integer.parseInt(segments[0]) - durabilitytoremove;
+						if (finaldurability == 0) {
+							player.getInventory().removeItem(player.getInventory().getItemInMainHand());
+							player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
+							return;
+						} else {
+							String newstring = string.replaceFirst("Durability: " + segments[0],
+									"Durability: " + Integer.toString(finaldurability));
+							BountifulAPI.sendActionBar(player,
+									ChatColor.RED + "" + ChatColor.BOLD + "Item Durability Low!");
+							String redstring = newstring.replaceAll(ChatColor.RED + "", ChatColor.RED + "");
+							lore.remove(string);
+							lore.remove(newstring);
+							lore.add(redstring);
+						}
 					}
 				}
+				ItemMeta im = item.getItemMeta();
+				im.setDisplayName(im.getDisplayName());
+				im.setLore(lore);
+				item.setItemMeta(im);
 			}
-			ItemMeta im = item.getItemMeta();
-			im.setDisplayName(im.getDisplayName());
-			im.setLore(lore);
-			item.setItemMeta(im);
 		}
 	}
 

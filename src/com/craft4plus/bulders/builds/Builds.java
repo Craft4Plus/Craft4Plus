@@ -80,7 +80,7 @@ public class Builds {
 
 	public static void completeBuild(Player player, String[] args) {
 		if (!NumberUtils.isNumber(args[1])) {
-			player.sendMessage(ChatColor.RED + "The value you enteredis not a number!");
+			player.sendMessage(ChatColor.RED + "The value you entered is not a number!");
 			return;
 		}
 		int buildnumber = Integer.parseInt(args[1]);
@@ -149,8 +149,8 @@ public class Builds {
 		BuildsListString = (HashMap<Integer, String>) Files.load(new File(dir, "BuildsListString.dat"));
 		BuildsListLocationSerialized = (HashMap<Integer, String>) Files.load(new File(dir, "BuildsListLocationSerialized.dat"));
 		BuildsListSubmitter = (HashMap<Integer, UUID>) Files.load(new File(dir, "BuildsListSubmitter.dat"));
-		if (Files.load(new File(dir, "BuildsList/Number.dat")) != null) {
-			BuildsListNumber = (int) Files.load(new File(dir, "BuildsList/Number.dat"));
+		if (Files.load(new File(dir, "BuildsListNumber.dat")) != null) {
+			BuildsListNumber = (int) Files.load(new File(dir, "BuildsListNumber.dat"));
 		} else {
 			BuildsListNumber = new Integer(0);
 		}

@@ -27,8 +27,10 @@ import com.craft4plus.minigames.parkour.ParkourCommand;
 import com.craft4plus.minigames.survivalgames.SGPlayerDetection;
 import com.craft4plus.miscellaneous.MelonFaller;
 import com.craft4plus.motd.MailPlaceholder;
+import com.craft4plus.questcraft.QCCommand;
 import com.craft4plus.ranks.RanksCommand;
 import com.craft4plus.tips.Tips;
+import com.craft4plus.utils.armorequip.ArmorListener;
 import com.craft4plus.warpsystem.SetWarpCmd;
 import com.craft4plus.warpsystem.WarpSystem;
 import com.earth2me.essentials.Essentials;
@@ -89,6 +91,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		this.getCommand("setwp").setExecutor(new SetWarpCmd());
 		this.getCommand("parkourreset").setExecutor(new ParkourCommand());
 		this.getCommand("builds").setExecutor(new BuildsCommand());
+		this.getCommand("qc").setExecutor(new QCCommand());
 	}
 
 	public void repeatingTasksPerMinute() {
@@ -126,6 +129,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		pm.registerEvents(new PlayerWorldChange(), this);
 		pm.registerEvents(new CustomItemsListener(), this);
 		pm.registerEvents(new ResourcePackListener(), this);
+		pm.registerEvents(new ArmorListener(getConfig().getStringList("blocked")), this);
 	}
 	
 	private void load() {

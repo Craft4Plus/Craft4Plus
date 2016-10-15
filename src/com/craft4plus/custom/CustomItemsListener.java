@@ -1,5 +1,6 @@
 package com.craft4plus.custom;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -7,45 +8,58 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import com.craft4plus.main.Main;
 import com.craft4plus.miscellaneous.TreeBreaker;
+import com.craft4plus.utils.armorequip.ArmorEquipEvent;
+
+import net.minecraft.server.v1_10_R1.Material;
 
 public class CustomItemsListener implements Listener {
 	
-	@SuppressWarnings("deprecation")
 	public void customItemCheck(Player player) {
-		if ((player.getItemInHand() != null)
-				&& (CustomItems.getCustomItemDurability(player.getItemInHand()) != 123456789)
-				&& (player.getItemInHand().getDurability() >= CustomItems.getCustomItemDurability(player.getItemInHand()))) {
-			player.getInventory().removeItem(player.getItemInHand()); // Check if there is an item in hand and if it should be broken due to low durability.
+		if ((!player.getInventory().getItemInMainHand().getType().equals(Material.AIR))
+				&& (CustomItems.getCustomItemDurability(player.getInventory().getItemInMainHand()) != 123456789)
+				&& (player.getInventory().getItemInMainHand().getDurability() >= CustomItems.getCustomItemDurability(player.getInventory().getItemInMainHand()))) {
+			player.getInventory().removeItem(player.getInventory().getItemInMainHand()); // Check if there is an item in hand and if it should be broken due to low durability.
 			player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
 		}
 		
 	}
 
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onEntityDamage(EntityDamageByEntityEvent event) { // When an entity is hit
-		if ((event.getDamager() instanceof Player)) { // If the damager is a player
+		if ((event.getEntity() instanceof Player)) { 
 			Player player = (Player) event.getEntity();
 			customItemCheck(player);
-			if (player.getItemInHand() != null && CustomItems.isDoubleAxe(player.getItemInHand())) {
-				CustomItems.reduceDurability(player.getItemInHand(), player, 2);
+			if (!player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
+				ItemStack item = player.getInventory().getItemInMainHand();
+				if (CustomItems.isDoubleAxe(item)) {
+				CustomItems.reduceDurability(item, player, 2);
+				}
+				if (CustomItems.isEndStoneSword(item)) {
+					CustomItems.reduceDurability(item, player, 1);
+				}
+				if (CustomItems.isEndStoneItem(item)) {
+					CustomItems.reduceDurability(item, player, 2);
+				}
 			}
+			
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onBlockBreakEvent(BlockBreakEvent event) { // When a block is broken
 		Player player = event.getPlayer();
 		customItemCheck(player);
-		if (player.getItemInHand() != null && CustomItems.isDoubleAxe(player.getItemInHand())) {
-			TreeBreaker.Chop(event.getBlock(), player, event.getBlock().getWorld());
-			CustomItems.reduceDurability(player.getItemInHand(), player, 1);
+		if (!player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
+			if (CustomItems.isDoubleAxe(player.getInventory().getItemInMainHand())) {
+				TreeBreaker.Chop(event.getBlock(), player, event.getBlock().getWorld());
+				CustomItems.reduceDurability(player.getInventory().getItemInMainHand(), player, 1);
+			}
 		}
 	}
 	
@@ -53,16 +67,31 @@ public class CustomItemsListener implements Listener {
 	public void onPlayerInteract(PlayerInteractEvent event) { // When a player interacts with something
 		customItemCheck(event.getPlayer());
 	}
-	
+
 	@EventHandler
-	public void onPlayerMove(PlayerMoveEvent event) {
+	public void onPlayerMove(ArmorEquipEvent event) {
 		Player player = event.getPlayer();
-			if (CustomItems.isStoneArmor(player.getInventory().getItem(39))
+		if ((event.getNewArmorPiece() != null) && (!event.getNewArmorPiece().getType().equals(Material.AIR))
+				&& (CustomItems.isStoneArmor(event.getNewArmorPiece()))) {
+			player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 9999999, 1));
+		} else {
+			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+				public void run() {
+			if (!(CustomItems.isStoneArmor(player.getInventory().getItem(39))
 					|| CustomItems.isStoneArmor(player.getInventory().getItem(38))
 					|| CustomItems.isStoneArmor(player.getInventory().getItem(37))
-					|| CustomItems.isStoneArmor(player.getInventory().getItem(36))) {
-				player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 40, 1));
+					|| CustomItems.isStoneArmor(player.getInventory().getItem(36)))) {
+				if (player.hasPotionEffect(PotionEffectType.SLOW)) {
+					for (PotionEffect effect : player.getActivePotionEffects()) {
+						if (effect.getDuration() >= 1000 && effect.getAmplifier() == 1) {
+							player.removePotionEffect(effect.getType());
+						}
+					}
+				}
+			}
+				}
+			}, 1L);
 		}
 	}
-	
+
 }
