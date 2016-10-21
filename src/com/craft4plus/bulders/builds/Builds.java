@@ -145,7 +145,6 @@ public class Builds {
 	
 	@SuppressWarnings("unchecked")
 	public static void load(File dir) {
-		
 		BuildsListString = (HashMap<Integer, String>) Files.load(new File(dir, "BuildsListString.dat"));
 		BuildsListLocationSerialized = (HashMap<Integer, String>) Files.load(new File(dir, "BuildsListLocationSerialized.dat"));
 		BuildsListSubmitter = (HashMap<Integer, UUID>) Files.load(new File(dir, "BuildsListSubmitter.dat"));
