@@ -604,6 +604,29 @@ public class CustomItems {
 	
 	// ------------ END OF END STONE ITEMS -------------
 	
+	// ================= CUSTOM FOOD ===================
+	
+	public static ItemStack Goldfish() {
+		
+		ItemStack Item = createItem(Material.BOW, 1 , 384);
+		
+		setName(Item, "Goldfish");
+		setUnbreakable(Item, true, true);
+		
+		return Item;
+		
+	}
+	
+	public static boolean isCustomFood(ItemStack item) {
+		if ((!item.equals(Material.AIR)) && ((item.equals(Goldfish())))) {
+			return true;
+		}
+		return false;
+	}
+	
+	// ============= END OF CSTOM FOODS ================
+	
+	
 	public static int getCustomItemDurability(ItemStack item) {
 		if ((!item.getType().equals(Material.AIR)) && (item.getItemMeta() != null) && (!item.getItemMeta().spigot().isUnbreakable())) {
 			Material m = item.getType();

@@ -203,6 +203,18 @@ public class CraftingRecipes {
 		}, 1L);
 		
 		// ------------ END OF END STONE ITEMS -------------
+		
+		// ================= CUSTOM FOOD ===================
+		
+		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+			@Override
+			public void run() {
+				addGoldfish();
+			}
+		}, 1L);
+		
+		// ============= END OF CSTOM FOODS ================
+		
 	}
 
 	// ------------ EMERALD ITEMS ---------------
@@ -889,5 +901,23 @@ public class CraftingRecipes {
 	}
 	
 	// ------------ END OF END STONE ITEMS -------------
+	
+	// ================= CUSTOM FOOD ===================
+	
+	public static void addGoldfish() {
+
+		ItemStack item = CustomItems.Goldfish();
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("111", "121", "111");
+
+		ItemRecipe1.setIngredient('1', Material.GOLD_NUGGET);
+		ItemRecipe1.setIngredient('2', Material.RAW_FISH);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+	}	
+		
+	// ============= END OF CSTOM FOODS ================
 	
 }
