@@ -670,6 +670,7 @@ public class CustomItemsOldy {
 	
 	// ------------ END OF END STONE ITEMS -------------
 	
+<<<<<<< HEAD:Legacy Stuff (Ignore)/custom/CustomItems.java
 	// ----------------- CUSTOM FOOD -------------------
 	
 	public static ItemStack Goldfish() {
@@ -685,10 +686,29 @@ public class CustomItemsOldy {
 	public static boolean isCustomFood(ItemStack item, Material material) {
 		if (material == Material.DIAMOND_SWORD) {
 			if ((item.getDurability() >= 1560) && (item.getDurability() <= 1560)) return true;
+=======
+	// ================= CUSTOM FOOD ===================
+	
+	public static ItemStack Goldfish() {
+		
+		ItemStack Item = createItem(Material.BOW, 1 , 384);
+		
+		setName(Item, "Goldfish");
+		setUnbreakable(Item, true, true);
+		
+		return Item;
+		
+	}
+	
+	public static boolean isCustomFood(ItemStack item) {
+		if ((!item.equals(Material.AIR)) && ((item.equals(Goldfish())))) {
+			return true;
+>>>>>>> origin/master:src/com/craft4plus/custom/CustomItems.java
 		}
 		return false;
 	}
 	
+<<<<<<< HEAD:Legacy Stuff (Ignore)/custom/CustomItems.java
 	public static void addFood(Player player, ItemStack item, Material material) {
 		if (material == Material.DIAMOND_SWORD) {
 			if (item.getDurability() == 1560) {
@@ -715,6 +735,10 @@ public class CustomItemsOldy {
 	}
 	
 	// -------------- END OF CUSTOM FOOD ---------------
+=======
+	// ============= END OF CSTOM FOODS ================
+	
+>>>>>>> origin/master:src/com/craft4plus/custom/CustomItems.java
 	
 	public static int getCustomItemDurability(ItemStack item) {
 		if ((!item.getType().equals(Material.AIR)) && (item.getItemMeta() != null) && (!item.getItemMeta().spigot().isUnbreakable())) {
