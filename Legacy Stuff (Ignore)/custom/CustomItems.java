@@ -24,7 +24,7 @@ import net.minecraft.server.v1_10_R1.NBTTagInt;
 import net.minecraft.server.v1_10_R1.NBTTagList;
 import net.minecraft.server.v1_10_R1.NBTTagString;
 
-public class CustomItems {
+public class CustomItemsOldy {
 
 	public static int ArmorUUID = 1;
 

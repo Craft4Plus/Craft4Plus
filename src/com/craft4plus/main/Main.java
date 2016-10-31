@@ -13,9 +13,10 @@ import org.mcsg.survivalgames.SurvivalGames;
 import com.craft4plus.afksystem.AFKSystem;
 import com.craft4plus.bulders.builds.Builds;
 import com.craft4plus.bulders.builds.BuildsCommand;
-import com.craft4plus.custom.CraftingRecipes;
-import com.craft4plus.custom.CustomItemsListener;
 import com.craft4plus.custom.ResourcePackListener;
+import com.craft4plus.custom.items.CraftingRecipes;
+import com.craft4plus.custom.items.CustomItemsListener;
+import com.craft4plus.custom.items.CustomItems;
 import com.craft4plus.listeners.PlayerJoin;
 import com.craft4plus.listeners.PlayerLeave;
 import com.craft4plus.listeners.PlayerWorldChange;
@@ -78,9 +79,14 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		
 		load();
 		
-		CraftingRecipes.addCustomCraftingRecipes();
+		addCustomItems();
 		
 		System.out.println("Craft4Plus has been enabled!");
+	}
+
+	private void addCustomItems() {
+		CustomItems.generateCustomItems();
+		CraftingRecipes.addCustomCraftingRecipes();
 	}
 
 	private void registerCommands() {

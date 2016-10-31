@@ -1,4 +1,4 @@
-package com.craft4plus.custom;
+package com.craft4plus.custom.items;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -12,7 +12,7 @@ public class CraftingRecipes {
 	public static void addCustomCraftingRecipes() {
 
 		// There is a need for a 1 tick delay - otherwise the Crafting Bench
-		// will glitch out and have some item already.
+		// will glitch out and have some items already.
 		
 		// ------------ EMERALD ITEMS ---------------
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
@@ -219,7 +219,7 @@ public class CraftingRecipes {
 	// ------------ EMERALD ITEMS ---------------
 	public static void addEmeraldSword() {
 
-		ItemStack item = CustomItems.EmeraldSword();
+		ItemStack item = CustomItemStack.EMERALD_SWORD();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -254,7 +254,7 @@ public class CraftingRecipes {
 
 	public static void addEmeraldAxe() {
 
-		ItemStack item = CustomItems.EmeraldAxe();
+		ItemStack item = CustomItemStack.EMERALD_AXE();
 
 		ShapedRecipe ItemRecipe4 = new ShapedRecipe(item);
 
@@ -283,7 +283,7 @@ public class CraftingRecipes {
 
 	public static void addEmeraldPickaxe() {
 
-		ItemStack item = CustomItems.EmeraldPickaxe();
+		ItemStack item = CustomItemStack.EMERALD_PICKAXE();
 
 		ShapedRecipe ItemRecipe6 = new ShapedRecipe(item);
 
@@ -300,7 +300,7 @@ public class CraftingRecipes {
 
 	public static void addEmeraldShovel() {
 
-		ItemStack item = CustomItems.EmeraldShovel();
+		ItemStack item = CustomItemStack.EMERALD_SHOVEL();
 
 		ShapedRecipe ItemRecipe7 = new ShapedRecipe(item);
 
@@ -315,7 +315,7 @@ public class CraftingRecipes {
 
 	public static void addEmeraldHoe() {
 
-		ItemStack item = CustomItems.EmeraldHoe();
+		ItemStack item = CustomItemStack.EMERALD_HOE();
 
 		ShapedRecipe ItemRecipe8 = new ShapedRecipe(item);
 
@@ -342,7 +342,7 @@ public class CraftingRecipes {
 
 	public static void addEmeraldHelmet() {
 
-		ItemStack item = CustomItems.EmeraldHelmet();
+		ItemStack item = CustomItemStack.EMERALD_HELMET();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -371,7 +371,7 @@ public class CraftingRecipes {
 
 	public static void addEmeraldChestplate() {
 
-		ItemStack item = CustomItems.EmeraldChestplate();
+		ItemStack item = CustomItemStack.EMERALD_CHESTPLATE();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -392,7 +392,7 @@ public class CraftingRecipes {
 
 	public static void addEmeraldLeggings() {
 
-		ItemStack item = CustomItems.EmeraldLeggings();
+		ItemStack item = CustomItemStack.EMERALD_LEGGINGS();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -412,7 +412,7 @@ public class CraftingRecipes {
 
 	public static void addEmeraldBoots() {
 
-		ItemStack item = CustomItems.EmeraldBoots();
+		ItemStack item = CustomItemStack.EMERALD_BOOTS();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -441,47 +441,92 @@ public class CraftingRecipes {
 	
 	// ----------------- DOUBLE AXES ------------------- 
 	
+	@SuppressWarnings("deprecation")
 	public static void addWoodenDoubleAxe() {
 
-		ItemStack item = CustomItems.WoodenDoubleAxe();
+		ItemStack item = CustomItemStack.WOODEN_DOUBLE_AXE();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
-		ItemRecipe1.shape("789", "456", "123");
+		ItemRecipe1.shape("111", "121", "020");
 
-		ItemRecipe1.setIngredient('7', Material.WOOD);
-		ItemRecipe1.setIngredient('8', Material.WOOD);
-		ItemRecipe1.setIngredient('9', Material.WOOD);
-		ItemRecipe1.setIngredient('4', Material.WOOD);
-		ItemRecipe1.setIngredient('6', Material.WOOD);
-		ItemRecipe1.setIngredient('5', Material.STICK);
+		ItemRecipe1.setIngredient('1', Material.WOOD);
 		ItemRecipe1.setIngredient('2', Material.STICK);
 
 		Bukkit.getServer().addRecipe(ItemRecipe1);
+		
+		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
+
+		ItemRecipe2.shape("111", "121", "020");
+
+		ItemRecipe2.setIngredient('1', Material.WOOD, 1);
+		ItemRecipe2.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe2);
+		
+		ShapedRecipe ItemRecipe3 = new ShapedRecipe(item);
+
+		ItemRecipe3.shape("111", "121", "020");
+
+		ItemRecipe3.setIngredient('1', Material.WOOD, 2);
+		ItemRecipe3.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe3);
+		
+		ShapedRecipe ItemRecipe4 = new ShapedRecipe(item);
+
+		ItemRecipe4.shape("111", "121", "020");
+
+		ItemRecipe4.setIngredient('1', Material.WOOD, 3);
+		ItemRecipe4.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe4);
+		
+		ShapedRecipe ItemRecipe5 = new ShapedRecipe(item);
+
+		ItemRecipe5.shape("111", "121", "020");
+
+		ItemRecipe5.setIngredient('1', Material.WOOD,4);
+		ItemRecipe5.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe5);
+		
+		ShapedRecipe ItemRecipe6 = new ShapedRecipe(item);
+
+		ItemRecipe6.shape("111", "121", "020");
+
+		ItemRecipe6.setIngredient('1', Material.WOOD,5);
+		ItemRecipe6.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe6);
 	}
 	
 	public static void addStoneDoubleAxe() {
 
-		ItemStack item = CustomItems.StoneDoubleAxe();
+		ItemStack item = CustomItemStack.STONE_DOUBLE_AXE();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
-		ItemRecipe1.shape("789", "456", "123");
+		ItemRecipe1.shape("111", "121", "020");
 
-		ItemRecipe1.setIngredient('7', Material.COBBLESTONE);
-		ItemRecipe1.setIngredient('8', Material.COBBLESTONE);
-		ItemRecipe1.setIngredient('9', Material.COBBLESTONE);
-		ItemRecipe1.setIngredient('4', Material.COBBLESTONE);
-		ItemRecipe1.setIngredient('6', Material.COBBLESTONE);
-		ItemRecipe1.setIngredient('5', Material.STICK);
-		ItemRecipe1.setIngredient('2', Material.STICK);
+		ItemRecipe1.setIngredient('1', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('2', Material.COBBLESTONE);
+		
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+		
+		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
 
+		ItemRecipe2.shape("111", "121", "020");
+
+		ItemRecipe2.setIngredient('1', Material.STONE);
+		ItemRecipe2.setIngredient('2', Material.STONE);
+		
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 	}
 	
 	public static void addEndStoneDoubleAxe() {
 
-		ItemStack item = CustomItems.EndStoneDoubleAxe();
+		ItemStack item = CustomItemStack.END_STONE_DOUBLE_AXE();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -500,7 +545,7 @@ public class CraftingRecipes {
 	
 	public static void addIronDoubleAxe() {
 
-		ItemStack item = CustomItems.IronDoubleAxe();
+		ItemStack item = CustomItemStack.IRON_DOUBLE_AXE();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -519,7 +564,7 @@ public class CraftingRecipes {
 	
 	public static void addGoldDoubleAxe() {
 
-		ItemStack item = CustomItems.GoldDoubleAxe();
+		ItemStack item = CustomItemStack.GOLD_DOUBLE_AXE();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -538,7 +583,7 @@ public class CraftingRecipes {
 	
 	public static void addDiamondDoubleAxe() {
 
-		ItemStack item = CustomItems.DiamondDoubleAxe();
+		ItemStack item = CustomItemStack.DIAMOND_DOUBLE_AXE();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -557,7 +602,7 @@ public class CraftingRecipes {
 	
 	public static void addEmeraldDoubleAxe() {
 
-		ItemStack item = CustomItems.EmeraldDoubleAxe();
+		ItemStack item = CustomItemStack.EMERALD_DOUBLE_AXE();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -580,7 +625,7 @@ public class CraftingRecipes {
 	
 	public static void addStoneHelmet() {
 
-		ItemStack item = CustomItems.StoneHelmet();
+		ItemStack item = CustomItemStack.STONE_HELMET();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -605,11 +650,35 @@ public class CraftingRecipes {
 		ItemRecipe2.setIngredient('3', Material.COBBLESTONE);
 
 		Bukkit.getServer().addRecipe(ItemRecipe2);
+		
+		ShapedRecipe ItemRecipe3 = new ShapedRecipe(item);
+		
+		ItemRecipe3.shape("789", "456", "123");
+
+		ItemRecipe3.setIngredient('7', Material.STONE);
+		ItemRecipe3.setIngredient('8', Material.STONE);
+		ItemRecipe3.setIngredient('9', Material.STONE);
+		ItemRecipe3.setIngredient('4', Material.STONE);
+		ItemRecipe3.setIngredient('6', Material.STONE);
+
+		Bukkit.getServer().addRecipe(ItemRecipe3);
+
+		ShapedRecipe ItemRecipe4 = new ShapedRecipe(item);
+
+		ItemRecipe4.shape("789", "456", "123");
+
+		ItemRecipe4.setIngredient('4', Material.STONE);
+		ItemRecipe4.setIngredient('5', Material.STONE);
+		ItemRecipe4.setIngredient('6', Material.STONE);
+		ItemRecipe4.setIngredient('1', Material.STONE);
+		ItemRecipe4.setIngredient('3', Material.STONE);
+
+		Bukkit.getServer().addRecipe(ItemRecipe4);
 	}
 
 	public static void addStoneChestplate() {
 
-		ItemStack item = CustomItems.StoneChestplate();
+		ItemStack item = CustomItemStack.STONE_CHESTPLATE();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -626,11 +695,19 @@ public class CraftingRecipes {
 
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 
+		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
+
+		ItemRecipe2.shape("101", "111", "111");
+
+		ItemRecipe2.setIngredient('1', Material.STONE);
+
+		Bukkit.getServer().addRecipe(ItemRecipe2);
+		
 	}
 
 	public static void addStoneLeggings() {
 
-		ItemStack item = CustomItems.StoneLeggings();
+		ItemStack item = CustomItemStack.STONE_LEGGINGS();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -646,33 +723,51 @@ public class CraftingRecipes {
 
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 
+		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
+
+		ItemRecipe2.shape("111", "101", "101");
+
+		ItemRecipe2.setIngredient('1', Material.STONE);
+
+		Bukkit.getServer().addRecipe(ItemRecipe2);
+				
 	}
 
 	public static void addStoneBoots() {
 
-		ItemStack item = CustomItems.StoneBoots();
+		ItemStack item = CustomItemStack.STONE_BOOTS();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
-		ItemRecipe1.shape("789", "456", "123");
+		ItemRecipe1.shape("101", "101", "000");
 
-		ItemRecipe1.setIngredient('7', Material.COBBLESTONE);
-		ItemRecipe1.setIngredient('9', Material.COBBLESTONE);
-		ItemRecipe1.setIngredient('4', Material.COBBLESTONE);
-		ItemRecipe1.setIngredient('6', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('1', Material.COBBLESTONE);
 
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 
 		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
 
-		ItemRecipe2.shape("789", "456", "123");
+		ItemRecipe2.shape("000", "101", "101");
 
-		ItemRecipe2.setIngredient('4', Material.COBBLESTONE);
-		ItemRecipe2.setIngredient('6', Material.COBBLESTONE);
 		ItemRecipe2.setIngredient('1', Material.COBBLESTONE);
-		ItemRecipe2.setIngredient('3', Material.COBBLESTONE);
-
+		
 		Bukkit.getServer().addRecipe(ItemRecipe2);
+		
+		ShapedRecipe ItemRecipe3 = new ShapedRecipe(item);
+
+		ItemRecipe3.shape("101", "101", "000");
+
+		ItemRecipe3.setIngredient('1', Material.STONE);
+
+		Bukkit.getServer().addRecipe(ItemRecipe3);
+
+		ShapedRecipe ItemRecipe4 = new ShapedRecipe(item);
+
+		ItemRecipe4.shape("000", "101", "101");
+
+		ItemRecipe4.setIngredient('1', Material.STONE);
+		
+		Bukkit.getServer().addRecipe(ItemRecipe4);
 	}
 	
 	// ------------- END OF STONE ARMOR ----------------
@@ -681,7 +776,7 @@ public class CraftingRecipes {
 	
 	public static void addEndStoneSword() {
 
-		ItemStack item = CustomItems.EndStoneSword();
+		ItemStack item = CustomItemStack.END_STONE_SWORD();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -716,7 +811,7 @@ public class CraftingRecipes {
 
 	public static void addEndStoneAxe() {
 
-		ItemStack item = CustomItems.EndStoneAxe();
+		ItemStack item = CustomItemStack.END_STONE_AXE();
 
 		ShapedRecipe ItemRecipe4 = new ShapedRecipe(item);
 
@@ -745,7 +840,7 @@ public class CraftingRecipes {
 
 	public static void addEndStonePickaxe() {
 
-		ItemStack item = CustomItems.EndStonePickaxe();
+		ItemStack item = CustomItemStack.END_STONE_PICKAXE();
 
 		ShapedRecipe ItemRecipe6 = new ShapedRecipe(item);
 
@@ -762,7 +857,7 @@ public class CraftingRecipes {
 
 	public static void addEndStoneShovel() {
 
-		ItemStack item = CustomItems.EndStoneShovel();
+		ItemStack item = CustomItemStack.END_STONE_SHOVEL();
 
 		ShapedRecipe ItemRecipe7 = new ShapedRecipe(item);
 
@@ -777,7 +872,7 @@ public class CraftingRecipes {
 
 	public static void addEndStoneHoe() {
 
-		ItemStack item = CustomItems.EndStoneHoe();
+		ItemStack item = CustomItemStack.END_STONE_HOE();
 
 		ShapedRecipe ItemRecipe8 = new ShapedRecipe(item);
 
@@ -804,7 +899,7 @@ public class CraftingRecipes {
 
 	public static void addEndStoneHelmet() {
 
-		ItemStack item = CustomItems.EndStoneHelmet();
+		ItemStack item = CustomItemStack.END_STONE_HELMET();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -833,7 +928,7 @@ public class CraftingRecipes {
 
 	public static void addEndStoneChestplate() {
 
-		ItemStack item = CustomItems.EndStoneChestplate();
+		ItemStack item = CustomItemStack.END_STONE_CHESTPLATE();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -854,7 +949,7 @@ public class CraftingRecipes {
 
 	public static void addEndStoneLeggings() {
 
-		ItemStack item = CustomItems.EndStoneLeggings();
+		ItemStack item = CustomItemStack.END_STONE_LEGGINGS();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -874,7 +969,7 @@ public class CraftingRecipes {
 
 	public static void addEndStoneBoots() {
 
-		ItemStack item = CustomItems.EndStoneBoots();
+		ItemStack item = CustomItemStack.END_STONE_BOOTS();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
@@ -905,7 +1000,7 @@ public class CraftingRecipes {
 	
 	public static void addGoldfish() {
 
-		ItemStack item = CustomItems.Goldfish();
+		ItemStack item = CustomItemStack.GOLDFISH();
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 

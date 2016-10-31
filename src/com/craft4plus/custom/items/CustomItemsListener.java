@@ -1,11 +1,10 @@
-package com.craft4plus.custom;
+package com.craft4plus.custom.items;
 
 import java.util.HashMap;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,51 +28,21 @@ import net.minecraft.server.v1_10_R1.MinecraftServer;
 
 public class CustomItemsListener implements Listener {
 
-	public void customItemCheck(Player player) {
-		if ((!player.getInventory().getItemInMainHand().getType().equals(Material.AIR))
-				&& (CustomItems.getCustomItemDurability(player.getInventory().getItemInMainHand()) != 123456789)
-				&& (player.getInventory().getItemInMainHand().getDurability() >= CustomItems
-						.getCustomItemDurability(player.getInventory().getItemInMainHand()))) {
-			player.getInventory().removeItem(player.getInventory().getItemInMainHand()); // Check
-																							// if
-																							// there
-																							// is
-																							// an
-																							// item
-																							// in
-																							// hand
-																							// and
-																							// if
-																							// it
-																							// should
-																							// be
-																							// broken
-																							// due
-																							// to
-																							// low
-																							// durability.
-			player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
-		}
-
-	}
-
 	@EventHandler
-	public void onEntityDamage(EntityDamageByEntityEvent event) { // When an
-																	// entity is
-																	// hit
+	public void onEntityDamage(EntityDamageByEntityEvent event) {
 		if ((event.getEntity() instanceof Player)) {
 			Player player = (Player) event.getEntity();
-			customItemCheck(player);
+			CustomItemsActions.customItemCheck(player);
 			if (!player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
 				ItemStack item = player.getInventory().getItemInMainHand();
-				if (CustomItems.isDoubleAxe(item)) {
-					CustomItems.reduceDurability(item, player, 2);
+				if (CustomItemsActions.isDoubleAxe(item)) {
+					CustomItemsActions.reduceDurability(item, player, 2);
 				}
-				if (CustomItems.isEndStoneSword(item)) {
-					CustomItems.reduceDurability(item, player, 1);
+				if (CustomItemsActions.isEndStoneSword(item)) {
+					CustomItemsActions.reduceDurability(item, player, 1);
 				}
-				if (CustomItems.isEndStoneItem(item)) {
-					CustomItems.reduceDurability(item, player, 2);
+				if (CustomItemsActions.isEndStoneItem(item)) {
+					CustomItemsActions.reduceDurability(item, player, 2);
 				}
 			}
 
@@ -81,39 +50,35 @@ public class CustomItemsListener implements Listener {
 	}
 
 	@EventHandler
-	public void onBlockBreakEvent(BlockBreakEvent event) { // When a block is
-															// broken
+	public void onBlockBreakEvent(BlockBreakEvent event) { 
 		Player player = event.getPlayer();
-		customItemCheck(player);
+		CustomItemsActions.customItemCheck(player);
 		if (!player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
-			if (CustomItems.isDoubleAxe(player.getInventory().getItemInMainHand())) {
+			if (CustomItemsActions.isDoubleAxe(player.getInventory().getItemInMainHand())) {
 				TreeBreaker.Chop(event.getBlock(), player, event.getBlock().getWorld());
-				CustomItems.reduceDurability(player.getInventory().getItemInMainHand(), player, 1);
+				CustomItemsActions.reduceDurability(player.getInventory().getItemInMainHand(), player, 1);
 			}
 		}
 	}
 
 	@EventHandler
-	public void onPlayerInteract(PlayerInteractEvent event) { // When a player
-																// interacts
-																// with
-																// something
-		customItemCheck(event.getPlayer());
+	public void onPlayerInteract(PlayerInteractEvent event) { 
+		CustomItemsActions.customItemCheck(event.getPlayer());
 	}
 
 	@EventHandler
 	public void onArmorEquip(ArmorEquipEvent event) {
 		Player player = event.getPlayer();
 		if ((event.getNewArmorPiece() != null) && (!event.getNewArmorPiece().getType().equals(Material.AIR))
-				&& (CustomItems.isStoneArmor(event.getNewArmorPiece()))) {
+				&& (CustomItemsActions.isStoneArmor(event.getNewArmorPiece()))) {
 			player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 9999999, 1));
 		} else {
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
 				public void run() {
-					if (!(CustomItems.isStoneArmor(player.getInventory().getItem(39))
-							|| CustomItems.isStoneArmor(player.getInventory().getItem(38))
-							|| CustomItems.isStoneArmor(player.getInventory().getItem(37))
-							|| CustomItems.isStoneArmor(player.getInventory().getItem(36)))) {
+					if (!(CustomItemsActions.isStoneArmor(player.getInventory().getItem(39))
+							|| CustomItemsActions.isStoneArmor(player.getInventory().getItem(38))
+							|| CustomItemsActions.isStoneArmor(player.getInventory().getItem(37))
+							|| CustomItemsActions.isStoneArmor(player.getInventory().getItem(36)))) {
 						if (player.hasPotionEffect(PotionEffectType.SLOW)) {
 							for (PotionEffect effect : player.getActivePotionEffects()) {
 								if (effect.getDuration() >= 1000 && effect.getAmplifier() == 1) {
@@ -199,7 +164,7 @@ public class CustomItemsListener implements Listener {
 				&& (player.getFoodLevel() != 20)) {
 			ItemStack item = event.getItem();
 			Material material = item.getType();
-			if (CustomItems.isCustomFood(item, material)) {
+			if (CustomItemsActions.isCustomFood(item, material)) {
 				//player.playSound(player.getLocation(), Sound.entitY_PLAYER, arg2, arg3);
 				int CurrentTick = MinecraftServer.currentTick;
 				UUID uuid = player.getUniqueId();
@@ -210,7 +175,7 @@ public class CustomItemsListener implements Listener {
 					if (EatingStateLastCheck.get(uuid) == CurrentTick - 4) {
 						int TimePassed = EatingState.get(uuid) - CurrentTick;
 						if (TimePassed == -28) {
-							CustomItems.addFood(player, item, material);
+							CustomItemsActions.addFood(player, item, material);
 							EatingState.remove(player.getUniqueId());
 							EatingStateLastCheck.remove(player.getUniqueId());
 							player.getInventory().remove(item);
