@@ -204,11 +204,7 @@ public class CraftingRecipes {
 		
 		// ------------ END OF END STONE ITEMS -------------
 		
-<<<<<<< HEAD:src/com/craft4plus/custom/items/CraftingRecipes.java
 		// ----------------- CUSTOM FOOD -------------------
-=======
-		// ================= CUSTOM FOOD ===================
->>>>>>> origin/master:src/com/craft4plus/custom/CraftingRecipes.java
 		
 		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
 			@Override
@@ -217,12 +213,7 @@ public class CraftingRecipes {
 			}
 		}, 1L);
 		
-<<<<<<< HEAD:src/com/craft4plus/custom/items/CraftingRecipes.java
 		// -------------- END OF CUSTOM FOOD ---------------
-=======
-		// ============= END OF CSTOM FOODS ================
-		
->>>>>>> origin/master:src/com/craft4plus/custom/CraftingRecipes.java
 	}
 
 	// ------------ EMERALD ITEMS ---------------
@@ -1005,25 +996,16 @@ public class CraftingRecipes {
 	
 	// ------------ END OF END STONE ITEMS -------------
 	
-<<<<<<< HEAD:src/com/craft4plus/custom/items/CraftingRecipes.java
 	// ----------------- CUSTOM FOOD -------------------
 	
 	public static void addGoldfish() {
 
 		ItemStack item = CustomItemStack.GOLDFISH();
-=======
-	// ================= CUSTOM FOOD ===================
-	
-	public static void addGoldfish() {
-
-		ItemStack item = CustomItems.Goldfish();
->>>>>>> origin/master:src/com/craft4plus/custom/CraftingRecipes.java
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
 		ItemRecipe1.shape("111", "121", "111");
 
-<<<<<<< HEAD:src/com/craft4plus/custom/items/CraftingRecipes.java
 		ItemRecipe1.setIngredient('1', Material.GOLD_INGOT);
 		ItemRecipe1.setIngredient('2', Material.RAW_FISH);
 
@@ -1032,14 +1014,5 @@ public class CraftingRecipes {
 	}
 	
 	// -------------- END OF CUSTOM FOOD ---------------
-=======
-		ItemRecipe1.setIngredient('1', Material.GOLD_NUGGET);
-		ItemRecipe1.setIngredient('2', Material.RAW_FISH);
-
-		Bukkit.getServer().addRecipe(ItemRecipe1);
-	}	
-		
-	// ============= END OF CSTOM FOODS ================
->>>>>>> origin/master:src/com/craft4plus/custom/CraftingRecipes.java
 	
 }
