@@ -1,6 +1,7 @@
 package com.craft4plus.custom;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -19,9 +20,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.Material;
+
 import com.craft4plus.main.Main;
 import com.craft4plus.miscellaneous.TreeBreaker;
 import com.craft4plus.utils.armorequip.ArmorEquipEvent;
+
+import net.minecraft.server.v1_10_R1.MinecraftServer;
 
 public class CustomItemsListener implements Listener {
 
@@ -126,7 +130,9 @@ public class CustomItemsListener implements Listener {
 	// CUSTOM FOOD - UTILITY TO HAVE A BOW THAT CAN SHOOT WITHOUT ARROWS - MADE
 	// BY Ugleh
 
-	HashMap<Player, ItemStack> storedItem = new HashMap<Player, ItemStack>();
+	HashMap<UUID, ItemStack> storedItem = new HashMap<UUID, ItemStack>();
+	HashMap<UUID, Integer> EatingState = new HashMap<UUID, Integer>();
+	HashMap<UUID, Integer> EatingStateLastCheck = new HashMap<UUID, Integer>();
 
 	@EventHandler
 	public void PlayerItemHeldEvent(PlayerItemHeldEvent e) {
@@ -156,28 +162,68 @@ public class CustomItemsListener implements Listener {
 	}
 
 	private void returnItem(Player player) {
-			if (storedItem.containsKey(player.getPlayer())) {
-				int slot = player.getInventory().getSize() - 6;
-				player.getInventory().setItem(slot, storedItem.get(player));
-				player.updateInventory();
-				storedItem.remove(player);
-			}
+		if (storedItem.containsKey(player.getUniqueId())) {
+			int slot = player.getInventory().getSize() - 6;
+			player.getInventory().setItem(slot, storedItem.get(player.getUniqueId()));
+			player.updateInventory();
+			storedItem.remove(player.getUniqueId());
+		}
 	}
 
 	@EventHandler
 	public void PlayerInteractEvent(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
+		unlimitedArrow(p, e);
+		customFood(p, e);
+	}
+
+	public void unlimitedArrow(Player p, PlayerInteractEvent e) {
 		if (!p.getGameMode().equals(GameMode.CREATIVE) && p.hasPermission("c4p.unlimitedarrows")) {
 			if (!(e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)))
 				return;
-			if (storedItem.containsKey(p))
+			if (storedItem.containsKey(p.getUniqueId()))
 				return;
-			if ((p.getInventory().getItemInMainHand().getType().equals(org.bukkit.Material.BOW))
+			if ((p.getInventory().getItemInMainHand().getType().equals(Material.BOW))
 					|| (p.getInventory().getItemInOffHand().getType().equals(Material.BOW))) {
 				int slot = p.getInventory().getSize() - 6;
 				ItemStack item = p.getInventory().getItem(slot);
-				storedItem.put(p, item);
+				storedItem.put(p.getUniqueId(), item);
 				p.getInventory().setItem(slot, new ItemStack(Material.ARROW, 1));
+			}
+		}
+	}
+
+	public void customFood(Player player, PlayerInteractEvent event) {
+		if ((player.getGameMode() != GameMode.CREATIVE) && (player.getGameMode() != GameMode.SPECTATOR)
+				&& (event.getItem() != null) && (event.getItem().getType() != Material.AIR)
+				&& (player.getFoodLevel() != 20)) {
+			ItemStack item = event.getItem();
+			Material material = item.getType();
+			if (CustomItems.isCustomFood(item, material)) {
+				//player.playSound(player.getLocation(), Sound.entitY_PLAYER, arg2, arg3);
+				int CurrentTick = MinecraftServer.currentTick;
+				UUID uuid = player.getUniqueId();
+				if (!(EatingState.containsKey(uuid) && (EatingStateLastCheck.containsKey(uuid)))) {
+					EatingState.put(uuid, CurrentTick);
+					EatingStateLastCheck.put(uuid, CurrentTick);
+				} else {
+					if (EatingStateLastCheck.get(uuid) == CurrentTick - 4) {
+						int TimePassed = EatingState.get(uuid) - CurrentTick;
+						if (TimePassed == -28) {
+							CustomItems.addFood(player, item, material);
+							EatingState.remove(player.getUniqueId());
+							EatingStateLastCheck.remove(player.getUniqueId());
+							player.getInventory().remove(item);
+						} else {
+							EatingStateLastCheck.put(uuid, CurrentTick);
+						}
+					} else {
+						if (EatingStateLastCheck.get(uuid) == CurrentTick)
+							return;
+						EatingState.put(uuid, CurrentTick);
+						EatingStateLastCheck.put(uuid, CurrentTick);
+					}
+				}
 			}
 		}
 	}

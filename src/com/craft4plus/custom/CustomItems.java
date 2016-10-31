@@ -13,6 +13,8 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import com.connorlinfoot.bountifulapi.BountifulAPI;
 import net.md_5.bungee.api.ChatColor;
@@ -102,8 +104,47 @@ public class CustomItems {
 
 	}
 
-	public static ItemStack setAttack(ItemStack Item, double AttackSpeed, double AttackDamage) {
+	public static ItemStack setAttack(ItemStack Item, double AttackSpeed, double AttackDamage, boolean ShowText, boolean addFakeText) {
 
+//		if (addFakeText) {
+//			ItemMeta im = Item.getItemMeta();
+//			im.setDisplayName(im.getDisplayName());
+//			if (Item.getItemMeta().getLore() == null) {
+//				List<String> loreList = new ArrayList<String>();
+//				loreList.add("");
+//				loreList.add(ChatColor.GRAY + "When in main hand: ");
+//				if (AttackDamage != Math.round(AttackSpeed)) {
+//					loreList.add(ChatColor.GRAY + " " + AttackSpeed + " Attack Speed");
+//				} else {
+//					loreList.add(ChatColor.GRAY + " " + Integer.toString((int) AttackSpeed) + " Attack Speed");
+//				}
+//				if (AttackDamage != Math.round(AttackDamage)) {
+//					loreList.add(ChatColor.GRAY + " " + AttackDamage + " Attack Speed");
+//				} else {
+//					loreList.add(ChatColor.GRAY + " " + Integer.toString((int) AttackDamage) + " Attack Speed");
+//				}
+//				im.setLore(loreList);
+//				Item.setItemMeta(im);
+//			} else {
+//				List<String> loreList = Item.getItemMeta().getLore();
+//				loreList.add("");
+//				loreList.add(ChatColor.GRAY + "When in main hand: ");
+//				if (AttackDamage != Math.round(AttackSpeed)) {
+//					loreList.add(ChatColor.GRAY + " " + AttackSpeed + " Attack Speed");
+//				} else {
+//					loreList.add(ChatColor.GRAY + " " + Integer.toString((int) AttackSpeed) + " Attack Speed");
+//				}
+//				if (AttackDamage != Math.round(AttackDamage)) {
+//					loreList.add(ChatColor.GRAY + " " + AttackDamage + " Attack Speed");
+//				} else {
+//					loreList.add(ChatColor.GRAY + " " + Integer.toString((int) AttackDamage) + " Attack Speed");
+//				}
+//				im.setLore(loreList);
+//				Item.setItemMeta(im);
+//			}
+//		}
+		
+		
 		net.minecraft.server.v1_10_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(Item);
 		NBTTagCompound ItemCompound = (nmsStack.hasTag()) ? nmsStack.getTag() : new NBTTagCompound();
 
@@ -112,7 +153,11 @@ public class CustomItems {
 		// -- attack damage
 		NBTTagCompound ItemDamage = new NBTTagCompound();
 		ItemDamage.set("AttributeName", new NBTTagString("generic.attackDamage"));
-		ItemDamage.set("Name", new NBTTagString("generic.attackDamage"));
+		if (ShowText) {
+			ItemDamage.set("Name", new NBTTagString("generic.attackDamage"));
+		} else {
+			ItemDamage.set("Name", new NBTTagString("generic.attackDamage"));
+		}
 		ItemDamage.set("Amount", new NBTTagDouble(AttackDamage - 1.0));
 		ItemDamage.set("Operation", new NBTTagInt(0));
 		ItemDamage.set("UUIDLeast", new NBTTagInt(894654));
@@ -122,7 +167,11 @@ public class CustomItems {
 		// -- attack speed
 		NBTTagCompound ItemSpeed = new NBTTagCompound();
 		ItemSpeed.set("AttributeName", new NBTTagString("generic.attackSpeed"));
-		ItemSpeed.set("Name", new NBTTagString("generic.attackSpeed"));
+		if (ShowText){
+			ItemSpeed.set("Name", new NBTTagString("generic.attackSpeed"));
+		} else {
+			ItemSpeed.set("Name", new NBTTagString("generic.attackSpeed"));
+		}
 		ItemSpeed.set("Amount", new NBTTagDouble(AttackSpeed - 4.0));
 		ItemSpeed.set("Operation", new NBTTagInt(0));
 		ItemSpeed.set("UUIDLeast", new NBTTagInt(894654));
@@ -133,10 +182,27 @@ public class CustomItems {
 		ItemModifiers.add(ItemSpeed);
 		ItemModifiers.add(ItemDamage);
 		ItemCompound.set("AttributeModifiers", ItemModifiers);
-
+		
 		nmsStack.setTag(ItemCompound);
+		
 		return CraftItemStack.asBukkitCopy(nmsStack);
 
+	}
+	
+	public static ItemStack nullifyModifiers(ItemStack Item) {
+
+		net.minecraft.server.v1_10_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(Item);
+		NBTTagCompound ItemCompound = (nmsStack.hasTag()) ? nmsStack.getTag() : new NBTTagCompound();
+
+		NBTTagList ItemModifiers = new NBTTagList();
+		NBTTagCompound ItemDamage = new NBTTagCompound();
+		ItemModifiers.add(ItemDamage);
+		ItemCompound.set("AttributeModifiers", ItemModifiers);
+		
+		nmsStack.setTag(ItemCompound);
+		
+		return CraftItemStack.asBukkitCopy(nmsStack);
+		
 	}
 
 	public static void setLeatherArmorColor(ItemStack Item, int Red, int Green, int Blue) {
@@ -292,7 +358,7 @@ public class CustomItems {
 
 		setUnbreakable(Item, true, true);
 		setName(Item, "Wooden Double Axe");
-		Item = setAttack(Item, 0.5, 7.0);
+		Item = setAttack(Item, 0.5, 7, false, true);
 		Item = addDurabilityLore(Item, 59, 59);
 
 		return Item;
@@ -305,7 +371,7 @@ public class CustomItems {
 
 		setUnbreakable(Item, true, true);
 		setName(Item, "Stone Double Axe");
-		Item = setAttack(Item, 0.5, 9.0);
+		Item = setAttack(Item, 0.5, 9, false, true);
 		Item = addDurabilityLore(Item, 131, 131);
 
 		return Item;
@@ -318,7 +384,7 @@ public class CustomItems {
 
 		setUnbreakable(Item, true, true);
 		setName(Item, "Iron Double Axe");
-		Item = setAttack(Item, 0.6, 9.0);
+		Item = setAttack(Item, 0.6, 9, false, true);
 		Item = addDurabilityLore(Item, 250, 250);
 
 		return Item;
@@ -331,7 +397,7 @@ public class CustomItems {
 
 		setUnbreakable(Item, true, true);
 		setName(Item, "Golden Double Axe");
-		Item = setAttack(Item, 0.7, 7.0);
+		Item = setAttack(Item, 0.7, 7, false, true);
 		Item = addDurabilityLore(Item, 32, 32);
 
 		return Item;
@@ -344,7 +410,7 @@ public class CustomItems {
 
 		setUnbreakable(Item, true, true);
 		setName(Item, "Diamond Double Axe");
-		Item = setAttack(Item, 0.7, 9.0);
+		Item = setAttack(Item, 0.7, 9, false, true);
 		Item = addDurabilityLore(Item, 1561, 1561);
 
 		return Item;
@@ -357,7 +423,7 @@ public class CustomItems {
 
 		setUnbreakable(Item, true, false);
 		setName(Item, "Emerald Double Axe");
-		Item = setAttack(Item, 0.7, 9.0);
+		Item = setAttack(Item, 0.7, 9, false, true);
 
 		return Item;
 
@@ -603,6 +669,52 @@ public class CustomItems {
 	}
 	
 	// ------------ END OF END STONE ITEMS -------------
+	
+	// ----------------- CUSTOM FOOD -------------------
+	
+	public static ItemStack Goldfish() {
+		ItemStack Item = createItem(Material.DIAMOND_SWORD, 1, 1560);
+		
+		setName(Item, "Goldfish");
+		setUnbreakable(Item, true, true);
+		Item = nullifyModifiers(Item);
+		
+		return Item;
+	}
+	
+	public static boolean isCustomFood(ItemStack item, Material material) {
+		if (material == Material.DIAMOND_SWORD) {
+			if ((item.getDurability() >= 1560) && (item.getDurability() <= 1560)) return true;
+		}
+		return false;
+	}
+	
+	public static void addFood(Player player, ItemStack item, Material material) {
+		if (material == Material.DIAMOND_SWORD) {
+			if (item.getDurability() == 1560) {
+				player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 2400, 0));
+				player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 1));
+				addToFoodLevel(player, 4);
+				addToSaturationLevel(player, 9.6F);
+			}
+		}
+	}
+	
+	public static void addToFoodLevel(Player player, int FoodLevel) {
+		if (player.getFoodLevel() > 20 - FoodLevel) {
+			player.setFoodLevel(20);
+		}
+		player.setFoodLevel(player.getFoodLevel() + FoodLevel);
+	}
+	
+	public static void addToSaturationLevel(Player player, float SaturationLevel) {
+		if (player.getSaturation() > 20F - SaturationLevel) {
+			player.setSaturation(20F);
+		}
+		player.setSaturation(player.getSaturation() + SaturationLevel);
+	}
+	
+	// -------------- END OF CUSTOM FOOD ---------------
 	
 	public static int getCustomItemDurability(ItemStack item) {
 		if ((!item.getType().equals(Material.AIR)) && (item.getItemMeta() != null) && (!item.getItemMeta().spigot().isUnbreakable())) {
