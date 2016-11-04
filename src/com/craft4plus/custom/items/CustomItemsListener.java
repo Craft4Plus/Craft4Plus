@@ -25,6 +25,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 
 import com.craft4plus.main.Main;
 import com.craft4plus.miscellaneous.TreeBreaker;
@@ -150,7 +151,10 @@ public class CustomItemsListener implements Listener {
 	}
 
 	public void unlimitedArrow(Player p, PlayerInteractEvent e) {
-		if (!p.getGameMode().equals(GameMode.CREATIVE) && p.hasPermission("c4p.unlimitedarrows")) {
+		String world = p.getWorld().getName();
+		if (!p.getGameMode().equals(GameMode.CREATIVE) && p.hasPermission("c4p.unlimitedarrows")
+				&& ((world == "Survival") || (world == "Survival_nether") || (world == "Survival_the_end")
+						|| (world == "FloatingIslands") || (world == "skyworld") || (world == "skyworld_nether"))) {
 			if (!(e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)))
 				return;
 			if (storedItem.containsKey(p.getUniqueId()))
@@ -178,6 +182,7 @@ public class CustomItemsListener implements Listener {
 				if (!(EatingState.containsKey(uuid) && (EatingStateLastCheck.containsKey(uuid)))) {
 					EatingState.put(uuid, CurrentTick);
 					EatingStateLastCheck.put(uuid, CurrentTick);
+					CustomItemsActions.addEatingFoodEffects(player, 5, Material.GOLD_INGOT);
 				} else {
 					if (EatingStateLastCheck.get(uuid) == CurrentTick - 4) {
 						int TimePassed = EatingState.get(uuid) - CurrentTick;
@@ -186,14 +191,17 @@ public class CustomItemsListener implements Listener {
 							EatingState.remove(player.getUniqueId());
 							EatingStateLastCheck.remove(player.getUniqueId());
 							player.getInventory().remove(item);
+							player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_BURP, 1.0F, 1.0F);
 						} else {
 							EatingStateLastCheck.put(uuid, CurrentTick);
+							CustomItemsActions.addEatingFoodEffects(player, 5, Material.GOLD_BLOCK);
 						}
 					} else {
 						if (EatingStateLastCheck.get(uuid) == CurrentTick)
 							return;
 						EatingState.put(uuid, CurrentTick);
 						EatingStateLastCheck.put(uuid, CurrentTick);
+						CustomItemsActions.addEatingFoodEffects(player, 5, Material.GOLD_INGOT);
 					}
 				}
 			}

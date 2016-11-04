@@ -2,7 +2,9 @@ package com.craft4plus.custom.items;
 
 import java.util.List;
 
+import org.bukkit.Effect;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -11,7 +13,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
 import com.connorlinfoot.bountifulapi.BountifulAPI;
 
 import net.md_5.bungee.api.ChatColor;
@@ -207,6 +208,17 @@ public class CustomItemsActions {
 			player.setSaturation(20F);
 		}
 		player.setSaturation(player.getSaturation() + SaturationLevel);
+	}
+	
+	public static void addEatingFoodEffects(Player player, Integer ticks, Material EffectLook) {
+		Location location = player.getLocation();
+		Material block = new Location(player.getWorld(), location.getBlockX(),
+				location.getBlockY() - 1, location.getBlockZ()).getBlock().getType();
+		if (block != Material.AIR && block != Material.WATER && block != Material.LAVA && block != Material.LADDER && !player.isInsideVehicle()) {
+			player.setVelocity(player.getVelocity().multiply(0.5));
+		}
+		player.playSound(location, Sound.ENTITY_GENERIC_EAT, 1.0F, 1.0F);
+		location.getWorld().playEffect(player.getEyeLocation(), Effect.STEP_SOUND, EffectLook);
 	}
 	
 }
