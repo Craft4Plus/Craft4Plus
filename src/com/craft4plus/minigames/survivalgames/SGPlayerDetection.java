@@ -25,6 +25,9 @@ public class SGPlayerDetection implements Listener {
 		if (PlayerInRegion.InWorldGuardRegion(player, "BuildWorld", "dimmedarena")) {
 			return true;
 		}
+		if (PlayerInRegion.InWorldGuardRegion(player, "BuildWorld", "candyland")) {
+			return true;
+		}
 		return false;
 	}
 }

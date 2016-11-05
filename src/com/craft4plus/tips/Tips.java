@@ -9,15 +9,17 @@ import org.bukkit.entity.Player;
 
 import com.connorlinfoot.bountifulapi.BountifulAPI;
 import com.craft4plus.listeners.PlayerJoin;
+import com.craft4plus.main.Main;
 
 import net.md_5.bungee.api.ChatColor;
 
 public class Tips {
-
-	public void showTips() {
-
-		List<String> listCrafter = new ArrayList<String>(); // List of Crafter Tips
-		
+	
+	static List<String> listCrafter = new ArrayList<String>(); // List of Crafter Tips
+	static List<String> listMiner = new ArrayList<String>(); // List of Miner Tips
+	static List<String> listWarrior = new ArrayList<String>(); // List of Warrior Tips
+	
+	public static void addValues() {		
 		// Add Crafter Tips to the list
 		listCrafter.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Sell items in the Survival Shop to get coins!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
 		listCrafter.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "You can get the Miner Rank using 10,000 in-game coins!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
@@ -29,10 +31,6 @@ public class Tips {
 		listCrafter.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Hard to get resources in SkyBlock? Use the shop!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
 		listCrafter.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "mcMMO is available! Use it to gain amazing advantages." + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
 		listCrafter.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Want a map of the server? Visit map.craft4plus.ml" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
-		
-		String TipsCrafter = listCrafter.get(new Random().nextInt(listCrafter.size())); // Pick a random Crafter Tip.
-
-		List<String> listMiner = new ArrayList<String>(); // List of Miner Tips
 		
 		// Add Miner Tips to the list
 		listMiner.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Sell items in the Survival Shop to get coins!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
@@ -46,10 +44,6 @@ public class Tips {
 		listMiner.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "mcMMO is available! Use it to gain amazing advantages." + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
 		listMiner.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Want a map of the server? Visit map.craft4plus.ml" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
 		
-		String TipsMiner = listMiner.get(new Random().nextInt(listMiner.size())); // Pick a random Miner Tip.
-
-		List<String> listWarrior = new ArrayList<String>(); // List of Warrior Tips
-		
 		// Add Warrior Tips to the list
 		listWarrior.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Sell items in the Survival Shop to get coins!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
 	//	listWarrior.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "You can get the Warrior Rank using 10,000 in-game coins!" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
@@ -62,28 +56,35 @@ public class Tips {
 		listWarrior.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "mcMMO is available! Use it to gain amazing advantages." + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
 		listWarrior.add(ChatColor.BLUE + "" + ChatColor.MAGIC + "|||" + ChatColor.RESET + " " + ChatColor.RED + ChatColor.BOLD + "Want a map of the server? Visit map.craft4plus.ml" + ChatColor.RESET + "" + ChatColor.BLUE + " " + ChatColor.MAGIC + "|||");
 		
-		String TipsWarrior = listWarrior.get(new Random().nextInt(listWarrior.size())); // Pick a random Warrior Tip.
+	}
 
-		for (Player player : Bukkit.getServer().getOnlinePlayers()) { // For every player on the server
+	public static void showTips() {
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.instance, new Runnable() { //Schedule a repeating task
+			@Override
+			public void run() {
 
-			if ((!PlayerJoin.JustJoined(player)) && (!player.isOp())) { // Check if they are not OP and are not in the just joined list.
+				for (Player player : Bukkit.getServer().getOnlinePlayers()) { // For every player on the server
 
-				if (player.hasPermission("c4p.rank.crafter")) { // Check for permission.
-					BountifulAPI.sendActionBar(player, TipsCrafter, 100); // Show Crafter Tips.
-				} else {
-					if (player.hasPermission("c4p.rank.miner")) { // Check for permission.
-						BountifulAPI.sendActionBar(player, TipsMiner, 100); // Show Miner Tips.
-					} else {
-						if (player.hasPermission("c4p.rank.warrior")) { // Check for permission.
-							BountifulAPI.sendActionBar(player, TipsWarrior, 100); // Show Warrior Tips.
+					if ((!PlayerJoin.JustJoined(player)) && (!player.isOp())) { // Check if they are not OP and are not in the just joined list.
+
+						if (player.hasPermission("c4p.rank.crafter")) { // Check for permission.
+							String TipsCrafter = listCrafter.get(new Random().nextInt(listCrafter.size())); // Pick a random Crafter Tip.
+							BountifulAPI.sendActionBar(player, TipsCrafter, 100); // Show Crafter Tips.
+						} else {
+							if (player.hasPermission("c4p.rank.miner")) { // Check for permission.
+								String TipsMiner = listMiner.get(new Random().nextInt(listMiner.size())); // Pick a random Miner Tip.
+								BountifulAPI.sendActionBar(player, TipsMiner, 100); // Show Miner Tips.
+							} else {
+								if (player.hasPermission("c4p.rank.warrior")) { // Check for permission.
+									String TipsWarrior = listWarrior.get(new Random().nextInt(listWarrior.size())); // Pick a random Warrior Tip.
+									BountifulAPI.sendActionBar(player, TipsWarrior, 100); // Show Warrior Tips.
+								}
 						}
-				}
 
+					}
+				}
 			}
-		}
-	}
-		listCrafter.clear(); // Possibly prevent
-		listMiner.clear(); // memory leaks.
-		listWarrior.clear(); // :D
-	}
+			}
+		}, 0L, 1200L);
+	}		
 }

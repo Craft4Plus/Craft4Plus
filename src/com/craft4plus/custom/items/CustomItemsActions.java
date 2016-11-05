@@ -1,8 +1,8 @@
 package com.craft4plus.custom.items;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Effect;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -13,6 +13,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.inventivetalent.particle.ParticleEffect;
+
 import com.connorlinfoot.bountifulapi.BountifulAPI;
 
 import net.md_5.bungee.api.ChatColor;
@@ -210,6 +212,7 @@ public class CustomItemsActions {
 		player.setSaturation(player.getSaturation() + SaturationLevel);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void addEatingFoodEffects(Player player, Integer ticks, Material EffectLook) {
 		Location location = player.getLocation();
 		Material block = new Location(player.getWorld(), location.getBlockX(),
@@ -218,7 +221,10 @@ public class CustomItemsActions {
 			player.setVelocity(player.getVelocity().multiply(0.5));
 		}
 		player.playSound(location, Sound.ENTITY_GENERIC_EAT, 1.0F, 1.0F);
-		location.getWorld().playEffect(player.getEyeLocation(), Effect.STEP_SOUND, EffectLook);
+		Location eye = player.getEyeLocation();
+		List<Player> list = new ArrayList<Player>();
+		list.add(player);
+		ParticleEffect.BLOCK_CRACK.sendData(list, eye.getX(), eye.getY(), eye.getZ(), 2, 2, 2, ticks, 200, Material.GOLD_BLOCK.getId(), (byte)0x01);
 	}
 	
 }

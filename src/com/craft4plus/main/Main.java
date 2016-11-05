@@ -57,6 +57,8 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 	public void onEnable() {
 		instance = this;
 		
+		prepareLists();
+		
 		if (!setupEconomy() ) {
 			System.out.println("Disabled due to no Vault dependency found!");
             getServer().getPluginManager().disablePlugin(this);
@@ -84,6 +86,11 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		System.out.println("Craft4Plus has been enabled!");
 	}
 
+	private void prepareLists() {
+		AFKSystem.addLocationsForAFK();
+		Tips.addValues();
+	}
+
 	private void addCustomItems() {
 		CustomItems.generateCustomItems();
 		CraftingRecipes.addCustomCraftingRecipes();
@@ -102,14 +109,13 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 
 	public void repeatingTasksPerMinute() {
 		
+		Tips.showTips();
+		
 		//Everything under "public void run() {" will be run every minute
 		
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() { //Schedule a repeating task
-			Tips tips = new Tips();
 			@Override
 			public void run() {
-			
-				tips.showTips();
 			
 				save();
 			
