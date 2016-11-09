@@ -77,9 +77,16 @@ public class CustomItemsListener implements Listener {
 	@EventHandler
 	public void onArmorEquip(ArmorEquipEvent event) {
 		Player player = event.getPlayer();
-		if ((event.getNewArmorPiece() != null) && (!event.getNewArmorPiece().getType().equals(Material.AIR))
-				&& (CustomItemsActions.isStoneArmor(event.getNewArmorPiece()))) {
-			player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 9999999, 1));
+		if ((event.getNewArmorPiece() != null) && (!event.getNewArmorPiece().getType().equals(Material.AIR))) {
+			ItemStack newArmorPiece = event.getNewArmorPiece();
+			if (CustomItemsActions.isStoneArmor(newArmorPiece)) {
+				player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 9999999, 1));
+				return;
+			}
+			if (CustomItemsActions.isSlimeBoots(newArmorPiece)) {
+				player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 9999999, 1));
+				return;
+			}
 		} else {
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
 				public void run() {
@@ -89,7 +96,16 @@ public class CustomItemsListener implements Listener {
 							|| CustomItemsActions.isStoneArmor(player.getInventory().getItem(36)))) {
 						if (player.hasPotionEffect(PotionEffectType.SLOW)) {
 							for (PotionEffect effect : player.getActivePotionEffects()) {
-								if (effect.getDuration() >= 1000 && effect.getAmplifier() == 1) {
+								if (effect.getType().equals(PotionEffectType.SLOW) && effect.getDuration() >= 1000 && effect.getAmplifier() == 1) {
+									player.removePotionEffect(effect.getType());
+								}
+							}
+						}
+					}
+					if (CustomItemsActions.isSlimeBoots(event.getOldArmorPiece())) {
+						if (player.hasPotionEffect(PotionEffectType.JUMP)) {
+							for (PotionEffect effect : player.getActivePotionEffects()) {
+								if (effect.getType().equals(PotionEffectType.JUMP) && effect.getDuration() >= 1000 && effect.getAmplifier() == 1) {
 									player.removePotionEffect(effect.getType());
 								}
 							}

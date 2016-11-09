@@ -3,6 +3,7 @@ package com.craft4plus.custom.items;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -137,10 +138,11 @@ public class CustomItemsActions {
 			if ((m.equals(Material.LEATHER_HELMET)) || (m.equals(Material.LEATHER_CHESTPLATE))
 					|| (m.equals(Material.LEATHER_LEGGINGS)) || (m.equals(Material.LEATHER_BOOTS))) {
 				LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
-				if ((meta.getColor().getRed() == 103) && (meta.getColor().getBlue() == 103) && (meta.getColor().getGreen() == 103)) {
+				Color color = meta.getColor();
+				if ((color.getRed() == 103) && (color.getBlue() == 103) && (color.getGreen() == 103)) {
 					return true;
 				}
-				if ((meta.getColor().getRed() == 168) && (meta.getColor().getBlue() == 100) && (meta.getColor().getGreen() == 168)) {
+				if ((color.getRed() == 168) && (color.getBlue() == 100) && (color.getGreen() == 168)) {
 					return true;
 				}
 				return false;
@@ -226,5 +228,26 @@ public class CustomItemsActions {
 		list.add(player);
 		ParticleEffect.BLOCK_CRACK.sendData(list, eye.getX(), eye.getY(), eye.getZ(), 2, 2, 2, ticks, 200, Material.GOLD_BLOCK.getId(), (byte)0x01);
 	}
+	
+	// === END OF CUSTOM FOOD === //
+	
+	// === SLIME ARMOR === //
+	public static boolean isSlimeBoots(ItemStack item) {
+		if (item != null) {
+			Material m = item.getType();
+			if (m.equals(Material.LEATHER_BOOTS)) {
+				LeatherArmorMeta meta = (LeatherArmorMeta) item.getItemMeta();
+				Color color = meta.getColor();
+				if ((color.getRed() == 132) && (color.getBlue() == 115) && (color.getGreen() == 200)) {
+					return true;
+				}
+				return false;
+			}
+			return false;
+		}
+		return false;
+	}
+	
+	// === END OF SLIME ARMOR === //
 	
 }

@@ -101,7 +101,12 @@ public class CustomItemStack {
     public static ItemStack GOLDFISH() {
     	return getItem(30);
     }
-    ;
+    
+    // === SLIME ARMOR === //
+    
+    public static ItemStack SLIME_BOOTS() {
+    	return getItem(31);
+    }
 
     public static ItemStack getItem(int id) {
     	return CustomItems.CustomItems.get(id);

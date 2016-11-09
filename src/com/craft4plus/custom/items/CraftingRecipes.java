@@ -5,219 +5,74 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 
-import com.craft4plus.main.Main;
-
 public class CraftingRecipes {
 
 	public static void addCustomCraftingRecipes() {
-
-		// There is a need for a 1 tick delay - otherwise the Crafting Bench
-		// will glitch out and have some items already.
 		
 		// ------------ EMERALD ITEMS ---------------
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEmeraldSword();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEmeraldAxe();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEmeraldPickaxe();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEmeraldShovel();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEmeraldHoe();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEmeraldHelmet();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEmeraldChestplate();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEmeraldLeggings();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEmeraldBoots();
-			}
-		}, 1L);
+
+		addEmeraldSword();
+		addEmeraldAxe();
+		addEmeraldPickaxe();
+		addEmeraldShovel();
+		addEmeraldHoe();
+		addEmeraldHelmet();
+		addEmeraldChestplate();
+		addEmeraldLeggings();
+		addEmeraldBoots();
+
 		// ------------ END OF EMERALD ITEMS ---------------
-		// ----------------- DOUBLE AXES ------------------- 
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addWoodenDoubleAxe();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addStoneDoubleAxe();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEndStoneDoubleAxe();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addIronDoubleAxe();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addGoldDoubleAxe();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addDiamondDoubleAxe();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEmeraldDoubleAxe();
-			}
-		}, 1L);
-		
+		// ----------------- DOUBLE AXES -------------------
+
+		addWoodenDoubleAxe();
+		addStoneDoubleAxe();
+		addEndStoneDoubleAxe();
+		addIronDoubleAxe();
+		addGoldDoubleAxe();
+		addDiamondDoubleAxe();
+		addEmeraldDoubleAxe();
+
 		// ------------- END OF DOUBLE AXES ----------------
-		
+
 		// ----------------- STONE ARMOR -------------------
-		
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addStoneHelmet();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addStoneChestplate();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addStoneLeggings();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addStoneBoots();
-			}
-		}, 1L);
-	
+
+		addStoneHelmet();
+		addStoneChestplate();
+		addStoneLeggings();
+		addStoneBoots();
+
 		// ------------- END OF STONE ARMOR ----------------
-		
+
 		// --------------- END STONE ITEMS -----------------
-		
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEndStoneSword();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEndStoneAxe();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEndStonePickaxe();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEndStoneShovel();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEndStoneHoe();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEndStoneHelmet();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEndStoneChestplate();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEndStoneLeggings();
-			}
-		}, 1L);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addEndStoneBoots();
-			}
-		}, 1L);
-		
+
+		addEndStoneSword();
+		addEndStoneAxe();
+		addEndStonePickaxe();
+		addEndStoneShovel();
+		addEndStoneHoe();
+		addEndStoneHelmet();
+		addEndStoneChestplate();
+		addEndStoneLeggings();
+		addEndStoneBoots();
+
 		// ------------ END OF END STONE ITEMS -------------
-		
+
 		// ----------------- CUSTOM FOOD -------------------
-		
-		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-			@Override
-			public void run() {
-				addGoldfish();
-			}
-		}, 1L);
-		
+
+		addGoldfish();
+
 		// -------------- END OF CUSTOM FOOD ---------------
+		
+		// === SLIME ARMOR === //
+		
+		addSlimeBoots();
+		
+		// === END OF SLIME ARMOR === //
+		
 	}
 
 	// ------------ EMERALD ITEMS ---------------
-	public static void addEmeraldSword() {
+	private static void addEmeraldSword() {
 
 		ItemStack item = CustomItemStack.EMERALD_SWORD();
 
@@ -252,7 +107,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe3);
 	}
 
-	public static void addEmeraldAxe() {
+	private static void addEmeraldAxe() {
 
 		ItemStack item = CustomItemStack.EMERALD_AXE();
 
@@ -281,7 +136,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe5);
 	}
 
-	public static void addEmeraldPickaxe() {
+	private static void addEmeraldPickaxe() {
 
 		ItemStack item = CustomItemStack.EMERALD_PICKAXE();
 
@@ -298,7 +153,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe6);
 	}
 
-	public static void addEmeraldShovel() {
+	private static void addEmeraldShovel() {
 
 		ItemStack item = CustomItemStack.EMERALD_SHOVEL();
 
@@ -313,7 +168,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe7);
 	}
 
-	public static void addEmeraldHoe() {
+	private static void addEmeraldHoe() {
 
 		ItemStack item = CustomItemStack.EMERALD_HOE();
 
@@ -340,7 +195,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe9);
 	}
 
-	public static void addEmeraldHelmet() {
+	private static void addEmeraldHelmet() {
 
 		ItemStack item = CustomItemStack.EMERALD_HELMET();
 
@@ -369,7 +224,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe2);
 	}
 
-	public static void addEmeraldChestplate() {
+	private static void addEmeraldChestplate() {
 
 		ItemStack item = CustomItemStack.EMERALD_CHESTPLATE();
 
@@ -390,7 +245,7 @@ public class CraftingRecipes {
 
 	}
 
-	public static void addEmeraldLeggings() {
+	private static void addEmeraldLeggings() {
 
 		ItemStack item = CustomItemStack.EMERALD_LEGGINGS();
 
@@ -410,7 +265,7 @@ public class CraftingRecipes {
 
 	}
 
-	public static void addEmeraldBoots() {
+	private static void addEmeraldBoots() {
 
 		ItemStack item = CustomItemStack.EMERALD_BOOTS();
 
@@ -442,7 +297,7 @@ public class CraftingRecipes {
 	// ----------------- DOUBLE AXES ------------------- 
 	
 	@SuppressWarnings("deprecation")
-	public static void addWoodenDoubleAxe() {
+	private static void addWoodenDoubleAxe() {
 
 		ItemStack item = CustomItemStack.WOODEN_DOUBLE_AXE();
 
@@ -501,7 +356,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe6);
 	}
 	
-	public static void addStoneDoubleAxe() {
+	private static void addStoneDoubleAxe() {
 
 		ItemStack item = CustomItemStack.STONE_DOUBLE_AXE();
 
@@ -524,7 +379,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 	}
 	
-	public static void addEndStoneDoubleAxe() {
+	private static void addEndStoneDoubleAxe() {
 
 		ItemStack item = CustomItemStack.END_STONE_DOUBLE_AXE();
 
@@ -543,7 +398,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 	}
 	
-	public static void addIronDoubleAxe() {
+	private static void addIronDoubleAxe() {
 
 		ItemStack item = CustomItemStack.IRON_DOUBLE_AXE();
 
@@ -562,7 +417,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 	}
 	
-	public static void addGoldDoubleAxe() {
+	private static void addGoldDoubleAxe() {
 
 		ItemStack item = CustomItemStack.GOLD_DOUBLE_AXE();
 
@@ -581,7 +436,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 	}
 	
-	public static void addDiamondDoubleAxe() {
+	private static void addDiamondDoubleAxe() {
 
 		ItemStack item = CustomItemStack.DIAMOND_DOUBLE_AXE();
 
@@ -600,7 +455,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 	}
 	
-	public static void addEmeraldDoubleAxe() {
+	private static void addEmeraldDoubleAxe() {
 
 		ItemStack item = CustomItemStack.EMERALD_DOUBLE_AXE();
 
@@ -623,7 +478,7 @@ public class CraftingRecipes {
 	
 	// ----------------- STONE ARMOR -------------------
 	
-	public static void addStoneHelmet() {
+	private static void addStoneHelmet() {
 
 		ItemStack item = CustomItemStack.STONE_HELMET();
 
@@ -676,7 +531,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe4);
 	}
 
-	public static void addStoneChestplate() {
+	private static void addStoneChestplate() {
 
 		ItemStack item = CustomItemStack.STONE_CHESTPLATE();
 
@@ -705,7 +560,7 @@ public class CraftingRecipes {
 		
 	}
 
-	public static void addStoneLeggings() {
+	private static void addStoneLeggings() {
 
 		ItemStack item = CustomItemStack.STONE_LEGGINGS();
 
@@ -733,7 +588,7 @@ public class CraftingRecipes {
 				
 	}
 
-	public static void addStoneBoots() {
+	private static void addStoneBoots() {
 
 		ItemStack item = CustomItemStack.STONE_BOOTS();
 
@@ -774,7 +629,7 @@ public class CraftingRecipes {
 	
 	// --------------- END STONE ITEMS -----------------
 	
-	public static void addEndStoneSword() {
+	private static void addEndStoneSword() {
 
 		ItemStack item = CustomItemStack.END_STONE_SWORD();
 
@@ -809,7 +664,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe3);
 	}
 
-	public static void addEndStoneAxe() {
+	private static void addEndStoneAxe() {
 
 		ItemStack item = CustomItemStack.END_STONE_AXE();
 
@@ -838,7 +693,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe5);
 	}
 
-	public static void addEndStonePickaxe() {
+	private static void addEndStonePickaxe() {
 
 		ItemStack item = CustomItemStack.END_STONE_PICKAXE();
 
@@ -855,7 +710,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe6);
 	}
 
-	public static void addEndStoneShovel() {
+	private static void addEndStoneShovel() {
 
 		ItemStack item = CustomItemStack.END_STONE_SHOVEL();
 
@@ -870,7 +725,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe7);
 	}
 
-	public static void addEndStoneHoe() {
+	private static void addEndStoneHoe() {
 
 		ItemStack item = CustomItemStack.END_STONE_HOE();
 
@@ -897,7 +752,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe9);
 	}
 
-	public static void addEndStoneHelmet() {
+	private static void addEndStoneHelmet() {
 
 		ItemStack item = CustomItemStack.END_STONE_HELMET();
 
@@ -926,7 +781,7 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe2);
 	}
 
-	public static void addEndStoneChestplate() {
+	private static void addEndStoneChestplate() {
 
 		ItemStack item = CustomItemStack.END_STONE_CHESTPLATE();
 
@@ -947,7 +802,7 @@ public class CraftingRecipes {
 
 	}
 
-	public static void addEndStoneLeggings() {
+	private static void addEndStoneLeggings() {
 
 		ItemStack item = CustomItemStack.END_STONE_LEGGINGS();
 
@@ -967,7 +822,7 @@ public class CraftingRecipes {
 
 	}
 
-	public static void addEndStoneBoots() {
+	private static void addEndStoneBoots() {
 
 		ItemStack item = CustomItemStack.END_STONE_BOOTS();
 
@@ -998,7 +853,7 @@ public class CraftingRecipes {
 	
 	// ----------------- CUSTOM FOOD -------------------
 	
-	public static void addGoldfish() {
+	private static void addGoldfish() {
 
 		ItemStack item = CustomItemStack.GOLDFISH();
 
@@ -1014,5 +869,31 @@ public class CraftingRecipes {
 	}
 	
 	// -------------- END OF CUSTOM FOOD ---------------
+	
+	// === SLIME ARMOR === //
+	
+	private static void addSlimeBoots() {
+		
+		ItemStack item = CustomItemStack.SLIME_BOOTS();
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("101", "101", "000");
+
+		ItemRecipe1.setIngredient('1', Material.SLIME_BALL);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+		
+		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
+
+		ItemRecipe2.shape("000", "101", "101");
+
+		ItemRecipe2.setIngredient('1', Material.SLIME_BALL);
+
+		Bukkit.getServer().addRecipe(ItemRecipe2);
+		
+	}
+			
+	// === END OF SLIME ARMOR === //
 	
 }
