@@ -17,6 +17,7 @@ import com.craft4plus.custom.ResourcePackListener;
 import com.craft4plus.custom.items.CraftingRecipes;
 import com.craft4plus.custom.items.CustomItemsListener;
 import com.craft4plus.custom.items.CustomItems;
+import com.craft4plus.custom.items.CustomItemsCommand;
 import com.craft4plus.listeners.PlayerJoin;
 import com.craft4plus.listeners.PlayerLeave;
 import com.craft4plus.listeners.PlayerWorldChange;
@@ -105,6 +106,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		this.getCommand("parkourreset").setExecutor(new ParkourCommand());
 		this.getCommand("builds").setExecutor(new BuildsCommand());
 		this.getCommand("qc").setExecutor(new QCCommand());
+		this.getCommand("customgive").setExecutor(new CustomItemsCommand());
 	}
 
 	public void repeatingTasksPerMinute() {

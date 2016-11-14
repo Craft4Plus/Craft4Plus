@@ -3,11 +3,14 @@ package com.craft4plus.custom.items;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -17,6 +20,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.inventivetalent.particle.ParticleEffect;
 
 import com.connorlinfoot.bountifulapi.BountifulAPI;
+import com.craft4plus.main.Main;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -249,5 +253,45 @@ public class CustomItemsActions {
 	}
 	
 	// === END OF SLIME ARMOR === //
+	
+
+	// === SUPER HOES === //
+
+	@SuppressWarnings("deprecation")
+	public static void breakSeedsInRadius(Block block, int radius) {		
+        List<Block> blocks = new ArrayList<Block>();
+		
+        World world = block.getWorld();
+        
+		int centerX = block.getX();
+        int centerY = block.getY();
+        int centerZ = block.getZ();
+
+        for (int x = centerX - radius; x < centerX + radius; x++)
+        {
+            for (int y = centerY - radius; y < centerY + radius; y++)
+            {
+                for (int z = centerZ - radius; z < centerZ + radius; z++)
+                {
+                    blocks.add(world.getBlockAt(x,y,z));
+                }
+            }
+        }
+        
+        Long delay = 0L;
+        
+        for (Block b : blocks) {
+			int material = b.getTypeId();
+        	if (material == 59 || material == 141 || material == 142 || material == 207) {
+        		delay++;
+        		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+        			@Override
+        			public void run() {
+        				if (b.getTypeId() == material) b.breakNaturally();
+        			}
+        		}, delay);
+        	}
+        }
+	}
 	
 }

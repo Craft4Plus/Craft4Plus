@@ -26,6 +26,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
 
 import com.craft4plus.main.Main;
 import com.craft4plus.miscellaneous.TreeBreaker;
@@ -250,7 +251,31 @@ public class CustomItemsListener implements Listener {
 	 			}
 	 		}
 	 	}
-	 	// END OF NETHER STAR EXPLOIT FIX
+	 // END OF NETHER STAR EXPLOIT FIX
 	 
+	 	
+	// === SUPER HOES === //
+
+	@EventHandler
+	public void onHoeBreak(BlockBreakEvent event) {
+		if (event.getPlayer() == null)
+			return;
+
+		Player player = event.getPlayer();
+
+		if (player.getGameMode() != GameMode.SURVIVAL) return;
+		
+		if (player.getInventory().getItemInMainHand() == null
+				|| player.getInventory().getItemInMainHand().getType() == Material.AIR)
+			return;
+
+		ItemStack item = player.getInventory().getItemInMainHand();
+		Material itemType = item.getType();
+		Block block = event.getBlock();	
+		
+		if (itemType == Material.DIAMOND_HOE) {
+			CustomItemsActions.breakSeedsInRadius(block, 5);
+		}
+	}
 
 }

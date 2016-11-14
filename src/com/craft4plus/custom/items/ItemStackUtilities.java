@@ -246,5 +246,5 @@ public class ItemStackUtilities {
 		im.setLore(loreList);
 		item.setItemMeta(im);
 	}
-	
+
 }

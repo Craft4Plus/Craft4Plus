@@ -54,6 +54,9 @@ public class CustomItems {
 		
 		// Slime Armor
 		SlimeBoots();
+		
+		// Super Hoes
+		SuperHoeBreakPlaceholder();
 	}
 	
 	// ======== END OF STUFF CONTAINING CUSTOM ITEMS ======= //
@@ -456,4 +459,14 @@ public class CustomItems {
 		}
 		
 		// === END OF SLIME ARMOR === //
+		
+		// === SUPER HOES === //
+		
+		public static void SuperHoeBreakPlaceholder() { // ID OF 32
+			ItemStack Item = ItemStackUtilities.createItem(Material.DIAMOND_HOE, 1, 0);
+
+			ItemStackUtilities.setName(Item, "Non obtainable item - please return to chrismin13.");
+			
+			CustomItems.put(32, Item);
+		}
 }
