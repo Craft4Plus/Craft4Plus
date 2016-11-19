@@ -27,6 +27,7 @@ public class AFKSystem implements Listener {
 	static HashMap<Location, UUID> LocationsElite = new HashMap<Location, UUID>();
 	
 	public static void addLocationsForAFK() {
+		// Simple
 		LocationsSimple.put(new Location(Bukkit.getWorld("Spawn"), 17.5, 82, -85.5) , null);
 		LocationsSimple.put(new Location(Bukkit.getWorld("Spawn"), 94.5, 86, -52.5) , null);
 		LocationsSimple.put(new Location(Bukkit.getWorld("Spawn"), 60.5, 80, -28.5) , null);
@@ -35,6 +36,12 @@ public class AFKSystem implements Listener {
 		LocationsSimple.put(new Location(Bukkit.getWorld("Spawn"), 89.5, 94, -114.5) , null);
 		LocationsSimple.put(new Location(Bukkit.getWorld("Spawn"), 96.5, 67, -8.5) , null);
 		LocationsSimple.put(new Location(Bukkit.getWorld("Spawn"), 15.5, 82, -21.5) , null);
+		
+		// Elite
+		LocationsElite.put(new Location(Bukkit.getWorld("Spawn"), 78.5, 120.5, -39.5) , null);
+		LocationsElite.put(new Location(Bukkit.getWorld("Spawn"), 75.5, 128.5, -104.5) , null);
+		LocationsElite.put(new Location(Bukkit.getWorld("Spawn"), -10.5, 118.5, -19.5) , null);
+		LocationsElite.put(new Location(Bukkit.getWorld("Spawn"), -10.5, 133.5, -101.5) , null);
 	}
 	
 	@EventHandler (priority = EventPriority.HIGHEST)

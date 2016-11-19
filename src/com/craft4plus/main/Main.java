@@ -120,7 +120,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 				save();
 			
 			}
-		}, 0L, 1200L);
+		}, 0L, 12000L);
 	}
 
 	public void registerEvents(){
