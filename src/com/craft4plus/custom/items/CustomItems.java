@@ -52,6 +52,11 @@ public class CustomItems {
 		// Custom Food
 		Goldfish();
 		
+		// Slime Armor
+		SlimeBoots();
+		
+		// Super Hoes
+		SuperHoeBreakPlaceholder();
 	}
 	
 	// ======== END OF STUFF CONTAINING CUSTOM ITEMS ======= //
@@ -438,4 +443,30 @@ public class CustomItems {
 		}
 		
 		// -------------- END OF CUSTOM FOOD ---------------
+		
+		// === SLIME ARMOR === //
+		
+		public static void SlimeBoots() { // ID OF 31
+
+			ItemStack Item = ItemStackUtilities.createItem(Material.LEATHER_BOOTS, 1, 0);
+
+			ItemStackUtilities.setName(Item, "Slime Boots");
+			ItemStackUtilities.setLeatherArmorColor(Item, 132, 200, 115);
+			ItemStackUtilities.addLore(Item, "Jump Boost II");
+			
+			CustomItems.put(31, Item);
+
+		}
+		
+		// === END OF SLIME ARMOR === //
+		
+		// === SUPER HOES === //
+		
+		public static void SuperHoeBreakPlaceholder() { // ID OF 32
+			ItemStack Item = ItemStackUtilities.createItem(Material.DIAMOND_HOE, 1, 0);
+
+			ItemStackUtilities.setName(Item, "Non obtainable item - please return to chrismin13.");
+			
+			CustomItems.put(32, Item);
+		}
 }

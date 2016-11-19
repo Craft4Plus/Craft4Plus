@@ -145,6 +145,7 @@ public class Builds {
 	
 	@SuppressWarnings("unchecked")
 	public static void load(File dir) {
+		try {
 		BuildsListString = (HashMap<Integer, String>) Files.load(new File(dir, "BuildsListString.dat"));
 		BuildsListLocationSerialized = (HashMap<Integer, String>) Files.load(new File(dir, "BuildsListLocationSerialized.dat"));
 		BuildsListSubmitter = (HashMap<Integer, UUID>) Files.load(new File(dir, "BuildsListSubmitter.dat"));
@@ -167,6 +168,14 @@ public class Builds {
 		}
 		if (BuildsListSubmitter == null) {
 			BuildsListSubmitter = new HashMap<Integer, UUID>();
+		}
+		} catch (NullPointerException e) {
+			Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+				@Override
+				public void run() {
+					load(dir);
+				}
+			}, 20L);
 		}
 	}
 	

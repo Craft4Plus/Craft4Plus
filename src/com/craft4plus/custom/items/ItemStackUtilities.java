@@ -233,5 +233,18 @@ public class ItemStackUtilities {
 		return item;
 	}
 
-	
+	public static void addLore(ItemStack item, String lore) {
+		ItemMeta im = item.getItemMeta();
+		im.setDisplayName(im.getDisplayName());
+		List<String> loreList;
+		if (item.getItemMeta().getLore() == null) {
+			loreList = new ArrayList<String>();
+		} else {
+			loreList = item.getItemMeta().getLore();
+		}
+		loreList.add(ChatColor.GRAY + lore);
+		im.setLore(loreList);
+		item.setItemMeta(im);
+	}
+
 }

@@ -21,4 +21,7 @@ commands:
     qc:
         description: Custom command for QuestCraft
         usage: /qc <args>
+    customgive:
+        description: Get Custom Items
+        usage: /customgive <id>
 depend: [Vault]
