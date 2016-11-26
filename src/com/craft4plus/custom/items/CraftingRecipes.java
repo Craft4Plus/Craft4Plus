@@ -8,7 +8,7 @@ import org.bukkit.inventory.ShapedRecipe;
 public class CraftingRecipes {
 
 	public static void addCustomCraftingRecipes() {
-		
+
 		// === EMERALD ITEMS === //
 		addEmeraldSword();
 		addEmeraldAxe();
@@ -19,7 +19,7 @@ public class CraftingRecipes {
 		addEmeraldChestplate();
 		addEmeraldLeggings();
 		addEmeraldBoots();
-		
+
 		// === DOUBLE AXES === //
 		addWoodenDoubleAxe();
 		addStoneDoubleAxe();
@@ -48,11 +48,19 @@ public class CraftingRecipes {
 
 		// === FOOD === //
 		addGoldfish();
-		
+
 		// === SLIME ARMOR === //
 		addSlimeBoots();
-		
-		
+
+		// === SICKLES === //
+		addWoodenSickle();
+		addStoneSickle();
+		addEndStoneSickle();
+		addGoldenSickle();
+		addIronSickle();
+		addDiamondSickle();
+		addEmeraldSickle();
+
 	}
 
 	// === EMERALD ITEMS === //
@@ -123,7 +131,7 @@ public class CraftingRecipes {
 	private static void addEmeraldPickaxe() {
 
 		ItemStack item = CustomItemStack.EMERALD_PICKAXE;
-		
+
 		ShapedRecipe ItemRecipe6 = new ShapedRecipe(item);
 
 		ItemRecipe6.shape("123", "456", "789");
@@ -275,9 +283,9 @@ public class CraftingRecipes {
 
 		Bukkit.getServer().addRecipe(ItemRecipe2);
 	}
-	
-	// === DOUBLE AXES === // 
-	
+
+	// === DOUBLE AXES === //
+
 	@SuppressWarnings("deprecation")
 	private static void addWoodenDoubleAxe() {
 
@@ -291,7 +299,7 @@ public class CraftingRecipes {
 		ItemRecipe1.setIngredient('2', Material.STICK);
 
 		Bukkit.getServer().addRecipe(ItemRecipe1);
-		
+
 		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
 
 		ItemRecipe2.shape("111", "121", "020");
@@ -300,7 +308,7 @@ public class CraftingRecipes {
 		ItemRecipe2.setIngredient('2', Material.STICK);
 
 		Bukkit.getServer().addRecipe(ItemRecipe2);
-		
+
 		ShapedRecipe ItemRecipe3 = new ShapedRecipe(item);
 
 		ItemRecipe3.shape("111", "121", "020");
@@ -309,7 +317,7 @@ public class CraftingRecipes {
 		ItemRecipe3.setIngredient('2', Material.STICK);
 
 		Bukkit.getServer().addRecipe(ItemRecipe3);
-		
+
 		ShapedRecipe ItemRecipe4 = new ShapedRecipe(item);
 
 		ItemRecipe4.shape("111", "121", "020");
@@ -318,26 +326,26 @@ public class CraftingRecipes {
 		ItemRecipe4.setIngredient('2', Material.STICK);
 
 		Bukkit.getServer().addRecipe(ItemRecipe4);
-		
+
 		ShapedRecipe ItemRecipe5 = new ShapedRecipe(item);
 
 		ItemRecipe5.shape("111", "121", "020");
 
-		ItemRecipe5.setIngredient('1', Material.WOOD,4);
+		ItemRecipe5.setIngredient('1', Material.WOOD, 4);
 		ItemRecipe5.setIngredient('2', Material.STICK);
 
 		Bukkit.getServer().addRecipe(ItemRecipe5);
-		
+
 		ShapedRecipe ItemRecipe6 = new ShapedRecipe(item);
 
 		ItemRecipe6.shape("111", "121", "020");
 
-		ItemRecipe6.setIngredient('1', Material.WOOD,5);
+		ItemRecipe6.setIngredient('1', Material.WOOD, 5);
 		ItemRecipe6.setIngredient('2', Material.STICK);
 
 		Bukkit.getServer().addRecipe(ItemRecipe6);
 	}
-	
+
 	private static void addStoneDoubleAxe() {
 
 		ItemStack item = CustomItemStack.STONE_DOUBLE_AXE;
@@ -348,19 +356,19 @@ public class CraftingRecipes {
 
 		ItemRecipe1.setIngredient('1', Material.COBBLESTONE);
 		ItemRecipe1.setIngredient('2', Material.COBBLESTONE);
-		
+
 		Bukkit.getServer().addRecipe(ItemRecipe1);
-		
+
 		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
 
 		ItemRecipe2.shape("111", "121", "020");
 
 		ItemRecipe2.setIngredient('1', Material.STONE);
 		ItemRecipe2.setIngredient('2', Material.STONE);
-		
+
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 	}
-	
+
 	private static void addEndStoneDoubleAxe() {
 
 		ItemStack item = CustomItemStack.END_STONE_DOUBLE_AXE;
@@ -379,7 +387,7 @@ public class CraftingRecipes {
 
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 	}
-	
+
 	private static void addIronDoubleAxe() {
 
 		ItemStack item = CustomItemStack.IRON_DOUBLE_AXE;
@@ -398,7 +406,7 @@ public class CraftingRecipes {
 
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 	}
-	
+
 	private static void addGoldDoubleAxe() {
 
 		ItemStack item = CustomItemStack.GOLD_DOUBLE_AXE;
@@ -417,7 +425,7 @@ public class CraftingRecipes {
 
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 	}
-	
+
 	private static void addDiamondDoubleAxe() {
 
 		ItemStack item = CustomItemStack.DIAMOND_DOUBLE_AXE;
@@ -436,11 +444,11 @@ public class CraftingRecipes {
 
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 	}
-	
+
 	private static void addEmeraldDoubleAxe() {
 
 		ItemStack item = CustomItemStack.EMERALD_DOUBLE_AXE;
-		
+
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
 		ItemRecipe1.shape("789", "456", "123");
@@ -455,9 +463,9 @@ public class CraftingRecipes {
 
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 	}
-	
+
 	// === STONE ARMOR === //
-	
+
 	private static void addStoneHelmet() {
 
 		ItemStack item = CustomItemStack.STONE_HELMET;
@@ -485,9 +493,9 @@ public class CraftingRecipes {
 		ItemRecipe2.setIngredient('3', Material.COBBLESTONE);
 
 		Bukkit.getServer().addRecipe(ItemRecipe2);
-		
+
 		ShapedRecipe ItemRecipe3 = new ShapedRecipe(item);
-		
+
 		ItemRecipe3.shape("789", "456", "123");
 
 		ItemRecipe3.setIngredient('7', Material.STONE);
@@ -537,7 +545,7 @@ public class CraftingRecipes {
 		ItemRecipe2.setIngredient('1', Material.STONE);
 
 		Bukkit.getServer().addRecipe(ItemRecipe2);
-		
+
 	}
 
 	private static void addStoneLeggings() {
@@ -565,7 +573,7 @@ public class CraftingRecipes {
 		ItemRecipe2.setIngredient('1', Material.STONE);
 
 		Bukkit.getServer().addRecipe(ItemRecipe2);
-				
+
 	}
 
 	private static void addStoneBoots() {
@@ -585,9 +593,9 @@ public class CraftingRecipes {
 		ItemRecipe2.shape("000", "101", "101");
 
 		ItemRecipe2.setIngredient('1', Material.COBBLESTONE);
-		
+
 		Bukkit.getServer().addRecipe(ItemRecipe2);
-		
+
 		ShapedRecipe ItemRecipe3 = new ShapedRecipe(item);
 
 		ItemRecipe3.shape("101", "101", "000");
@@ -601,12 +609,12 @@ public class CraftingRecipes {
 		ItemRecipe4.shape("000", "101", "101");
 
 		ItemRecipe4.setIngredient('1', Material.STONE);
-		
+
 		Bukkit.getServer().addRecipe(ItemRecipe4);
 	}
-	
+
 	// === END STONE ITEMS === //
-	
+
 	private static void addEndStoneSword() {
 
 		ItemStack item = CustomItemStack.END_STONE_SWORD;
@@ -826,9 +834,9 @@ public class CraftingRecipes {
 
 		Bukkit.getServer().addRecipe(ItemRecipe2);
 	}
-	
+
 	// === FOOD === //
-	
+
 	private static void addGoldfish() {
 
 		ItemStack item = CustomItemStack.GOLDFISH;
@@ -843,11 +851,11 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 
 	}
-	
+
 	// === SLIME ARMOR === //
-	
+
 	private static void addSlimeBoots() {
-		
+
 		ItemStack item = CustomItemStack.SLIME_BOOTS;
 
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
@@ -857,7 +865,7 @@ public class CraftingRecipes {
 		ItemRecipe1.setIngredient('1', Material.SLIME_BALL);
 
 		Bukkit.getServer().addRecipe(ItemRecipe1);
-		
+
 		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
 
 		ItemRecipe2.shape("000", "101", "101");
@@ -865,7 +873,272 @@ public class CraftingRecipes {
 		ItemRecipe2.setIngredient('1', Material.SLIME_BALL);
 
 		Bukkit.getServer().addRecipe(ItemRecipe2);
-		
+
 	}
-	
+
+	// === SICKLES === //
+
+	@SuppressWarnings("deprecation")
+	public static void addWoodenSickle() {
+
+		ItemStack item = CustomItemStack.WOODEN_SICKLE;
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("010", "001", "210");
+
+		ItemRecipe1.setIngredient('1', Material.WOOD);
+		ItemRecipe1.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+
+		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
+
+		ItemRecipe2.shape("010", "001", "210");
+
+		ItemRecipe2.setIngredient('1', Material.WOOD, 1);
+		ItemRecipe2.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe2);
+
+		ShapedRecipe ItemRecipe3 = new ShapedRecipe(item);
+
+		ItemRecipe3.shape("010", "001", "210");
+
+		ItemRecipe3.setIngredient('1', Material.WOOD, 2);
+		ItemRecipe3.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe3);
+
+		ShapedRecipe ItemRecipe4 = new ShapedRecipe(item);
+
+		ItemRecipe4.shape("010", "001", "210");
+
+		ItemRecipe4.setIngredient('1', Material.WOOD, 3);
+		ItemRecipe4.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe4);
+
+		ShapedRecipe ItemRecipe5 = new ShapedRecipe(item);
+
+		ItemRecipe5.shape("010", "001", "210");
+
+		ItemRecipe5.setIngredient('1', Material.WOOD, 4);
+		ItemRecipe5.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe5);
+
+		ShapedRecipe ItemRecipe6 = new ShapedRecipe(item);
+
+		ItemRecipe6.shape("010", "001", "210");
+
+		ItemRecipe6.setIngredient('1', Material.WOOD, 5);
+		ItemRecipe6.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe6);
+
+		ShapedRecipe ItemRecipe7 = new ShapedRecipe(item);
+
+		ItemRecipe7.shape("010", "001", "210");
+
+		ItemRecipe7.setIngredient('1', Material.WOOD);
+		ItemRecipe7.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe7);
+
+		ShapedRecipe ItemRecipe8 = new ShapedRecipe(item);
+
+		ItemRecipe8.shape("010", "001", "210");
+
+		ItemRecipe8.setIngredient('1', Material.WOOD, 1);
+		ItemRecipe8.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe8);
+
+		ShapedRecipe ItemRecipe9 = new ShapedRecipe(item);
+
+		ItemRecipe9.shape("010", "001", "210");
+
+		ItemRecipe9.setIngredient('1', Material.WOOD, 2);
+		ItemRecipe9.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe9);
+
+		ShapedRecipe ItemRecipe10 = new ShapedRecipe(item);
+
+		ItemRecipe10.shape("010", "001", "210");
+
+		ItemRecipe10.setIngredient('1', Material.WOOD, 3);
+		ItemRecipe10.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe10);
+
+		ShapedRecipe ItemRecipe11 = new ShapedRecipe(item);
+
+		ItemRecipe11.shape("010", "001", "210");
+
+		ItemRecipe11.setIngredient('1', Material.WOOD, 4);
+		ItemRecipe11.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe11);
+
+		ShapedRecipe ItemRecipe12 = new ShapedRecipe(item);
+
+		ItemRecipe12.shape("010", "001", "210");
+
+		ItemRecipe12.setIngredient('1', Material.WOOD, 5);
+		ItemRecipe12.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe12);
+
+	}
+
+	public static void addStoneSickle() {
+
+		ItemStack item = CustomItemStack.STONE_SICKLE;
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("010", "001", "210");
+		ItemRecipe1.setIngredient('1', Material.COBBLESTONE);
+		ItemRecipe1.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+
+		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
+
+		ItemRecipe2.shape("010", "100", "012");
+		ItemRecipe2.setIngredient('1', Material.COBBLESTONE);
+		ItemRecipe2.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe2);
+
+		ShapedRecipe ItemRecipe3 = new ShapedRecipe(item);
+
+		ItemRecipe3.shape("010", "001", "210");
+		ItemRecipe3.setIngredient('1', Material.STONE);
+		ItemRecipe3.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe3);
+
+		ShapedRecipe ItemRecipe4 = new ShapedRecipe(item);
+
+		ItemRecipe4.shape("010", "100", "012");
+		ItemRecipe4.setIngredient('1', Material.STONE);
+		ItemRecipe4.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe4);
+
+	}
+
+	public static void addEndStoneSickle() {
+
+		ItemStack item = CustomItemStack.END_STONE_SICKLE;
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("010", "001", "210");
+		ItemRecipe1.setIngredient('1', Material.ENDER_STONE);
+		ItemRecipe1.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+
+		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
+
+		ItemRecipe2.shape("010", "100", "012");
+		ItemRecipe2.setIngredient('1', Material.ENDER_STONE);
+		ItemRecipe2.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe2);
+
+	}
+
+	public static void addIronSickle() {
+
+		ItemStack item = CustomItemStack.IRON_SICKLE;
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("010", "001", "210");
+		ItemRecipe1.setIngredient('1', Material.IRON_INGOT);
+		ItemRecipe1.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+
+		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
+
+		ItemRecipe2.shape("010", "100", "012");
+		ItemRecipe2.setIngredient('1', Material.IRON_INGOT);
+		ItemRecipe2.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe2);
+
+	}
+
+	public static void addGoldenSickle() {
+
+		ItemStack item = CustomItemStack.GOLD_SICKLE;
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("010", "001", "210");
+		ItemRecipe1.setIngredient('1', Material.GOLD_INGOT);
+		ItemRecipe1.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+
+		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
+
+		ItemRecipe2.shape("010", "100", "012");
+		ItemRecipe2.setIngredient('1', Material.GOLD_INGOT);
+		ItemRecipe2.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe2);
+
+	}
+
+	public static void addDiamondSickle() {
+
+		ItemStack item = CustomItemStack.DIAMOND_SICKLE;
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("010", "001", "210");
+		ItemRecipe1.setIngredient('1', Material.DIAMOND);
+		ItemRecipe1.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+
+		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
+
+		ItemRecipe2.shape("010", "100", "012");
+		ItemRecipe2.setIngredient('1', Material.DIAMOND);
+		ItemRecipe2.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe2);
+
+	}
+
+	public static void addEmeraldSickle() {
+
+		ItemStack item = CustomItemStack.EMERALD_SICKLE;
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("010", "001", "210");
+		ItemRecipe1.setIngredient('1', Material.EMERALD);
+		ItemRecipe1.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+
+		ShapedRecipe ItemRecipe2 = new ShapedRecipe(item);
+
+		ItemRecipe2.shape("010", "100", "012");
+		ItemRecipe2.setIngredient('1', Material.EMERALD);
+		ItemRecipe2.setIngredient('2', Material.STICK);
+
+		Bukkit.getServer().addRecipe(ItemRecipe2);
+
+	}
+
 }

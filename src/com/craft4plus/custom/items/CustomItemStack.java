@@ -48,7 +48,14 @@ public class CustomItemStack {
 	
 	// === SUPER HOES === //
 	public static ItemStack SUPER_HOE_BREAK_PLACEHOLDER = getItem(32);
-
+	public static ItemStack WOODEN_SICKLE = getItem(33);
+	public static ItemStack STONE_SICKLE = getItem(34);
+	public static ItemStack END_STONE_SICKLE = getItem(35);
+	public static ItemStack IRON_SICKLE = getItem(36);
+	public static ItemStack GOLD_SICKLE = getItem(37);
+	public static ItemStack DIAMOND_SICKLE = getItem(38);
+	public static ItemStack EMERALD_SICKLE = getItem(39);
+	
 	public static ItemStack getItem(int id) {
 		return CustomItems.CustomItems.get(id);
 	}
