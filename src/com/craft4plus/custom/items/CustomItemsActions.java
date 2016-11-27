@@ -42,9 +42,11 @@ public class CustomItemsActions {
 	public static int getCustomItemDurability(ItemStack item) {
 		if ((!item.getType().equals(Material.AIR)) && (item.getItemMeta() != null) && (!item.getItemMeta().spigot().isUnbreakable())) {
 			Material m = item.getType();
-			if ((m.equals(Material.DIAMOND_SWORD)) || (m.equals(Material.DIAMOND_AXE))
-					|| (m.equals(Material.DIAMOND_PICKAXE)) || (m.equals(Material.DIAMOND_SPADE))
-					|| (m.equals(Material.DIAMOND_HOE))) {
+			if (m.equals(Material.DIAMOND_SWORD)) {
+				return 1552;
+			}
+			if ((m.equals(Material.DIAMOND_AXE)) || (m.equals(Material.DIAMOND_PICKAXE))
+					|| (m.equals(Material.DIAMOND_SPADE)) || (m.equals(Material.DIAMOND_HOE))) {
 				return 1560;
 			}
 			if ((m.equals(Material.STONE_SWORD)) || (m.equals(Material.STONE_PICKAXE)) || (m.equals(Material.STONE_SPADE))

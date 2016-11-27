@@ -484,7 +484,7 @@ public class CustomItems {
 
 			ItemStackUtilities.setUnbreakable(Item, true, true);
 			ItemStackUtilities.setName(Item, "Wooden Sickle");
-			Item = ItemStackUtilities.nullifyModifiers(Item);
+			Item = ItemStackUtilities.setAttack(Item, 1.0, 1.0, false, false);
 			Item = ItemStackUtilities.addDurabilityLore(Item, 59, 59);
 
 			CustomItems.put(33, Item);
@@ -497,7 +497,7 @@ public class CustomItems {
 
 			ItemStackUtilities.setUnbreakable(Item, true, true);
 			ItemStackUtilities.setName(Item, "Stone Sickle");
-			Item = ItemStackUtilities.nullifyModifiers(Item);
+			Item = ItemStackUtilities.setAttack(Item, 2.0, 1.0, false, false);
 			Item = ItemStackUtilities.addDurabilityLore(Item, 131, 131);
 
 			CustomItems.put(34, Item);
@@ -510,7 +510,7 @@ public class CustomItems {
 
 			ItemStackUtilities.setUnbreakable(Item, true, true);
 			ItemStackUtilities.setName(Item, "Stone Sickle");
-			Item = ItemStackUtilities.nullifyModifiers(Item);
+			Item = ItemStackUtilities.setAttack(Item, 2.0, 1.0, false, false);
 			Item = ItemStackUtilities.addDurabilityLore(Item, 131, 131);
 
 			CustomItems.put(35, Item);
@@ -523,7 +523,7 @@ public class CustomItems {
 
 			ItemStackUtilities.setUnbreakable(Item, true, true);
 			ItemStackUtilities.setName(Item, "Iron Sickle");
-			Item = ItemStackUtilities.nullifyModifiers(Item);
+			Item = ItemStackUtilities.setAttack(Item, 3.0, 1.0, false, false);
 			Item = ItemStackUtilities.addDurabilityLore(Item, 250, 250);
 
 			CustomItems.put(36, Item);
@@ -536,7 +536,7 @@ public class CustomItems {
 
 			ItemStackUtilities.setUnbreakable(Item, true, true);
 			ItemStackUtilities.setName(Item, "Golden Sickle");
-			Item = ItemStackUtilities.nullifyModifiers(Item);
+			Item = ItemStackUtilities.setAttack(Item, 1.0, 1.0, false, false);
 			Item = ItemStackUtilities.addDurabilityLore(Item, 32, 32);
 
 			CustomItems.put(37, Item);
@@ -549,7 +549,7 @@ public class CustomItems {
 
 			ItemStackUtilities.setUnbreakable(Item, true, true);
 			ItemStackUtilities.setName(Item, "Diamond Sickle");
-			Item = ItemStackUtilities.nullifyModifiers(Item);
+			Item = ItemStackUtilities.setAttack(Item, 4.0, 1.0, false, false);
 			Item = ItemStackUtilities.addDurabilityLore(Item, 1561, 1561);
 
 			CustomItems.put(38, Item);
@@ -562,7 +562,7 @@ public class CustomItems {
 
 			ItemStackUtilities.setUnbreakable(Item, true, false);
 			ItemStackUtilities.setName(Item, "Emerald Sickle");
-			Item = ItemStackUtilities.nullifyModifiers(Item);
+			Item = ItemStackUtilities.setAttack(Item, 4.0, 1.0, false, false);
 
 			CustomItems.put(39, Item);
 
