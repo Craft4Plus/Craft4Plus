@@ -16,6 +16,7 @@ import com.craft4plus.bulders.builds.BuildsCommand;
 import com.craft4plus.custom.ResourcePackListener;
 import com.craft4plus.custom.items.CraftingRecipes;
 import com.craft4plus.custom.items.CustomItemsListener;
+import com.craft4plus.islandclash.WorldGeneration;
 import com.craft4plus.custom.items.CustomItems;
 import com.craft4plus.custom.items.CustomItemsCommand;
 import com.craft4plus.listeners.PlayerJoin;
@@ -144,6 +145,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		pm.registerEvents(new CustomItemsListener(), this);
 		pm.registerEvents(new ResourcePackListener(), this);
 		pm.registerEvents(new ArmorListener(getConfig().getStringList("blocked")), this);
+		pm.registerEvents(new WorldGeneration(), this);
 	}
 	
 	private void load() {
