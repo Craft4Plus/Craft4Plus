@@ -1,6 +1,7 @@
 package com.craft4plus.custom.items;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -41,9 +42,11 @@ public class CustomItemsActions {
 	public static int getCustomItemDurability(ItemStack item) {
 		if ((!item.getType().equals(Material.AIR)) && (item.getItemMeta() != null) && (!item.getItemMeta().spigot().isUnbreakable())) {
 			Material m = item.getType();
-			if ((m.equals(Material.DIAMOND_SWORD)) || (m.equals(Material.DIAMOND_AXE))
-					|| (m.equals(Material.DIAMOND_PICKAXE)) || (m.equals(Material.DIAMOND_SPADE))
-					|| (m.equals(Material.DIAMOND_HOE))) {
+			if (m.equals(Material.DIAMOND_SWORD)) {
+				return 1550;
+			}
+			if ((m.equals(Material.DIAMOND_AXE)) || (m.equals(Material.DIAMOND_PICKAXE))
+					|| (m.equals(Material.DIAMOND_SPADE)) || (m.equals(Material.DIAMOND_HOE))) {
 				return 1560;
 			}
 			if ((m.equals(Material.STONE_SWORD)) || (m.equals(Material.STONE_PICKAXE)) || (m.equals(Material.STONE_SPADE))
@@ -257,41 +260,88 @@ public class CustomItemsActions {
 
 	// === SUPER HOES === //
 
-	@SuppressWarnings("deprecation")
-	public static void breakSeedsInRadius(Block block, int radius) {		
-        List<Block> blocks = new ArrayList<Block>();
-		
-        World world = block.getWorld();
-        
-		int centerX = block.getX();
-        int centerY = block.getY();
-        int centerZ = block.getZ();
+	public static List<Block> getSquareRadius(Block block, int radius) {
+		List<Block> blocks = new ArrayList<Block>();
 
-        for (int x = centerX - radius; x < centerX + radius; x++)
-        {
-            for (int y = centerY - radius; y < centerY + radius; y++)
-            {
-                for (int z = centerZ - radius; z < centerZ + radius; z++)
-                {
-                    blocks.add(world.getBlockAt(x,y,z));
-                }
-            }
-        }
+		World world = block.getWorld();
+
+		int centerX = block.getX();
+		int centerY = block.getY();
+		int centerZ = block.getZ();
+
+		for (int x = centerX - radius; x < centerX + radius; x++) {
+			for (int y = centerY - radius; y < centerY + radius; y++) {
+				for (int z = centerZ - radius; z < centerZ + radius; z++) {
+					blocks.add(world.getBlockAt(x, y, z));
+				}
+			}
+		}
+
+		return blocks;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public static int breakSeedsInRadius(Block block, int radius) {		
+       
+		List<Block> blocks = getSquareRadius(block, radius);
         
         Long delay = 0L;
+        int blocksbroken = 0;
+        Collection<? extends Player> players = Bukkit.getOnlinePlayers();
+        World world = block.getWorld();
         
         for (Block b : blocks) {
 			int material = b.getTypeId();
         	if (material == 59 || material == 141 || material == 142 || material == 207) {
         		delay++;
+        		blocksbroken++;
         		Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
         			@Override
         			public void run() {
-        				if (b.getTypeId() == material) b.breakNaturally();
+        				if (b.getTypeId() == material) {
+        					b.breakNaturally();
+        					ParticleEffect.BLOCK_CRACK.sendData(players, b.getX(), b.getY(), b.getZ(), 2, 2, 2, 1, 100, material, (byte)0x01);
+        					world.playSound(b.getLocation(), Sound.BLOCK_GRASS_BREAK, 1.0F, 1.0F);
+        				}
         			}
         		}, delay);
         	}
         }
+        
+        return blocksbroken;
+	}
+	
+	public static boolean isSickle(ItemStack item) {
+		if (item.getType() == Material.DIAMOND_SWORD) {
+			int durability = item.getDurability();
+			if (durability <= 1559 && durability >= 1553)
+				return true;
+		}
+		return false;
+	}
+	
+	public static int getSickleBreakRadius(ItemStack item) {
+		if (!isSickle(item)) return 0;
+		int durability = item.getDurability();
+		if (durability == 1559) return 1;
+		if (durability == 1558 || durability == 1557) return 2;
+		if (durability == 1556) return 3;
+		if (durability == 1555) return 4;
+		if (durability == 1554 || durability == 1553) return 5;
+		return 0;
+	}
+	
+	public static Material getSickleMaterial(ItemStack item) {
+		if (!isSickle(item)) return null;
+		int durability = item.getDurability();
+		if (durability == 1559) return Material.WOOD;
+		if (durability == 1558) return Material.STONE;
+		if (durability == 1557) return Material.ENDER_STONE;
+		if (durability == 1556) return Material.IRON_INGOT;
+		if (durability == 1555) return Material.GOLD_INGOT;
+		if (durability == 1554) return Material.DIAMOND;
+		if (durability == 1553) return Material.EMERALD;
+		return null;
 	}
 	
 }

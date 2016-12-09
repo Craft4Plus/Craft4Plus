@@ -17,9 +17,11 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.CraftingInventory;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
@@ -29,6 +31,7 @@ import org.bukkit.Sound;
 import org.bukkit.block.Block;
 
 import com.craft4plus.main.Main;
+import com.craft4plus.miscellaneous.SlimeChunks;
 import com.craft4plus.miscellaneous.TreeBreaker;
 import com.craft4plus.utils.armorequip.ArmorEquipEvent;
 
@@ -63,16 +66,51 @@ public class CustomItemsListener implements Listener {
 		Player player = event.getPlayer();
 		CustomItemsActions.customItemCheck(player);
 		if (!player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
-			if (CustomItemsActions.isDoubleAxe(player.getInventory().getItemInMainHand())) {
-				TreeBreaker.Chop(event.getBlock(), player, event.getBlock().getWorld());
-				CustomItemsActions.reduceDurability(player.getInventory().getItemInMainHand(), player, 1);
+			ItemStack item = player.getInventory().getItemInMainHand();
+			Block block = event.getBlock();
+			if (CustomItemsActions.isDoubleAxe(item)) {
+				TreeBreaker.Chop(block, player);
+				CustomItemsActions.reduceDurability(item, player, 1);
+				return;
+			}
+			if (CustomItemsActions.isSickle(item)) {
+				CustomItemsActions.reduceDurability(item, player, CustomItemsActions.breakSeedsInRadius(block, CustomItemsActions.getSickleBreakRadius(item)));
+				player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_ATTACK_SWEEP, 1.0F, 1.0F);
+				return;
 			}
 		}
 	}
 
 	@EventHandler
-	public void onPlayerInteract(PlayerInteractEvent event) { 
+	public void onPlayerInteract(PlayerInteractEvent event) {
 		CustomItemsActions.customItemCheck(event.getPlayer());
+	}
+	
+	List<UUID> PlayersInSlimeChunks = new ArrayList<UUID>();
+	
+	@EventHandler
+	public void onPlayerMove(PlayerMoveEvent event) {
+		Player player = event.getPlayer();
+		UUID playeruuid = player.getUniqueId();
+		if (SlimeChunks.isSlimeChunk(player.getLocation())) {
+			if (!PlayersInSlimeChunks.contains(playeruuid)) {
+				PlayersInSlimeChunks.add(playeruuid);
+				Inventory inventory = player.getInventory();
+				for (ItemStack item : inventory.getContents()) {
+					if (item != null && item.getType().equals(Material.DIAMOND_SWORD) && item.getDurability() == 1552)
+						item.setDurability((short) 1551);
+				}
+			}
+		} else {
+			if (PlayersInSlimeChunks.contains(playeruuid)) {
+				PlayersInSlimeChunks.remove(playeruuid);
+				Inventory inventory = player.getInventory();
+				for (ItemStack item : inventory.getContents()) {
+					if (item != null && item.getType().equals(Material.DIAMOND_SWORD) && item.getDurability() == 1551)
+						item.setDurability((short) 1552);
+				}
+			}
+		}
 	}
 
 	@EventHandler
@@ -97,7 +135,8 @@ public class CustomItemsListener implements Listener {
 							|| CustomItemsActions.isStoneArmor(player.getInventory().getItem(36)))) {
 						if (player.hasPotionEffect(PotionEffectType.SLOW)) {
 							for (PotionEffect effect : player.getActivePotionEffects()) {
-								if (effect.getType().equals(PotionEffectType.SLOW) && effect.getDuration() >= 1000 && effect.getAmplifier() == 1) {
+								if (effect.getType().equals(PotionEffectType.SLOW) && effect.getDuration() >= 1000
+										&& effect.getAmplifier() == 1) {
 									player.removePotionEffect(effect.getType());
 								}
 							}
@@ -106,7 +145,8 @@ public class CustomItemsListener implements Listener {
 					if (CustomItemsActions.isSlimeBoots(event.getOldArmorPiece())) {
 						if (player.hasPotionEffect(PotionEffectType.JUMP)) {
 							for (PotionEffect effect : player.getActivePotionEffects()) {
-								if (effect.getType().equals(PotionEffectType.JUMP) && effect.getDuration() >= 1000 && effect.getAmplifier() == 1) {
+								if (effect.getType().equals(PotionEffectType.JUMP) && effect.getDuration() >= 1000
+										&& effect.getAmplifier() == 1) {
 									player.removePotionEffect(effect.getType());
 								}
 							}
@@ -193,7 +233,6 @@ public class CustomItemsListener implements Listener {
 			ItemStack item = event.getItem();
 			Material material = item.getType();
 			if (CustomItemsActions.isCustomFood(item, material)) {
-				//player.playSound(player.getLocation(), Sound.entitY_PLAYER, arg2, arg3);
 				int CurrentTick = MinecraftServer.currentTick;
 				UUID uuid = player.getUniqueId();
 				if (!(EatingState.containsKey(uuid) && (EatingStateLastCheck.containsKey(uuid)))) {
@@ -226,34 +265,33 @@ public class CustomItemsListener implements Listener {
 	}
 
 	// END OF CUSTOM FOOD
-	
+
 	// NETHER STAR EXPLOIT FIX
-	 	@EventHandler
-	 	public void craftItem(PrepareItemCraftEvent e) {
-	 		CraftingInventory inv = e.getInventory();
-	 		ItemStack netherstar = new ItemStack(Material.NETHER_STAR, 1);
-	 		ItemMeta meta = netherstar.getItemMeta();
-	 		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&aNavigator"));
-	 		List<String> lore = new ArrayList<String>();
-	 		lore.add(ChatColor.translateAlternateColorCodes('&', "&aRight click to use the World Navigator"));
-	 		meta.setLore(lore);
-	 		netherstar.setItemMeta(meta);
-	 		if (inv.contains(netherstar)) {
-	 			for (HumanEntity human : e.getViewers()) {
-	 				human.closeInventory();
-	 				human.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Don't use the navigator to craft items!");
-	 				Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
-	 					@Override
-	 					public void run() {
-	 						human.getInventory().setItem(8, netherstar);
-	 					}
-	 				}, 1L);
-	 			}
-	 		}
-	 	}
-	 // END OF NETHER STAR EXPLOIT FIX
-	 
-	 	
+	@EventHandler
+	public void craftItem(PrepareItemCraftEvent e) {
+		CraftingInventory inv = e.getInventory();
+		ItemStack netherstar = new ItemStack(Material.NETHER_STAR, 1);
+		ItemMeta meta = netherstar.getItemMeta();
+		meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&aNavigator"));
+		List<String> lore = new ArrayList<String>();
+		lore.add(ChatColor.translateAlternateColorCodes('&', "&aRight click to use the World Navigator"));
+		meta.setLore(lore);
+		netherstar.setItemMeta(meta);
+		if (inv.contains(netherstar)) {
+			for (HumanEntity human : e.getViewers()) {
+				human.closeInventory();
+				human.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Don't use the navigator to craft items!");
+				Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
+					@Override
+					public void run() {
+						human.getInventory().setItem(8, netherstar);
+					}
+				}, 1L);
+			}
+		}
+	}
+	// END OF NETHER STAR EXPLOIT FIX
+
 	// === SUPER HOES === //
 
 	@EventHandler
@@ -263,16 +301,17 @@ public class CustomItemsListener implements Listener {
 
 		Player player = event.getPlayer();
 
-		if (player.getGameMode() != GameMode.SURVIVAL) return;
-		
+		if (player.getGameMode() != GameMode.SURVIVAL)
+			return;
+
 		if (player.getInventory().getItemInMainHand() == null
 				|| player.getInventory().getItemInMainHand().getType() == Material.AIR)
 			return;
 
 		ItemStack item = player.getInventory().getItemInMainHand();
 		Material itemType = item.getType();
-		Block block = event.getBlock();	
-		
+		Block block = event.getBlock();
+
 		if (itemType == Material.DIAMOND_HOE) {
 			CustomItemsActions.breakSeedsInRadius(block, 5);
 		}

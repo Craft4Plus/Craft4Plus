@@ -57,6 +57,18 @@ public class CustomItems {
 		
 		// Super Hoes
 		SuperHoeBreakPlaceholder();
+		WoodenSickle();
+		StoneSickle();
+		EndStoneSickle();
+		IronSickle();
+		GoldSickle();
+		DiamondSickle();
+		EmeraldSickle();
+		
+		//Slime Buckets
+		SlimeBucket();
+		HoppingSlimeBucket();
+		
 	}
 	
 	// ======== END OF STUFF CONTAINING CUSTOM ITEMS ======= //
@@ -469,4 +481,121 @@ public class CustomItems {
 			
 			CustomItems.put(32, Item);
 		}
+		
+		public static void WoodenSickle() { // ID OF 33
+
+			ItemStack Item = ItemStackUtilities.createItem(Material.DIAMOND_SWORD, 1, 1559);
+
+			ItemStackUtilities.setUnbreakable(Item, true, true);
+			ItemStackUtilities.setName(Item, "Wooden Sickle");
+			Item = ItemStackUtilities.setAttack(Item, 1.0, 1.0, false, false);
+			Item = ItemStackUtilities.addDurabilityLore(Item, 59, 59);
+
+			CustomItems.put(33, Item);
+
+		}
+
+		public static void StoneSickle() { // ID OF 34
+
+			ItemStack Item = ItemStackUtilities.createItem(Material.DIAMOND_SWORD, 1, 1558);
+
+			ItemStackUtilities.setUnbreakable(Item, true, true);
+			ItemStackUtilities.setName(Item, "Stone Sickle");
+			Item = ItemStackUtilities.setAttack(Item, 2.0, 1.0, false, false);
+			Item = ItemStackUtilities.addDurabilityLore(Item, 131, 131);
+
+			CustomItems.put(34, Item);
+
+		}
+		
+		public static void EndStoneSickle() { // ID OF 35
+
+			ItemStack Item = ItemStackUtilities.createItem(Material.DIAMOND_SWORD, 1, 1557);
+
+			ItemStackUtilities.setUnbreakable(Item, true, true);
+			ItemStackUtilities.setName(Item, "Stone Sickle");
+			Item = ItemStackUtilities.setAttack(Item, 2.0, 1.0, false, false);
+			Item = ItemStackUtilities.addDurabilityLore(Item, 131, 131);
+
+			CustomItems.put(35, Item);
+
+		}
+
+		public static void IronSickle() { // ID OF 36
+
+			ItemStack Item = ItemStackUtilities.createItem(Material.DIAMOND_SWORD, 1, 1556);
+
+			ItemStackUtilities.setUnbreakable(Item, true, true);
+			ItemStackUtilities.setName(Item, "Iron Sickle");
+			Item = ItemStackUtilities.setAttack(Item, 3.0, 1.0, false, false);
+			Item = ItemStackUtilities.addDurabilityLore(Item, 250, 250);
+
+			CustomItems.put(36, Item);
+
+		}
+
+		public static void GoldSickle() { // ID OF 37
+
+			ItemStack Item = ItemStackUtilities.createItem(Material.DIAMOND_SWORD, 1, 1555);
+
+			ItemStackUtilities.setUnbreakable(Item, true, true);
+			ItemStackUtilities.setName(Item, "Golden Sickle");
+			Item = ItemStackUtilities.setAttack(Item, 1.0, 1.0, false, false);
+			Item = ItemStackUtilities.addDurabilityLore(Item, 32, 32);
+
+			CustomItems.put(37, Item);
+
+		}
+
+		public static void DiamondSickle() { // ID OF 38 
+
+			ItemStack Item = ItemStackUtilities.createItem(Material.DIAMOND_SWORD, 1, 1554);
+
+			ItemStackUtilities.setUnbreakable(Item, true, true);
+			ItemStackUtilities.setName(Item, "Diamond Sickle");
+			Item = ItemStackUtilities.setAttack(Item, 4.0, 1.0, false, false);
+			Item = ItemStackUtilities.addDurabilityLore(Item, 1561, 1561);
+
+			CustomItems.put(38, Item);
+
+		}
+
+		public static void EmeraldSickle() { // ID OF 39
+
+			ItemStack Item = ItemStackUtilities.createItem(Material.DIAMOND_SWORD, 1, 1553);
+
+			ItemStackUtilities.setUnbreakable(Item, true, false);
+			ItemStackUtilities.setName(Item, "Emerald Sickle");
+			Item = ItemStackUtilities.setAttack(Item, 4.0, 1.0, false, false);
+
+			CustomItems.put(39, Item);
+
+		}
+		
+		// === SLIME BUCKETS === //
+		
+		public static void SlimeBucket() { // ID OF 40
+
+			ItemStack Item = ItemStackUtilities.createItem(Material.DIAMOND_SWORD, 1, 1552);
+
+			ItemStackUtilities.setUnbreakable(Item, true, true);
+			ItemStackUtilities.setName(Item, "Slime Bucket");
+			Item = ItemStackUtilities.setAttack(Item, 4.0, 1.0, false, false);
+
+			CustomItems.put(40, Item);
+
+		}
+		
+		public static void HoppingSlimeBucket() { // ID OF 41
+
+			ItemStack Item = ItemStackUtilities.createItem(Material.DIAMOND_SWORD, 1, 1551);
+
+			ItemStackUtilities.setUnbreakable(Item, true, false);
+			ItemStackUtilities.setName(Item, "Slime Bucket");
+			Item = ItemStackUtilities.setAttack(Item, 4.0, 1.0, false, false);
+
+			CustomItems.put(41, Item);
+
+		}
+		
 }

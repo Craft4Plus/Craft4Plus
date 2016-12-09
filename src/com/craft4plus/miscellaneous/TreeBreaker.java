@@ -13,12 +13,12 @@ import org.bukkit.inventory.ItemStack;
 public class TreeBreaker {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static boolean Chop(Block block, Player player, World world) {
+	public static boolean Chop(Block block, Player player) {
 		List<Block> blocks = new LinkedList();
 		Block highest = getHighestLog(block);
 		if (isTree(highest, player, block)) {
 			getBlocksToChop(block, highest, blocks);
-			popLogs(block, blocks, world, player);
+			popLogs(block, blocks, block.getWorld(), player);
 			return true;
 		}
 		return false;
