@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="ChestCommands1.10.2.jar"/>
 	<classpathentry kind="lib" path="CPCameraStudioReborn.jar"/>
 	<classpathentry kind="lib" path="ParticleAPI.jar"/>
+	<classpathentry kind="lib" path="PlotSquared.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

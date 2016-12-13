@@ -14,7 +14,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 import com.craft4plus.main.Main;
-import com.craft4plus.miscellaneous.RandomNumber;
+import com.craft4plus.miscellaneous.Numbers;
 
 import net.ess3.api.IUser;
 import net.ess3.api.events.AfkStatusChangeEvent;
@@ -73,7 +73,7 @@ public class AFKSystem implements Listener {
 					AvailableLocations.add(loc);
 				}
 			}
-			Location chosenloc = AvailableLocations.get(RandomNumber.getRandom(1, AvailableLocations.size()));
+			Location chosenloc = AvailableLocations.get(Numbers.getRandom(1, AvailableLocations.size()));
 			LocationsSimple.put(chosenloc, player.getUniqueId());
 			return chosenloc;
 		}
@@ -95,7 +95,7 @@ public class AFKSystem implements Listener {
 					AvailableLocations.add(loc);
 				}
 			}
-			Location chosenloc = AvailableLocations.get(RandomNumber.getRandom(1, AvailableLocations.size()));
+			Location chosenloc = AvailableLocations.get(Numbers.getRandom(1, AvailableLocations.size()));
 			LocationsElite.put(chosenloc, player.getUniqueId());
 			return chosenloc;
 		}

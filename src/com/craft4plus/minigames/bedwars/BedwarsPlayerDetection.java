@@ -5,13 +5,14 @@ import org.bukkit.entity.Player;
 import com.craft4plus.worldguard.PlayerInRegion;
 
 public class BedwarsPlayerDetection {
-	
-	public static boolean InBWGame(Player player){ // Boolean that we can access from any class as long as you specify player.
+
+	public static boolean InBWGame(Player player) { 
 		if ((PlayerInRegion.InWorldGuardRegion(player, "BuildWorld", "goldenmountain"))
-				|| (PlayerInRegion.InWorldGuardRegion(player, "BuildWorld", "goldenmountainlobby"))) {
+				|| (PlayerInRegion.InWorldGuardRegion(player, "BuildWorld", "goldenmountainlobby"))
+				|| (PlayerInRegion.InWorldGuardRegion(player, "BuildWorld", "sandstonefortress"))) {
 			return true;
 		}
 		return false;
 	}
-	
+
 }
