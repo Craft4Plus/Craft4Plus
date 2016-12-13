@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import com.craft4plus.miscellaneous.Numbers;
 
-public class TeamsStorage {
+public class TeamStorage {
 	
 	/*
 	 * Things that need to be tracked:

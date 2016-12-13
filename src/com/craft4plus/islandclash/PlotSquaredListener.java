@@ -17,6 +17,10 @@ public class PlotSquaredListener implements Listener {
 		
 		Player player = event.getPlayer();
 		
+		TeamStorage.addToRandomTeam(player);
+		
+		player.sendMessage("In " + TeamStorage.getTeam(player).toString());
+		
 	}
 
 }
