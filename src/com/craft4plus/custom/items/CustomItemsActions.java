@@ -344,4 +344,22 @@ public class CustomItemsActions {
 		return null;
 	}
 	
+	// === SLIME BUCKETS === //
+	
+	public static boolean isSlimeBucket(ItemStack item) {
+		if (isSimpleSlimeBucket(item)) return true;
+		if (isHoppingSlimeBucket(item)) return true;
+		return false;
+	}
+	
+	public static boolean isSimpleSlimeBucket(ItemStack item) {
+		if (item != null && item.getType().equals(Material.DIAMOND_SWORD) && item.getDurability() == 1552) return true;
+		return false;
+	}
+	
+	public static boolean isHoppingSlimeBucket(ItemStack item) {
+		if (item != null && item.getType().equals(Material.DIAMOND_SWORD) && item.getDurability() == 1551) return true;
+		return false;
+	}
+	
 }

@@ -590,7 +590,7 @@ public class CustomItems {
 
 			ItemStack Item = ItemStackUtilities.createItem(Material.DIAMOND_SWORD, 1, 1551);
 
-			ItemStackUtilities.setUnbreakable(Item, true, false);
+			ItemStackUtilities.setUnbreakable(Item, true, true);
 			ItemStackUtilities.setName(Item, "Slime Bucket");
 			Item = ItemStackUtilities.setAttack(Item, 4.0, 1.0, false, false);
 
