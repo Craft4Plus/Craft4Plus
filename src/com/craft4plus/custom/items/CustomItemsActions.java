@@ -353,12 +353,12 @@ public class CustomItemsActions {
 	}
 	
 	public static boolean isSimpleSlimeBucket(ItemStack item) {
-		if (item != null && item.getType().equals(Material.DIAMOND_SWORD) && item.getDurability() == 1552) return true;
+		if (item != null && item.getType() == Material.DIAMOND_SWORD && item.getDurability() == 1552) return true;
 		return false;
 	}
 	
 	public static boolean isHoppingSlimeBucket(ItemStack item) {
-		if (item != null && item.getType().equals(Material.DIAMOND_SWORD) && item.getDurability() == 1551) return true;
+		if (item != null && item.getType() == Material.DIAMOND_SWORD && item.getDurability() == 1551) return true;
 		return false;
 	}
 	

@@ -3,16 +3,22 @@ package com.craft4plus.custom.items;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
+import static com.earth2me.essentials.I18n.tl;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -24,10 +30,12 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.CraftingInventory;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -35,17 +43,32 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.Material;
+import org.bukkit.Server;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
-
 import com.craft4plus.main.Main;
 import com.craft4plus.miscellaneous.SlimeChunks;
 import com.craft4plus.miscellaneous.TreeBreaker;
 import com.craft4plus.utils.armorequip.ArmorEquipEvent;
+import com.earth2me.essentials.CommandSource;
+import com.earth2me.essentials.Mob;
+import com.earth2me.essentials.Mob.MobException;
+import com.earth2me.essentials.MobData;
+import com.earth2me.essentials.SpawnMob;
+import com.earth2me.essentials.User;
+import com.earth2me.essentials.utils.LocationUtil;
+import com.earth2me.essentials.utils.StringUtil;
+
+import net.ess3.api.IEssentials;
 import net.md_5.bungee.api.ChatColor;
 import net.minecraft.server.v1_10_R1.MinecraftServer;
 
 public class CustomItemsListener implements Listener {
+
+	public static void tell(String string) {
+		if (Bukkit.getPlayer("chrismin13").isOnline())
+			Bukkit.getPlayer("chrismin13").sendMessage(ChatColor.AQUA + string);
+	}
 
 	@EventHandler
 	public void onEntityDamage(EntityDamageByEntityEvent event) {
@@ -327,6 +350,7 @@ public class CustomItemsListener implements Listener {
 		}
 	}
 
+	@EventHandler
 	public void onItemDrop(PlayerDropItemEvent event) {
 		Item item = event.getItemDrop();
 		ItemStack itemstack = item.getItemStack();
@@ -340,6 +364,7 @@ public class CustomItemsListener implements Listener {
 		item.setItemStack(itemstack);
 	}
 
+	@EventHandler
 	public void onItemPickup(PlayerPickupItemEvent event) {
 		Item item = event.getItem();
 		ItemStack itemstack = item.getItemStack();
@@ -353,22 +378,28 @@ public class CustomItemsListener implements Listener {
 				if (CustomItemsActions.isSimpleSlimeBucket(itemtochange))
 					itemtochange.setDurability((short) 1551);
 			}
+			itemstack.setDurability((short) 1551);
 		} else {
 			if (PlayersInSlimeChunks.contains(playeruuid))
 				PlayersInSlimeChunks.remove(playeruuid);
 			for (ItemStack itemtochange : player.getInventory().getContents()) {
-				if (CustomItemsActions.isSimpleSlimeBucket(itemtochange))
+				if (CustomItemsActions.isHoppingSlimeBucket(itemtochange))
 					itemtochange.setDurability((short) 1552);
 			}
+			itemstack.setDurability((short) 1551);
 		}
 		item.setItemStack(itemstack);
 	}
 
-	public void onInventoryMove(InventoryMoveItemEvent event) {
+	@EventHandler
+	public void onInventoryItemMove(InventoryMoveItemEvent event) {
+		tell("Moved item");
 		ItemStack item = event.getItem();
 		if (!CustomItemsActions.isSlimeBucket(item))
 			return;
+		tell("Is Slime Bucket");
 		if (event.getDestination().getHolder() instanceof HumanEntity) {
+			tell("To Player");
 			HumanEntity player = (HumanEntity) event.getDestination().getHolder();
 			UUID playeruuid = player.getUniqueId();
 			if (SlimeChunks.isSlimeChunk(player.getLocation())) {
@@ -385,22 +416,28 @@ public class CustomItemsListener implements Listener {
 						itemtochange.setDurability((short) 1552);
 				}
 			}
+		} else if (event.getInitiator().getHolder() instanceof HumanEntity) {
+			tell("From Player");
+			HumanEntity player = (HumanEntity) event.getDestination().getHolder();
+			UUID playeruuid = player.getUniqueId();
+			if (PlayersInSlimeChunks.contains(playeruuid))
+				PlayersInSlimeChunks.remove(playeruuid);
+			item.setDurability((short) 1552);
 		} else {
-			if (event.getInitiator().getHolder() instanceof HumanEntity) {
-				HumanEntity player = (HumanEntity) event.getDestination().getHolder();
-				UUID playeruuid = player.getUniqueId();
-				if (PlayersInSlimeChunks.contains(playeruuid))
-					PlayersInSlimeChunks.remove(playeruuid);
-				for (ItemStack itemtochange : player.getInventory().getContents()) {
-					if (CustomItemsActions.isSimpleSlimeBucket(itemtochange))
-						itemtochange.setDurability((short) 1552);
-				}
-			}
+			tell("Something else");
+			item.setDurability((short) 1552);
 		}
 	}
 
+	@EventHandler
 	public void onBucketSlimeClick(PlayerInteractEntityEvent event) {
-		if (!(event.getRightClicked() instanceof Slime))
+		Entity entity = event.getRightClicked();
+		if (!(entity instanceof Slime))
+			return;
+		if (entity.isDead())
+			return;
+		Slime slime = (Slime) entity;
+		if (slime.getSize() != 1)
 			return;
 		Player player = event.getPlayer();
 		PlayerInventory inventory = player.getInventory();
@@ -411,6 +448,9 @@ public class CustomItemsListener implements Listener {
 			item = inventory.getItemInOffHand();
 		}
 		UUID playeruuid = player.getUniqueId();
+		item.setType(Material.DIAMOND_SWORD);
+		ItemStackUtilities.setUnbreakable(item, true, true);
+		ItemStackUtilities.setName(item, "Slime Bucket");
 		if (SlimeChunks.isSlimeChunk(player.getLocation())) {
 			PlayersInSlimeChunks.add(playeruuid);
 			item.setDurability((short) 1551);
@@ -419,9 +459,13 @@ public class CustomItemsListener implements Listener {
 				PlayersInSlimeChunks.remove(playeruuid);
 			item.setDurability((short) 1552);
 		}
+		event.getRightClicked().remove();
 	}
 
+	@EventHandler
 	public void onSlimeBucketBlockClick(PlayerInteractEvent event) {
+		if (event.getAction() != Action.RIGHT_CLICK_BLOCK)
+			return;
 		Player player = event.getPlayer();
 		PlayerInventory inventory = player.getInventory();
 		ItemStack item = null;
@@ -429,11 +473,247 @@ public class CustomItemsListener implements Listener {
 			item = inventory.getItemInMainHand();
 		} else if (CustomItemsActions.isSlimeBucket(inventory.getItemInOffHand())) {
 			item = inventory.getItemInOffHand();
-		} else return;
-		if (event.getClickedBlock() == null) return;
-		Location location = event.getClickedBlock().getLocation();
+		} else
+			return;
+		if (event.getClickedBlock() == null)
+			return;
+		List<String> mobParts = SpawnMob.mobParts("slime:1");
+		List<String> mobData = SpawnMob.mobData("slime:1");
+
+		int mobCount = 1;
+
+		try {
+			spawnmob(Main.ess, Main.instance.getServer(), Main.ess.getUser(player), mobParts, mobData, mobCount);
+		} catch (Exception e) {
+			tell("Failed to spawn slime of user " + player.getName());
+			e.printStackTrace();
+		}
 		item.setType(Material.BUCKET);
-		location.getWorld().spawnEntity(location, EntityType.SLIME);
+		item.setDurability((short) 0);
+		ItemStackUtilities.setName(item, "Bucket");
 	}
 
+	@EventHandler
+	public void onTeleportWithSlimeBucket(PlayerTeleportEvent event) {
+		Player player = event.getPlayer();
+		UUID playeruuid = player.getUniqueId();
+		if (SlimeChunks.isSlimeChunk(player.getLocation())) {
+			if (!PlayersInSlimeChunks.contains(playeruuid)) {
+				PlayersInSlimeChunks.add(playeruuid);
+				Inventory inventory = player.getInventory();
+				for (ItemStack item : inventory.getContents()) {
+					if (CustomItemsActions.isSimpleSlimeBucket(item))
+						item.setDurability((short) 1551);
+				}
+			}
+		} else {
+			if (PlayersInSlimeChunks.contains(playeruuid)) {
+				PlayersInSlimeChunks.remove(playeruuid);
+				Inventory inventory = player.getInventory();
+				for (ItemStack item : inventory.getContents()) {
+					if (CustomItemsActions.isHoppingSlimeBucket(item))
+						item.setDurability((short) 1552);
+				}
+			}
+		}
+	}
+
+	/*
+	 * ALL CODE IS FROM THE ESSENTIALS GITHUB REPO
+	 * 
+	 * SMALL CHANGES HAVE BEEN MADE
+	 */
+	// This method spawns a mob where the user is looking, owned by user
+	public static void spawnmob(final IEssentials ess, final Server server, final User user, final List<String> parts,
+			final List<String> data, int mobCount) throws Exception {
+		final Block block = LocationUtil.getTarget(user.getBase()).getBlock();
+		if (block == null) {
+			throw new Exception(tl("unableToSpawnMob"));
+		}
+		spawnmob(ess, server, user.getSource(), user, block.getLocation(), parts, data, mobCount);
+	}
+
+	// This method spawns a mob at target, owned by target
+	public static void spawnmob(final IEssentials ess, final Server server, final CommandSource sender,
+			final User target, final List<String> parts, final List<String> data, int mobCount) throws Exception {
+		spawnmob(ess, server, sender, target, target.getLocation(), parts, data, mobCount);
+	}
+
+	// This method spawns a mob at loc, owned by target
+	public static void spawnmob(final IEssentials ess, final Server server, final CommandSource sender,
+			final User target, final Location loc, final List<String> parts, final List<String> data, int mobCount)
+			throws Exception {
+		final Location sloc = LocationUtil.getSafeDestination(loc);
+
+		for (int i = 0; i < parts.size(); i++) {
+			Mob mob = Mob.fromName(parts.get(i));
+			checkSpawnable(ess, sender, mob);
+		}
+
+		final int serverLimit = ess.getSettings().getSpawnMobLimit();
+		int effectiveLimit = serverLimit / parts.size();
+
+		if (effectiveLimit < 1) {
+			effectiveLimit = 1;
+			while (parts.size() > serverLimit) {
+				parts.remove(serverLimit);
+			}
+		}
+
+		if (mobCount > effectiveLimit) {
+			mobCount = effectiveLimit;
+			sender.sendMessage(tl("mobSpawnLimit"));
+		}
+
+		try {
+			for (int i = 0; i < mobCount; i++) {
+				spawnMob(ess, server, sender, target, sloc, parts, data);
+			}
+		} catch (MobException e1) {
+			throw new Exception(tl("unableToSpawnMob"), e1);
+		} catch (NumberFormatException e2) {
+			throw new Exception(tl("numberRequired"), e2);
+		} catch (NullPointerException np) {
+			throw new Exception(tl("soloMob"), np);
+		}
+	}
+
+	private static void spawnMob(final IEssentials ess, final Server server, final CommandSource sender,
+			final User target, final Location sloc, List<String> parts, List<String> data) throws Exception {
+		Mob mob;
+		Entity spawnedMob = null;
+		Entity spawnedMount;
+
+		for (int i = 0; i < parts.size(); i++) {
+			if (i == 0) {
+				mob = Mob.fromName(parts.get(i));
+				spawnedMob = mob.spawn(sloc.getWorld(), server, sloc);
+				defaultMobData(mob.getType(), spawnedMob);
+
+				if (data.get(i) != null) {
+					changeMobData(sender, mob.getType(), spawnedMob, data.get(i).toLowerCase(Locale.ENGLISH), target);
+				}
+			}
+
+			int next = (i + 1);
+			if (next < parts.size()) // If it's the last mob in the list, don't
+										// set the mount
+			{
+				Mob mMob = Mob.fromName(parts.get(next));
+				spawnedMount = mMob.spawn(sloc.getWorld(), server, sloc);
+				defaultMobData(mMob.getType(), spawnedMount);
+
+				if (data.get(next) != null) {
+					changeMobData(sender, mMob.getType(), spawnedMount, data.get(next).toLowerCase(Locale.ENGLISH),
+							target);
+				}
+
+				spawnedMob.setPassenger(spawnedMount);
+
+				spawnedMob = spawnedMount;
+			}
+		}
+	}
+
+	private static void checkSpawnable(IEssentials ess, CommandSource sender, Mob mob) throws Exception {
+		if (mob == null) {
+			throw new Exception(tl("invalidMob"));
+		}
+
+		if (ess.getSettings().getProtectPreventSpawn(mob.getType().toString().toLowerCase(Locale.ENGLISH))) {
+			throw new Exception(tl("disabledToSpawnMob"));
+		}
+
+		if (sender.isPlayer() && !ess.getUser(sender.getPlayer())
+				.isAuthorized("essentials.spawnmob." + mob.name.toLowerCase(Locale.ENGLISH))) {
+			throw new Exception(tl("noPermToSpawnMob"));
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	private static void defaultMobData(final EntityType type, final Entity spawned) {
+		if (type == EntityType.SKELETON) {
+			final EntityEquipment invent = ((LivingEntity) spawned).getEquipment();
+			invent.setItemInHand(new ItemStack(Material.BOW, 1));
+			invent.setItemInHandDropChance(0.1f);
+
+			invent.setBoots(new ItemStack(Material.GOLD_BOOTS, 1));
+			invent.setBootsDropChance(0.0f);
+		}
+
+		if (type == EntityType.PIG_ZOMBIE) {
+			final PigZombie zombie = ((PigZombie) spawned);
+			zombie.setVillager(false);
+
+			final EntityEquipment invent = zombie.getEquipment();
+			invent.setItemInHand(new ItemStack(Material.GOLD_SWORD, 1));
+			invent.setItemInHandDropChance(0.1f);
+
+			invent.setBoots(new ItemStack(Material.GOLD_BOOTS, 1));
+			invent.setBootsDropChance(0.0f);
+		}
+
+		if (type == EntityType.ZOMBIE) {
+			final Zombie zombie = ((Zombie) spawned);
+			zombie.setVillager(false);
+
+			final EntityEquipment invent = zombie.getEquipment();
+			invent.setBoots(new ItemStack(Material.GOLD_BOOTS, 1));
+			invent.setBootsDropChance(0.0f);
+		}
+	}
+
+	private static void changeMobData(final CommandSource sender, final EntityType type, final Entity spawned,
+			final String inputData, final User target) throws Exception {
+		String data = inputData;
+
+		if (data.isEmpty()) {
+			sender.sendMessage(tl("mobDataList", StringUtil.joinList(MobData.getValidHelp(spawned))));
+		}
+
+		if (spawned instanceof Zombie) {
+			((Zombie) spawned).setBaby(false);
+		}
+
+		if (spawned instanceof Zombie || type == EntityType.SKELETON) {
+			if (inputData.contains("armor") || inputData.contains("armour")) {
+				final EntityEquipment invent = ((LivingEntity) spawned).getEquipment();
+				if (inputData.contains("noarmor") || inputData.contains("noarmour")) {
+					invent.clear();
+				} else if (inputData.contains("diamond")) {
+					invent.setBoots(new ItemStack(Material.DIAMOND_BOOTS, 1));
+					invent.setLeggings(new ItemStack(Material.DIAMOND_LEGGINGS, 1));
+					invent.setChestplate(new ItemStack(Material.DIAMOND_CHESTPLATE, 1));
+					invent.setHelmet(new ItemStack(Material.DIAMOND_HELMET, 1));
+				} else if (inputData.contains("gold")) {
+					invent.setBoots(new ItemStack(Material.GOLD_BOOTS, 1));
+					invent.setLeggings(new ItemStack(Material.GOLD_LEGGINGS, 1));
+					invent.setChestplate(new ItemStack(Material.GOLD_CHESTPLATE, 1));
+					invent.setHelmet(new ItemStack(Material.GOLD_HELMET, 1));
+				} else if (inputData.contains("leather")) {
+					invent.setBoots(new ItemStack(Material.LEATHER_BOOTS, 1));
+					invent.setLeggings(new ItemStack(Material.LEATHER_LEGGINGS, 1));
+					invent.setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE, 1));
+					invent.setHelmet(new ItemStack(Material.LEATHER_HELMET, 1));
+				} else {
+					invent.setBoots(new ItemStack(Material.IRON_BOOTS, 1));
+					invent.setLeggings(new ItemStack(Material.IRON_LEGGINGS, 1));
+					invent.setChestplate(new ItemStack(Material.IRON_CHESTPLATE, 1));
+					invent.setHelmet(new ItemStack(Material.IRON_HELMET, 1));
+				}
+				invent.setBootsDropChance(0f);
+				invent.setLeggingsDropChance(0f);
+				invent.setChestplateDropChance(0f);
+				invent.setHelmetDropChance(0f);
+			}
+
+		}
+
+		MobData newData = MobData.fromData(spawned, data);
+		while (newData != null) {
+			newData.setData(spawned, target.getBase(), data);
+			data = data.replace(newData.getMatched(), "");
+			newData = MobData.fromData(spawned, data);
+		}
+	}
 }
