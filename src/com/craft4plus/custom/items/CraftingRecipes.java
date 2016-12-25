@@ -72,6 +72,9 @@ public class CraftingRecipes {
 		addHalfSlabCombo(Material.WOOD_STEP, 3, Material.WOOD, 3);
 		addHalfSlabCombo(Material.WOOD_STEP, 4, Material.WOOD, 4);
 		addHalfSlabCombo(Material.WOOD_STEP, 5, Material.WOOD, 5);
+		
+		// === SLIME BUCKETS === //
+		addSlimeBucket();
 
 	}
 
@@ -1191,6 +1194,25 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 		
 		ItemRecipe1.shape("000", "001", "001");
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+	}
+	
+	private static void addSlimeBucket() {
+
+		ItemStack item = CustomItemStack.SLIME_BUCKET;
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("100", "100", "200");
+		ItemRecipe1.setIngredient('1', Material.SLIME_BALL);
+		ItemRecipe1.setIngredient('2', Material.BUCKET);
+
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+		
+		ItemRecipe1.shape("010", "010", "020");
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+		
+		ItemRecipe1.shape("001", "001", "002");
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 	}
 

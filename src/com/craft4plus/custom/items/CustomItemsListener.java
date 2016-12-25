@@ -1,6 +1,7 @@
 package com.craft4plus.custom.items;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -14,12 +15,14 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -32,6 +35,8 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.CraftingInventory;
@@ -386,86 +391,105 @@ public class CustomItemsListener implements Listener {
 				if (CustomItemsActions.isHoppingSlimeBucket(itemtochange))
 					itemtochange.setDurability((short) 1552);
 			}
-			itemstack.setDurability((short) 1551);
+			itemstack.setDurability((short) 1552);
 		}
 		item.setItemStack(itemstack);
 	}
 
 	@EventHandler
-	public void onInventoryItemMove(InventoryMoveItemEvent event) {
-		tell("Moved item");
+	public void onSlimeBucketMove(InventoryMoveItemEvent event) {
 		ItemStack item = event.getItem();
 		if (!CustomItemsActions.isSlimeBucket(item))
 			return;
-		tell("Is Slime Bucket");
-		if (event.getDestination().getHolder() instanceof HumanEntity) {
-			tell("To Player");
-			HumanEntity player = (HumanEntity) event.getDestination().getHolder();
-			UUID playeruuid = player.getUniqueId();
-			if (SlimeChunks.isSlimeChunk(player.getLocation())) {
-				PlayersInSlimeChunks.add(playeruuid);
-				for (ItemStack itemtochange : player.getInventory().getContents()) {
-					if (CustomItemsActions.isSimpleSlimeBucket(itemtochange))
-						itemtochange.setDurability((short) 1551);
-				}
-			} else {
-				if (PlayersInSlimeChunks.contains(playeruuid))
-					PlayersInSlimeChunks.remove(playeruuid);
-				for (ItemStack itemtochange : player.getInventory().getContents()) {
-					if (CustomItemsActions.isSimpleSlimeBucket(itemtochange))
-						itemtochange.setDurability((short) 1552);
-				}
-			}
-		} else if (event.getInitiator().getHolder() instanceof HumanEntity) {
-			tell("From Player");
-			HumanEntity player = (HumanEntity) event.getDestination().getHolder();
-			UUID playeruuid = player.getUniqueId();
-			if (PlayersInSlimeChunks.contains(playeruuid))
-				PlayersInSlimeChunks.remove(playeruuid);
-			item.setDurability((short) 1552);
-		} else {
-			tell("Something else");
-			item.setDurability((short) 1552);
-		}
+		item.setDurability((short) 1552);
 	}
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onBucketSlimeClick(PlayerInteractEntityEvent event) {
 		Entity entity = event.getRightClicked();
-		if (!(entity instanceof Slime))
-			return;
-		if (entity.isDead())
-			return;
-		Slime slime = (Slime) entity;
-		if (slime.getSize() != 1)
-			return;
 		Player player = event.getPlayer();
 		PlayerInventory inventory = player.getInventory();
 		ItemStack item = null;
-		if (inventory.getItemInMainHand().getType().equals(Material.BUCKET)) {
-			item = inventory.getItemInMainHand();
-		} else if (inventory.getItemInOffHand().getType().equals(Material.BUCKET)) {
-			item = inventory.getItemInOffHand();
-		}
 		UUID playeruuid = player.getUniqueId();
-		item.setType(Material.DIAMOND_SWORD);
-		ItemStackUtilities.setUnbreakable(item, true, true);
-		ItemStackUtilities.setName(item, "Slime Bucket");
-		if (SlimeChunks.isSlimeChunk(player.getLocation())) {
-			PlayersInSlimeChunks.add(playeruuid);
-			item.setDurability((short) 1551);
-		} else {
-			if (PlayersInSlimeChunks.contains(playeruuid))
+		if (entity instanceof Slime) {
+			if (entity.isDead())
+				return;
+			Slime slime = (Slime) entity;
+			if (slime.getSize() != 1)
+				return;
+			if (inventory.getItemInMainHand().getType().equals(Material.BUCKET)) {
+				item = inventory.getItemInMainHand();
+				int amount = item.getAmount() - 1;
+				item.setAmount(amount);
+				inventory.setItemInMainHand(item);
+			} else if (inventory.getItemInOffHand().getType().equals(Material.BUCKET)) {
+				item = inventory.getItemInOffHand();
+				int amount = item.getAmount() - 1;
+				item.setAmount(amount);
+				inventory.setItemInOffHand(item);
+			}
+			if (SlimeChunks.isSlimeChunk(player.getLocation())) {
+				PlayersInSlimeChunks.add(playeruuid);
+				player.getInventory().addItem(CustomItemStack.HOPPING_SLIME_BUCKET);
+			} else {
+				if (PlayersInSlimeChunks.contains(playeruuid))
+					PlayersInSlimeChunks.remove(playeruuid);
+				player.getInventory().addItem(CustomItemStack.SLIME_BUCKET);
+			}
+			event.getRightClicked().remove();
+		} else if (entity instanceof ItemFrame) {
+			ItemFrame itemframe = (ItemFrame) entity;
+			if (itemframe.getItem().getType() != Material.AIR)
+				return;
+			if (CustomItemsActions.isSlimeBucket(inventory.getItemInMainHand())) {
 				PlayersInSlimeChunks.remove(playeruuid);
-			item.setDurability((short) 1552);
+				inventory.getItemInMainHand().setDurability((short) 1552);
+			} else if (CustomItemsActions.isSlimeBucket(inventory.getItemInOffHand())) {
+				PlayersInSlimeChunks.remove(playeruuid);
+				inventory.getItemInOffHand().setDurability((short) 1552);
+			}
 		}
-		event.getRightClicked().remove();
 	}
 
 	@EventHandler
-	public void onSlimeBucketBlockClick(PlayerInteractEvent event) {
-		if (event.getAction() != Action.RIGHT_CLICK_BLOCK)
+	public void onInventoryChange(InventoryClickEvent event) {
+		if (event.getView().getTopInventory() == null)
 			return;
+		Inventory inventory = event.getInventory();
+		ItemStack item = event.getCurrentItem();
+		if (inventory.getHolder().toString().contains("CraftPlayer")) {
+			if (CustomItemsActions.isSlimeBucket(item)) {
+				if (CustomItemsActions.isSlimeBucket(item)) {
+					if (SlimeChunks.isSlimeChunk(event.getWhoClicked().getLocation())) {
+						item.setDurability((short) 1551);
+					} else {
+						item.setDurability((short) 1552);
+					}
+				}
+			}
+		} else {
+			if (CustomItemsActions.isSlimeBucket(item)) {
+				item.setDurability((short) 1552);
+				PlayersInSlimeChunks.remove(event.getWhoClicked().getUniqueId());
+			}
+		}
+	}
+
+	static List<Material> interactables = Arrays.asList(Material.ACACIA_DOOR, Material.ACACIA_FENCE_GATE,
+			Material.ANVIL, Material.BEACON, Material.BED, Material.BIRCH_DOOR, Material.BIRCH_FENCE_GATE,
+			Material.BOAT, Material.BOAT_ACACIA, Material.BOAT_BIRCH, Material.BOAT_DARK_OAK, Material.BOAT_JUNGLE,
+			Material.BOAT_SPRUCE, Material.BREWING_STAND, Material.COMMAND, Material.CHEST, Material.DARK_OAK_DOOR,
+			Material.DARK_OAK_FENCE_GATE, Material.DAYLIGHT_DETECTOR, Material.DAYLIGHT_DETECTOR_INVERTED,
+			Material.DISPENSER, Material.DROPPER, Material.ENCHANTMENT_TABLE, Material.ENDER_CHEST, Material.FENCE_GATE,
+			Material.FURNACE, Material.HOPPER, Material.HOPPER_MINECART, Material.ITEM_FRAME, Material.JUNGLE_DOOR,
+			Material.JUNGLE_FENCE_GATE, Material.LEVER, Material.MINECART, Material.NOTE_BLOCK,
+			Material.POWERED_MINECART, Material.REDSTONE_COMPARATOR, Material.REDSTONE_COMPARATOR_OFF,
+			Material.REDSTONE_COMPARATOR_ON, Material.SIGN, Material.SIGN_POST, Material.STORAGE_MINECART,
+			Material.TRAP_DOOR, Material.TRAPPED_CHEST, Material.WALL_SIGN, Material.WOOD_BUTTON, Material.WOOD_DOOR,
+			Material.WORKBENCH);
+
+	@EventHandler
+	public void onSlimeBucketBlockClick(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 		PlayerInventory inventory = player.getInventory();
 		ItemStack item = null;
@@ -475,22 +499,28 @@ public class CustomItemsListener implements Listener {
 			item = inventory.getItemInOffHand();
 		} else
 			return;
-		if (event.getClickedBlock() == null)
-			return;
-		List<String> mobParts = SpawnMob.mobParts("slime:1");
-		List<String> mobData = SpawnMob.mobData("slime:1");
 
-		int mobCount = 1;
+		if (event.getAction() == Action.RIGHT_CLICK_BLOCK
+				&& !interactables.contains(event.getClickedBlock().getType())) {
+			if (event.getClickedBlock() == null)
+				return;
+			List<String> mobParts = SpawnMob.mobParts("slime:1");
+			List<String> mobData = SpawnMob.mobData("slime:1");
 
-		try {
-			spawnmob(Main.ess, Main.instance.getServer(), Main.ess.getUser(player), mobParts, mobData, mobCount);
-		} catch (Exception e) {
-			tell("Failed to spawn slime of user " + player.getName());
-			e.printStackTrace();
+			int mobCount = 1;
+
+			try {
+				spawnmob(Main.ess, Main.instance.getServer(), Main.ess.getUser(player), mobParts, mobData, mobCount);
+			} catch (Exception e) {
+				tell("Failed to spawn slime of user " + player.getName());
+				e.printStackTrace();
+			}
+			item.setType(Material.BUCKET);
+			item.setDurability((short) 0);
+			ItemStackUtilities.setName(item, "Bucket");
+		} else if (event.getClickedBlock() != null && event.getClickedBlock().equals(Material.ITEM_FRAME)) {
+			item.setDurability((short) 1552);
 		}
-		item.setType(Material.BUCKET);
-		item.setDurability((short) 0);
-		ItemStackUtilities.setName(item, "Bucket");
 	}
 
 	@EventHandler
@@ -515,6 +545,14 @@ public class CustomItemsListener implements Listener {
 						item.setDurability((short) 1552);
 				}
 			}
+		}
+	}
+
+	@EventHandler
+	public void onItemCraft(CraftItemEvent event) {
+		ItemStack item = event.getCurrentItem();
+		if (CustomItemsActions.isSlimeBucket(item)) {
+			PlayersInSlimeChunks.remove(event.getWhoClicked().getUniqueId());
 		}
 	}
 
