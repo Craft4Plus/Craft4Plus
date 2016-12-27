@@ -69,6 +69,15 @@ public class CustomItems {
 		SlimeBucket();
 		HoppingSlimeBucket();
 		
+		//Chisels
+		WoodenChisel();
+		StoneChisel();
+		EndStoneChisel();
+		IronChisel();
+		GoldChisel();
+		DiamondChisel();
+		EmeraldChisel();
+		
 	}
 	
 	// ======== END OF STUFF CONTAINING CUSTOM ITEMS ======= //
@@ -595,6 +604,91 @@ public class CustomItems {
 			Item = ItemStackUtilities.setAttack(Item, 4.0, 1.0, false, false);
 
 			CustomItems.put(41, Item);
+
+		}
+		
+		// === CHISELS === //
+		
+		public static void WoodenChisel() { // ID OF 42
+
+			ItemStack Item = ItemStackUtilities.createItem(Material.WOOD_PICKAXE, 1, 59);
+
+			ItemStackUtilities.setUnbreakable(Item, true, true);
+			ItemStackUtilities.setName(Item, "Wooden Chisel");
+			Item = ItemStackUtilities.addDurabilityLore(Item, 59, 59);
+
+			CustomItems.put(42, Item);
+
+		}
+
+		public static void StoneChisel() { // ID OF 43
+
+			ItemStack Item = ItemStackUtilities.createItem(Material.STONE_PICKAXE, 1, 130);
+
+			ItemStackUtilities.setUnbreakable(Item, true, true);
+			ItemStackUtilities.setName(Item, "Stone Chisel");
+			Item = ItemStackUtilities.addDurabilityLore(Item, 131, 131);
+
+			CustomItems.put(43, Item);
+
+		}
+		
+		public static void EndStoneChisel() { // ID OF 44
+
+			ItemStack Item = ItemStackUtilities.createItem(Material.STONE_PICKAXE, 1, 129);
+
+			ItemStackUtilities.setUnbreakable(Item, true, true);
+			ItemStackUtilities.setName(Item, "Stone Chisel");
+			Item = ItemStackUtilities.addDurabilityLore(Item, 131, 131);
+
+			CustomItems.put(44, Item);
+
+		}
+
+		public static void IronChisel() { // ID OF 45
+
+			ItemStack Item = ItemStackUtilities.createItem(Material.IRON_PICKAXE, 1, 250);
+
+			ItemStackUtilities.setUnbreakable(Item, true, true);
+			ItemStackUtilities.setName(Item, "Iron Chisel");
+			Item = ItemStackUtilities.addDurabilityLore(Item, 250, 250);
+
+			CustomItems.put(45, Item);
+
+		}
+
+		public static void GoldChisel() { // ID OF 46
+
+			ItemStack Item = ItemStackUtilities.createItem(Material.GOLD_PICKAXE, 1, 31);
+
+			ItemStackUtilities.setUnbreakable(Item, true, true);
+			ItemStackUtilities.setName(Item, "Golden Chisel");
+			Item = ItemStackUtilities.addDurabilityLore(Item, 32, 32);
+
+			CustomItems.put(46, Item);
+
+		}
+
+		public static void DiamondChisel() { // ID OF 47
+
+			ItemStack Item = ItemStackUtilities.createItem(Material.DIAMOND_PICKAXE, 1, 1560);
+
+			ItemStackUtilities.setUnbreakable(Item, true, true);
+			ItemStackUtilities.setName(Item, "Diamond Chisel");
+			Item = ItemStackUtilities.addDurabilityLore(Item, 1561, 1561);
+
+			CustomItems.put(47, Item);
+
+		}
+
+		public static void EmeraldChisel() { // ID OF 48
+
+			ItemStack Item = ItemStackUtilities.createItem(Material.DIAMOND_PICKAXE, 1, 1559);
+
+			ItemStackUtilities.setUnbreakable(Item, true, false);
+			ItemStackUtilities.setName(Item, "Emerald Chisel");
+
+			CustomItems.put(48, Item);
 
 		}
 		

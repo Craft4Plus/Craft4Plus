@@ -82,15 +82,17 @@ public class CustomItemsListener implements Listener {
 			CustomItemsActions.customItemCheck(player);
 			if (!player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
 				ItemStack item = player.getInventory().getItemInMainHand();
-				if (CustomItemsActions.isDoubleAxe(item)) {
+				// DOUBLE AXES
+				if (CustomItemsActions.isDoubleAxe(item)) 
 					CustomItemsActions.reduceDurability(item, player, 2);
-				}
-				if (CustomItemsActions.isEndStoneSword(item)) {
+				// END STONE ITEMS
+				if (CustomItemsActions.isEndStoneSword(item)) 
 					CustomItemsActions.reduceDurability(item, player, 1);
-				}
-				if (CustomItemsActions.isEndStoneItem(item)) {
+				if (CustomItemsActions.isEndStoneItem(item)) 
 					CustomItemsActions.reduceDurability(item, player, 2);
-				}
+				// CHISELS
+				if (CustomItemsActions.isChisel(item))
+					CustomItemsActions.reduceDurability(item, player, 2);
 			}
 
 		}
@@ -103,16 +105,24 @@ public class CustomItemsListener implements Listener {
 		if (!player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
 			ItemStack item = player.getInventory().getItemInMainHand();
 			Block block = event.getBlock();
+			// DOUBLE AXES
 			if (CustomItemsActions.isDoubleAxe(item)) {
 				TreeBreaker.Chop(block, player);
 				CustomItemsActions.reduceDurability(item, player, 1);
 				return;
 			}
+			// SICKELS
 			if (CustomItemsActions.isSickle(item)) {
 				CustomItemsActions.reduceDurability(item, player,
 						CustomItemsActions.breakSeedsInRadius(block, CustomItemsActions.getSickleBreakRadius(item)));
 				player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_ATTACK_SWEEP, 1.0F, 1.0F);
 				return;
+			}
+			// CHISELS
+			if (CustomItemsActions.isChisel(item) && !event.isCancelled()) {
+				event.setCancelled(true);
+				CustomItemsActions.convertToChiseled(block);
+				CustomItemsActions.reduceDurability(item, player, 1);
 			}
 		}
 	}
@@ -753,5 +763,5 @@ public class CustomItemsListener implements Listener {
 			data = data.replace(newData.getMatched(), "");
 			newData = MobData.fromData(spawned, data);
 		}
-	}
+	}			
 }

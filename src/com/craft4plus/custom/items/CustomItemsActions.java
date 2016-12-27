@@ -9,6 +9,7 @@ import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.SandstoneType;
 import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -43,7 +44,7 @@ public class CustomItemsActions {
 		if ((!item.getType().equals(Material.AIR)) && (item.getItemMeta() != null) && (!item.getItemMeta().spigot().isUnbreakable())) {
 			Material m = item.getType();
 			if (m.equals(Material.DIAMOND_SWORD)) {
-				return 1550;
+				return 1543;
 			}
 			if ((m.equals(Material.DIAMOND_AXE)) || (m.equals(Material.DIAMOND_PICKAXE))
 					|| (m.equals(Material.DIAMOND_SPADE)) || (m.equals(Material.DIAMOND_HOE))) {
@@ -312,7 +313,7 @@ public class CustomItemsActions {
 	}
 	
 	public static boolean isSickle(ItemStack item) {
-		if (item.getType() == Material.DIAMOND_SWORD) {
+		if (item != null && item.getType() == Material.DIAMOND_SWORD) {
 			int durability = item.getDurability();
 			if (durability <= 1559 && durability >= 1553)
 				return true;
@@ -360,6 +361,89 @@ public class CustomItemsActions {
 	public static boolean isHoppingSlimeBucket(ItemStack item) {
 		if (item != null && item.getType() == Material.DIAMOND_SWORD && item.getDurability() == 1551) return true;
 		return false;
+	}
+	
+	// === CHISELS === //
+	
+	public static boolean isChisel(ItemStack item) {
+		if (item != null) {
+			int durability = item.getDurability();
+			Material type = item.getType();
+			if (durability == 59 && type == Material.WOOD_PICKAXE)
+				return true;
+			if (durability == 130 && type == Material.STONE_PICKAXE)
+				return true;
+			if (durability == 129 && type == Material.STONE_PICKAXE)
+				return true;
+			if (durability == 250 && type == Material.IRON_PICKAXE)
+				return true;
+			if (durability == 31 && type == Material.GOLD_PICKAXE)
+				return true;
+			if (durability == 1560 && type == Material.DIAMOND_PICKAXE)
+				return true;
+			if (durability == 1559 && type == Material.DIAMOND_PICKAXE)
+				return true;
+		}
+		return false;
+	}
+	
+	public static Material getChiselMaterial(ItemStack item) {
+		if (item != null) {
+			int durability = item.getDurability();
+			Material type = item.getType();
+			if (durability == 59 && type == Material.WOOD_PICKAXE)
+				return Material.WOOD;
+			if (durability == 130 && type == Material.STONE_PICKAXE)
+				return Material.STONE;
+			if (durability == 129 && type == Material.STONE_PICKAXE)
+				return Material.ENDER_STONE;
+			if (durability == 250 && type == Material.IRON_PICKAXE)
+				return Material.IRON_INGOT;
+			if (durability == 31 && type == Material.GOLD_PICKAXE)
+				return Material.GOLD_INGOT;
+			if (durability == 1560 && type == Material.DIAMOND_PICKAXE)
+				return Material.DIAMOND;
+			if (durability == 1559 && type == Material.DIAMOND_PICKAXE)
+				return Material.EMERALD;
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public static void convertToChiseled(Block block) {
+		Material type = block.getType();
+		byte data = block.getData();
+		if (type == Material.SANDSTONE) {
+			if (data == (byte)0) {
+				block.setTypeIdAndData(Material.SANDSTONE.getId(), SandstoneType.GLYPHED.getData(), true);
+			} else if (data == SandstoneType.GLYPHED.getData()) {
+				block.setTypeIdAndData(Material.SANDSTONE.getId(), (byte)0, true);
+			}
+		} else if (type == Material.MONSTER_EGGS) {
+			if (data == (byte)2) {
+				block.setTypeIdAndData(Material.MONSTER_EGGS.getId(), (byte)5, true);
+			} else if (data == (byte)5) {
+				block.setTypeIdAndData(Material.MONSTER_EGGS.getId(), (byte)2, true);
+			}
+		} else if (type == Material.SMOOTH_BRICK) {
+			if (data == (byte)0) {
+				block.setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte)3, true);
+			} else if (data == (byte)3) {
+				block.setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte)0, true);
+			}
+		} else if (type == Material.QUARTZ_BLOCK) {
+			if (data == (byte)0) {
+				block.setTypeIdAndData(Material.QUARTZ_BLOCK.getId(), (byte)1, true);
+			} else if (data == (byte)1) {
+				block.setTypeIdAndData(Material.QUARTZ_BLOCK.getId(), (byte)0, true);
+			}
+		} else if (type == Material.RED_SANDSTONE) {
+			if (data == (byte)0) {
+				block.setTypeIdAndData(Material.RED_SANDSTONE.getId(), (byte)1, true);
+			} else if (data == (byte)1) {
+				block.setTypeIdAndData(Material.RED_SANDSTONE.getId(), (byte)0, true);
+			}
+		}
 	}
 	
 }

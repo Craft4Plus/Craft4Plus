@@ -21,13 +21,13 @@ public class CustomItemStack {
 	public final static ItemStack GOLD_DOUBLE_AXE = getItem(13);
 	public final static ItemStack DIAMOND_DOUBLE_AXE = getItem(14);
 	public final static ItemStack EMERALD_DOUBLE_AXE = getItem(15);
-	
+
 	// === STONE ARMOR === //
 	public final static ItemStack STONE_HELMET = getItem(16);
 	public final static ItemStack STONE_CHESTPLATE = getItem(17);
 	public final static ItemStack STONE_LEGGINGS = getItem(18);
 	public final static ItemStack STONE_BOOTS = getItem(19);
-	
+
 	// === END STONE ITEMS === //
 	public final static ItemStack END_STONE_HELMET = getItem(20);
 	public final static ItemStack END_STONE_CHESTPLATE = getItem(21);
@@ -45,7 +45,7 @@ public class CustomItemStack {
 
 	// === SLIME ARMOR === //
 	public final static ItemStack SLIME_BOOTS = getItem(31);
-	
+
 	// === SUPER HOES === //
 	public final static ItemStack SUPER_HOE_BREAK_PLACEHOLDER = getItem(32);
 	public final static ItemStack WOODEN_SICKLE = getItem(33);
@@ -55,11 +55,20 @@ public class CustomItemStack {
 	public final static ItemStack GOLD_SICKLE = getItem(37);
 	public final static ItemStack DIAMOND_SICKLE = getItem(38);
 	public final static ItemStack EMERALD_SICKLE = getItem(39);
-	
+
 	// === SLIME BUCKETS === //
-	public final static ItemStack SLIME_BUCKET = getItem(40);	
+	public final static ItemStack SLIME_BUCKET = getItem(40);
 	public final static ItemStack HOPPING_SLIME_BUCKET = getItem(41);
-	
+
+	// === CHISELS === //
+	public final static ItemStack WOODEN_CHISEL = getItem(42);
+	public final static ItemStack STONE_CHISEL = getItem(43);
+	public final static ItemStack END_STONE_CHISEL = getItem(44);
+	public final static ItemStack IRON_CHISEL = getItem(45);
+	public final static ItemStack GOLD_CHISEL = getItem(46);
+	public final static ItemStack DIAMOND_CHISEL = getItem(47);
+	public final static ItemStack EMERALD_CHISEL = getItem(48);
+
 	public static ItemStack getItem(int id) {
 		return CustomItems.CustomItems.get(id);
 	}
