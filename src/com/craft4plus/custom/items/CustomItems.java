@@ -659,7 +659,7 @@ public class CustomItems {
 
 		public static void GoldChisel() { // ID OF 46
 
-			ItemStack Item = ItemStackUtilities.createItem(Material.GOLD_PICKAXE, 1, 31);
+			ItemStack Item = ItemStackUtilities.createItem(Material.GOLD_PICKAXE, 1, 32);
 
 			ItemStackUtilities.setUnbreakable(Item, true, true);
 			ItemStackUtilities.setName(Item, "Golden Chisel");

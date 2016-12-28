@@ -133,7 +133,9 @@ public class Builds {
 		if (BuildsListLocation == null) {
 			Files.save(null, new File((dir), "BuildsListLocationSerialized.dat"));
 		} else {
-			BuildsListLocationSerialized.clear();
+			if (BuildsListLocationSerialized != null) {
+				BuildsListLocationSerialized.clear();
+			}
 			for (Integer i : BuildsListLocation.keySet()) {
 				BuildsListLocationSerialized.put(i, Files.getSerializedLocation(BuildsListLocation.get(i)));
 			}

@@ -60,7 +60,7 @@ public class CraftingRecipes {
 		addIronSickle();
 		addDiamondSickle();
 		addEmeraldSickle();
-		
+
 		// === SLABS TO FULL BLOCKS === //
 		addHalfSlabCombo(Material.STEP, Material.STONE);
 		addHalfSlabCombo(Material.STEP, 3, Material.COBBLESTONE);
@@ -72,10 +72,24 @@ public class CraftingRecipes {
 		addHalfSlabCombo(Material.WOOD_STEP, 3, Material.WOOD, 3);
 		addHalfSlabCombo(Material.WOOD_STEP, 4, Material.WOOD, 4);
 		addHalfSlabCombo(Material.WOOD_STEP, 5, Material.WOOD, 5);
-		
+
 		// === SLIME BUCKETS === //
 		addSlimeBucket();
 
+		// === CHISELS === //
+		addTwoItemsCombo(Material.WOOD, Material.STICK, CustomItemStack.WOODEN_CHISEL);
+		addTwoItemsCombo(Material.WOOD, 1, Material.STICK, 0, CustomItemStack.WOODEN_CHISEL);
+		addTwoItemsCombo(Material.WOOD, 2, Material.STICK, 0, CustomItemStack.WOODEN_CHISEL);
+		addTwoItemsCombo(Material.WOOD, 3, Material.STICK, 0, CustomItemStack.WOODEN_CHISEL);
+		addTwoItemsCombo(Material.WOOD, 4, Material.STICK, 0, CustomItemStack.WOODEN_CHISEL);
+		addTwoItemsCombo(Material.WOOD, 5, Material.STICK, 0, CustomItemStack.WOODEN_CHISEL);
+		addTwoItemsCombo(Material.STONE, Material.STICK, CustomItemStack.STONE_CHISEL);
+		addTwoItemsCombo(Material.COBBLESTONE, Material.STICK, CustomItemStack.STONE_CHISEL);
+		addTwoItemsCombo(Material.ENDER_STONE, Material.STICK, CustomItemStack.END_STONE_CHISEL);
+		addTwoItemsCombo(Material.IRON_INGOT, Material.STICK, CustomItemStack.IRON_CHISEL);
+		addTwoItemsCombo(Material.GOLD_INGOT, Material.STICK, CustomItemStack.GOLD_CHISEL);
+		addTwoItemsCombo(Material.DIAMOND, Material.STICK, CustomItemStack.DIAMOND_CHISEL);
+		addTwoItemsCombo(Material.EMERALD, Material.STICK, CustomItemStack.EMERALD_CHISEL);
 	}
 
 	// === EMERALD ITEMS === //
@@ -1155,24 +1169,26 @@ public class CraftingRecipes {
 		Bukkit.getServer().addRecipe(ItemRecipe2);
 
 	}
-	
+
 	public static void addHalfSlabCombo(Material original, Material result) {
 		addHalfSlabCombo(original, 1, 0, result, 1, 0);
 	}
-	
+
 	public static void addHalfSlabCombo(Material original, int durabilityoriginal, Material result) {
 		addHalfSlabCombo(original, 1, durabilityoriginal, result, 1, 0);
 	}
-	
-	public static void addHalfSlabCombo(Material original, int durabilityoriginal, Material result, int durabilityresult) {
+
+	public static void addHalfSlabCombo(Material original, int durabilityoriginal, Material result,
+			int durabilityresult) {
 		addHalfSlabCombo(original, 1, durabilityoriginal, result, 1, durabilityresult);
 	}
-	
+
 	@SuppressWarnings("deprecation")
-	public static void addHalfSlabCombo(Material original, int quantityoriginal, int durabilityoriginal, Material result, int quantityresult, int durabilityresult) {
-		
+	public static void addHalfSlabCombo(Material original, int quantityoriginal, int durabilityoriginal,
+			Material result, int quantityresult, int durabilityresult) {
+
 		ItemStack item = ItemStackUtilities.createItem(result, quantityresult, durabilityresult);
-		
+
 		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
 
 		ItemRecipe1.shape("100", "100", "000");
@@ -1183,20 +1199,20 @@ public class CraftingRecipes {
 
 		ItemRecipe1.shape("000", "100", "100");
 		Bukkit.getServer().addRecipe(ItemRecipe1);
-		
+
 		ItemRecipe1.shape("010", "010", "000");
 		Bukkit.getServer().addRecipe(ItemRecipe1);
-		
+
 		ItemRecipe1.shape("000", "010", "010");
 		Bukkit.getServer().addRecipe(ItemRecipe1);
-		
+
 		ItemRecipe1.shape("001", "001", "000");
 		Bukkit.getServer().addRecipe(ItemRecipe1);
-		
+
 		ItemRecipe1.shape("000", "001", "001");
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 	}
-	
+
 	private static void addSlimeBucket() {
 
 		ItemStack item = CustomItemStack.SLIME_BUCKET;
@@ -1208,12 +1224,44 @@ public class CraftingRecipes {
 		ItemRecipe1.setIngredient('2', Material.BUCKET);
 
 		Bukkit.getServer().addRecipe(ItemRecipe1);
-		
+
 		ItemRecipe1.shape("010", "010", "020");
 		Bukkit.getServer().addRecipe(ItemRecipe1);
-		
+
 		ItemRecipe1.shape("001", "001", "002");
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 	}
 
+	// === SICKLES === //
+
+	@SuppressWarnings("deprecation")
+	public static void addTwoItemsCombo(Material materialtop, int durabilitytop, Material materialbottom,
+			int durabilitybottom, ItemStack item) {
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(item);
+
+		ItemRecipe1.shape("100", "200", "000");
+		ItemRecipe1.setIngredient('1', materialtop, durabilitytop);
+		ItemRecipe1.setIngredient('2', materialbottom, durabilitybottom);
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+
+		ItemRecipe1.shape("010", "020", "000");
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+
+		ItemRecipe1.shape("001", "002", "000");
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+
+		ItemRecipe1.shape("000", "100", "200");
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+
+		ItemRecipe1.shape("000", "010", "020");
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+
+		ItemRecipe1.shape("000", "001", "002");
+		Bukkit.getServer().addRecipe(ItemRecipe1);
+	}
+
+	public static void addTwoItemsCombo(Material materialtop, Material materialbottom, ItemStack item) {
+		addTwoItemsCombo(materialtop, 0, materialbottom, 0, item);
+	}
 }

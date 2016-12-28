@@ -43,29 +43,31 @@ public class CustomItemsActions {
 	public static int getCustomItemDurability(ItemStack item) {
 		if ((!item.getType().equals(Material.AIR)) && (item.getItemMeta() != null) && (!item.getItemMeta().spigot().isUnbreakable())) {
 			Material m = item.getType();
-			if (m.equals(Material.DIAMOND_SWORD)) {
+			if (m.equals(Material.DIAMOND_SWORD))
 				return 1543;
-			}
-			if ((m.equals(Material.DIAMOND_AXE)) || (m.equals(Material.DIAMOND_PICKAXE))
-					|| (m.equals(Material.DIAMOND_SPADE)) || (m.equals(Material.DIAMOND_HOE))) {
+			if ((m.equals(Material.DIAMOND_AXE)) || (m.equals(Material.DIAMOND_SPADE))
+					|| (m.equals(Material.DIAMOND_HOE)))
 				return 1560;
-			}
-			if ((m.equals(Material.STONE_SWORD)) || (m.equals(Material.STONE_PICKAXE)) || (m.equals(Material.STONE_SPADE))
-					|| (m.equals(Material.STONE_HOE))) {
+			if (m.equals(Material.DIAMOND_PICKAXE))
+				return 1558;
+			if ((m.equals(Material.STONE_SWORD)) || (m.equals(Material.STONE_SPADE)) || (m.equals(Material.STONE_HOE)))
 				return 130;
-			}
-			if (m.equals(Material.WOOD_AXE)) {
+			if (m.equals(Material.WOOD_AXE))
 				return 58;
-			}
-			if (m.equals(Material.STONE_AXE)) {
+			if (m.equals(Material.STONE_AXE))
 				return 128;
-			}
-			if (m.equals(Material.IRON_AXE)) {
+			if (m.equals(Material.IRON_AXE))
 				return 250;
-			}
-			if (m.equals(Material.GOLD_AXE)) {
+			if (m.equals(Material.GOLD_AXE))
 				return 28;
-			}
+			if (m.equals(Material.WOOD_PICKAXE))
+				return 58;
+			if (m.equals(Material.STONE_PICKAXE))
+				return 128;
+			if (m.equals(Material.IRON_PICKAXE))
+				return 249;
+			if (m.equals(Material.GOLD_PICKAXE))
+				return 31;
 			return 123456789;
 		}
 		return 123456789;

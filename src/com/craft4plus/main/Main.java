@@ -79,9 +79,9 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		
 		registerEvents();
 		
-		repeatingTasksPerMinute();
-		
 		load();
+		
+		repeatingTasksPerMinute();
 		
 		addCustomItems();
 		
@@ -150,6 +150,8 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 	
 	private void load() {
 		
+		try {
+		
 		File dir = getDataFolder();
 		
 		if (!dir.exists()) {
@@ -160,6 +162,17 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		}
 		
 		Builds.load(dir);
+		
+		} catch(NullPointerException e) {
+			Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() { //Schedule a repeating task
+				@Override
+				public void run() {
+				
+					load();
+				
+				}
+			}, 600L);
+		}
 		
 	}
 	
