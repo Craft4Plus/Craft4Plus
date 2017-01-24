@@ -13,15 +13,11 @@ import org.mcsg.survivalgames.SurvivalGames;
 import com.craft4plus.afksystem.AFKSystem;
 import com.craft4plus.bulders.builds.Builds;
 import com.craft4plus.bulders.builds.BuildsCommand;
-import com.craft4plus.custom.ResourcePackListener;
-import com.craft4plus.custom.items.CraftingRecipes;
-import com.craft4plus.custom.items.CustomItemsListener;
 import com.craft4plus.islandclash.WorldGeneration;
-import com.craft4plus.custom.items.CustomItems;
-import com.craft4plus.custom.items.CustomItemsCommand;
 import com.craft4plus.listeners.PlayerJoin;
 import com.craft4plus.listeners.PlayerLeave;
 import com.craft4plus.listeners.PlayerWorldChange;
+import com.craft4plus.listeners.PrepareItemCraft;
 import com.craft4plus.minigames.LegacyPvP;
 import com.craft4plus.minigames.kitpvp.KitPvPDeath;
 import com.craft4plus.minigames.kitpvp.KitPvPItemDrops;
@@ -83,19 +79,12 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		
 		repeatingTasksPerMinute();
 		
-		addCustomItems();
-		
 		System.out.println("Craft4Plus has been enabled!");
 	}
 
 	private void prepareLists() {
 		AFKSystem.addLocationsForAFK();
 		Tips.addValues();
-	}
-
-	private void addCustomItems() {
-		CustomItems.generateCustomItems();
-		CraftingRecipes.addCustomCraftingRecipes();
 	}
 
 	private void registerCommands() {
@@ -107,7 +96,6 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		this.getCommand("parkourreset").setExecutor(new ParkourCommand());
 		this.getCommand("builds").setExecutor(new BuildsCommand());
 		this.getCommand("qc").setExecutor(new QCCommand());
-		this.getCommand("customgive").setExecutor(new CustomItemsCommand());
 	}
 
 	public void repeatingTasksPerMinute() {
@@ -142,10 +130,9 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		pm.registerEvents(new MelonFaller(), this);
 		pm.registerEvents(new Parkour(), this);
 		pm.registerEvents(new PlayerWorldChange(), this);
-		pm.registerEvents(new CustomItemsListener(), this);
-		pm.registerEvents(new ResourcePackListener(), this);
 		pm.registerEvents(new ArmorListener(getConfig().getStringList("blocked")), this);
 		pm.registerEvents(new WorldGeneration(), this);
+		pm.registerEvents(new PrepareItemCraft(), this);
 	}
 	
 	private void load() {
