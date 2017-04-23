@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="spigot-1.10.2.jar"/>
 	<classpathentry kind="lib" path="BountifulAPI-1.6.1.jar"/>
 	<classpathentry kind="lib" path="PermissionsEx-1.23.4.jar"/>
 	<classpathentry kind="lib" path="Vault.jar"/>
@@ -17,5 +16,6 @@
 	<classpathentry kind="lib" path="CPCameraStudioReborn.jar"/>
 	<classpathentry kind="lib" path="ParticleAPI.jar"/>
 	<classpathentry kind="lib" path="PlotSquared.jar"/>
+	<classpathentry kind="lib" path="spigot-1.11.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

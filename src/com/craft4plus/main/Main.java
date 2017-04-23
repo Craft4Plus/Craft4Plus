@@ -8,7 +8,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mcsg.survivalgames.SurvivalGames;
 
 import com.craft4plus.afksystem.AFKSystem;
 import com.craft4plus.bulders.builds.Builds;
@@ -34,6 +33,7 @@ import com.craft4plus.warpsystem.SetWarpCmd;
 import com.craft4plus.warpsystem.WarpSystem;
 import com.earth2me.essentials.Essentials;
 import com.gmail.filoghost.chestcommands.ChestCommands;
+import com.thundergemios10.survivalgames.SurvivalGames;
 
 import net.daboross.bukkitdev.skywars.api.SkyWars;
 import net.milkbowl.vault.chat.Chat;

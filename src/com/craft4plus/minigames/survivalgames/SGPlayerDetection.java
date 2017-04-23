@@ -4,11 +4,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.mcsg.survivalgames.api.PlayerJoinArenaEvent;
 
 import com.craft4plus.main.Main;
 import com.craft4plus.worldguard.ItemsInRegion;
 import com.craft4plus.worldguard.PlayerInRegion;
+import com.thundergemios10.survivalgames.api.PlayerJoinArenaEvent;
 
 public class SGPlayerDetection implements Listener {
 	
