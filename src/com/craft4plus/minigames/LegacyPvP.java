@@ -64,15 +64,8 @@ public class LegacyPvP implements Listener {
 	}
 
 	public boolean inLegacyPvPArea(Player player) {
-		
-		if ((Main.sw.getCurrentGameTracker().isInGame(player.getUniqueId())) || (SGPlayerDetection.InSGGame(player))
-				|| (KitPvPPlayerDetection.InSGGame(player)) || (BedwarsPlayerDetection.InBWGame(player))) {
-			
-			return true;
-			
-		}
-		
-		return false;
+		return (Main.sw.getCurrentGameTracker().isInGame(player.getUniqueId())) || (SGPlayerDetection.InSGGame(player))
+				|| (KitPvPPlayerDetection.InSGGame(player)) || (BedwarsPlayerDetection.InBWGame(player));
 	}
 
 }
